@@ -1,0 +1,719 @@
+{
+  "course": "Stanford CS149 Fall 2025",
+  "complete": true,
+  "verified_utc": "2026-10-23T13:10:20.077802+00:00",
+  "counts": {
+    "lectures": 18,
+    "written_assignments": 4,
+    "programming_assignments": 5,
+    "readings": 41,
+    "course_pages": 3
+  },
+  "files": [
+    {
+      "category": "lectures",
+      "title": "Lecture 1: Why Parallelism? Why Efficiency?",
+      "url": "https://gfxcourses.stanford.edu/cs149/fall25content/media/efficiency/01_efficiency_hyF1AJq.pdf",
+      "path": "lectures/01_efficiency_hyF1AJq.pdf",
+      "page": "https://gfxcourses.stanford.edu/cs149/fall25/lecture/efficiency/",
+      "bytes": 6012060,
+      "sha256": "900e3fed652bc1bb88e8a2500429303fe589838b9f3f0063d32540cc5dc76c2f",
+      "status": "ok",
+      "pages": 86
+    },
+    {
+      "category": "lectures",
+      "title": "Lecture 2: A Modern Multi-Core Processor (Part I)",
+      "url": "https://gfxcourses.stanford.edu/cs149/fall25content/media/multicore1/02_basicarch.pdf",
+      "path": "lectures/02_basicarch.pdf",
+      "page": "https://gfxcourses.stanford.edu/cs149/fall25/lecture/multicore1/",
+      "bytes": 5246059,
+      "sha256": "cd29f362e0e5962697e74e10514124740a60127c9dfaee4603af15a464158a9b",
+      "status": "ok",
+      "pages": 108
+    },
+    {
+      "category": "lectures",
+      "title": "Lecture 3: Modern Multi-Core Architecture (Part II) + ISPC Programming Abstractions",
+      "url": "https://gfxcourses.stanford.edu/cs149/fall25content/media/multicore2/03_multicore2-ispc_WueDBzT.pdf",
+      "path": "lectures/03_multicore2-ispc_WueDBzT.pdf",
+      "page": "https://gfxcourses.stanford.edu/cs149/fall25/lecture/multicore2/",
+      "bytes": 1845692,
+      "sha256": "b159447ed26e85a94d436ce937c446e3d9b35675b69a1f324e32b79ffc4f6287",
+      "status": "ok",
+      "pages": 56
+    },
+    {
+      "category": "lectures",
+      "title": "Lecture 4: Parallelizing Code: An Example Thought Process",
+      "url": "https://gfxcourses.stanford.edu/cs149/fall25content/media/thoughtprocess/04_progbasics.pdf",
+      "path": "lectures/04_progbasics.pdf",
+      "page": "https://gfxcourses.stanford.edu/cs149/fall25/lecture/thoughtprocess/",
+      "bytes": 2034059,
+      "sha256": "8f44e27b1029e40927c222cab88748db8736df5ee821b97cafd1ff8b6a19a4b0",
+      "status": "ok",
+      "pages": 74
+    },
+    {
+      "category": "lectures",
+      "title": "Lecture 5: Program Optimization 1: Work Distribution and Scheduling",
+      "url": "https://gfxcourses.stanford.edu/cs149/fall25content/media/perfopt1/05_progperf1.pdf",
+      "path": "lectures/05_progperf1.pdf",
+      "page": "https://gfxcourses.stanford.edu/cs149/fall25/lecture/perfopt1/",
+      "bytes": 2349479,
+      "sha256": "3261aa305b440cf3bc3078e02dbf3f8f964d69f8cfc443cfc97212ba2257846f",
+      "status": "ok",
+      "pages": 63
+    },
+    {
+      "category": "lectures",
+      "title": "Lecture 6: Program Optimization 2: Locality and Communication",
+      "url": "https://gfxcourses.stanford.edu/cs149/fall25content/media/perfopt2/06_progperf2.pdf",
+      "path": "lectures/06_progperf2.pdf",
+      "page": "https://gfxcourses.stanford.edu/cs149/fall25/lecture/perfopt2/",
+      "bytes": 2287423,
+      "sha256": "fe4429d66b5cb3f566135cc747dde53494bcad7288d673cd6bedd25a99c7eca4",
+      "status": "ok",
+      "pages": 68
+    },
+    {
+      "category": "lectures",
+      "title": "Lecture 7: GPU Architecture and CUDA Programming",
+      "url": "https://gfxcourses.stanford.edu/cs149/fall25content/media/gpuarch/07_gpuarch.pdf",
+      "path": "lectures/07_gpuarch.pdf",
+      "page": "https://gfxcourses.stanford.edu/cs149/fall25/lecture/gpuarch/",
+      "bytes": 4438563,
+      "sha256": "774f00f18643ee3c845af09071baf7b720099d774a32090e4db5f180a949c10e",
+      "status": "ok",
+      "pages": 74
+    },
+    {
+      "category": "lectures",
+      "title": "Lecture 8: Data-Parallel Thinking",
+      "url": "https://gfxcourses.stanford.edu/cs149/fall25content/media/dataparallel/08_dataparallel.pdf",
+      "path": "lectures/08_dataparallel.pdf",
+      "page": "https://gfxcourses.stanford.edu/cs149/fall25/lecture/dataparallel/",
+      "bytes": 1316571,
+      "sha256": "b5dd27cb11cc9dde8ae59194956640dd70d870175591079e0bdbafb8ec7f7044",
+      "status": "ok",
+      "pages": 51
+    },
+    {
+      "category": "lectures",
+      "title": "Lecture 9: Efficiently Evaluating DNNs on GPUs: Transformers and ConvNets",
+      "url": "https://gfxcourses.stanford.edu/cs149/fall25content/media/dnninference/09_dnneval.pdf",
+      "path": "lectures/09_dnneval.pdf",
+      "page": "https://gfxcourses.stanford.edu/cs149/fall25/lecture/dnninference/",
+      "bytes": 11576541,
+      "sha256": "a791ce2724ae92e22944bb194e824f5db12c0fc1a59e968bcab8092ec11e852e",
+      "status": "ok",
+      "pages": 75
+    },
+    {
+      "category": "lectures",
+      "title": "Lecture 10: Hardware Specialization",
+      "url": "https://gfxcourses.stanford.edu/cs149/fall25content/media/accelerators/10_Specialized.pdf",
+      "path": "lectures/10_Specialized.pdf",
+      "page": "https://gfxcourses.stanford.edu/cs149/fall25/lecture/accelerators/",
+      "bytes": 10553545,
+      "sha256": "ba5f127cf148aa61b4f4182654a4faf2c8015710fadbf2aeae55667b116d63cb",
+      "status": "ok",
+      "pages": 71
+    },
+    {
+      "category": "lectures",
+      "title": "Lecture 11: Programming Systems for Specialized Hardware",
+      "url": "https://gfxcourses.stanford.edu/cs149/fall25content/media/proghardware/11_SpecializedHardwareProgramming.pdf",
+      "path": "lectures/11_SpecializedHardwareProgramming.pdf",
+      "page": "https://gfxcourses.stanford.edu/cs149/fall25/lecture/proghardware/",
+      "bytes": 8647397,
+      "sha256": "47bdcf4e9091b55b04eb82ef3a34bd44bc3a990da421ff5fd79d0ddeaf832019",
+      "status": "ok",
+      "pages": 60
+    },
+    {
+      "category": "lectures",
+      "title": "Lecture 12: Mapping AI Applications to the Datacenter Computer",
+      "url": "https://gfxcourses.stanford.edu/cs149/fall25content/media/aidatacenter/12_AI_DatacenterMapping.pdf",
+      "path": "lectures/12_AI_DatacenterMapping.pdf",
+      "page": "https://gfxcourses.stanford.edu/cs149/fall25/lecture/aidatacenter/",
+      "bytes": 6478664,
+      "sha256": "bfbf8e92d75fe90c24692f3b2c882c359c248ca678bb4ad4cdb8db3f663c44f2",
+      "status": "ok",
+      "pages": 72
+    },
+    {
+      "category": "lectures",
+      "title": "Lecture 13: Domain-Specific Programming Systems and AI-Driven Performance Optimization",
+      "url": "https://gfxcourses.stanford.edu/cs149/fall25content/media/aiperfoptimization/13_autooptimize.pdf",
+      "path": "lectures/13_autooptimize.pdf",
+      "page": "https://gfxcourses.stanford.edu/cs149/fall25/lecture/aiperfoptimization/",
+      "bytes": 3821036,
+      "sha256": "7b229e555efc10b67f67ef85992986184503319278da1a6fa71b21f2e05720e5",
+      "status": "ok",
+      "pages": 55
+    },
+    {
+      "category": "lectures",
+      "title": "Lecture 14: Cache Coherence",
+      "url": "https://gfxcourses.stanford.edu/cs149/fall25content/media/cachecoherence/14_coherence.pdf",
+      "path": "lectures/14_coherence.pdf",
+      "page": "https://gfxcourses.stanford.edu/cs149/fall25/lecture/cachecoherence/",
+      "bytes": 2162898,
+      "sha256": "626642c323fed877737ce9aa98ca444a9c6108994d2cbc225fc0236dc07be00f",
+      "status": "ok",
+      "pages": 45
+    },
+    {
+      "category": "lectures",
+      "title": "Lecture 15: Implementing Synchronization + Memory Consistency",
+      "url": "https://gfxcourses.stanford.edu/cs149/fall25content/media/sync_consistency/15_consistency.pdf",
+      "path": "lectures/15_consistency.pdf",
+      "page": "https://gfxcourses.stanford.edu/cs149/fall25/lecture/sync_consistency/",
+      "bytes": 2071580,
+      "sha256": "7343dbcbb0b7ab499ff35bcb087785bca20ddb6852c2edcaece0bc99305f0f74",
+      "status": "ok",
+      "pages": 60
+    },
+    {
+      "category": "lectures",
+      "title": "Lecture 16: Fine-Grained Locking and Lock-Free Programming",
+      "url": "https://gfxcourses.stanford.edu/cs149/fall25content/media/finegrainedsync/16_finegrainedlock.pdf",
+      "path": "lectures/16_finegrainedlock.pdf",
+      "page": "https://gfxcourses.stanford.edu/cs149/fall25/lecture/finegrainedsync/",
+      "bytes": 1306816,
+      "sha256": "80a9daf5e0478e807c11d38b70ee1f028c94b9209af7441a2da99b2c565c36b8",
+      "status": "ok",
+      "pages": 66
+    },
+    {
+      "category": "lectures",
+      "title": "Lecture 17: Transactional Memory (Part I)",
+      "url": "https://gfxcourses.stanford.edu/cs149/fall25content/media/transactions/17_transactionalmem.pdf",
+      "path": "lectures/17_transactionalmem.pdf",
+      "page": "https://gfxcourses.stanford.edu/cs149/fall25/lecture/transactions/",
+      "bytes": 3064733,
+      "sha256": "cdb9832bbd7e61bdbc16610255025902426a0e9fe45808d30c63509ba937a5b4",
+      "status": "ok",
+      "pages": 50
+    },
+    {
+      "category": "lectures",
+      "title": "Lecture 18: Transactional Memory (Part II) + Ask Me Anything with Kunle and Kayvon",
+      "url": "https://gfxcourses.stanford.edu/cs149/fall25content/media/wrapup/18_transactionalmem_A4wu1Q8.pdf",
+      "path": "lectures/18_transactionalmem_A4wu1Q8.pdf",
+      "page": "https://gfxcourses.stanford.edu/cs149/fall25/lecture/wrapup/",
+      "bytes": 20195647,
+      "sha256": "5d69ecae80c94784c19ab4dab86a1715e4079698b979cd7b1e35e94ed144c849",
+      "status": "ok",
+      "pages": 62
+    },
+    {
+      "category": "written_assignments",
+      "title": "Written Assignment 1",
+      "url": "https://gfxcourses.stanford.edu/cs149/fall25content/static/pdfs/written_asst1.pdf",
+      "path": "written_assignments/written_asst1.pdf",
+      "bytes": 2681605,
+      "sha256": "95da2709881d2ad64114576684068808fcb0c74f326e078f0da75749bc0247cc",
+      "status": "ok",
+      "pages": 48
+    },
+    {
+      "category": "written_assignments",
+      "title": "Written Assignment 2",
+      "url": "https://gfxcourses.stanford.edu/cs149/fall25content/static/pdfs/written_asst2.pdf",
+      "path": "written_assignments/written_asst2.pdf",
+      "bytes": 991688,
+      "sha256": "4d559d9992f5c3e90feed0b787f1b079c8df4f6e40de52c3bc55973e6e15de3e",
+      "status": "ok",
+      "pages": 43
+    },
+    {
+      "category": "written_assignments",
+      "title": "Written Assignment 3",
+      "url": "https://gfxcourses.stanford.edu/cs149/fall25content/static/pdfs/written_asst3.pdf",
+      "path": "written_assignments/written_asst3.pdf",
+      "bytes": 188552,
+      "sha256": "4d602ecf6c48f736b011a3e3fa4ed18a13ec7922b25ab3bb548af63af8f52d23",
+      "status": "ok",
+      "pages": 31
+    },
+    {
+      "category": "written_assignments",
+      "title": "Written Assignment 4",
+      "url": "https://gfxcourses.stanford.edu/cs149/fall25content/static/pdfs/written_asst4.pdf",
+      "path": "written_assignments/written_asst4.pdf",
+      "bytes": 974075,
+      "sha256": "480e15822ea367e09c6399975a73797aee92a4093ce5ab54168ecf0b92c9fdbb",
+      "status": "ok",
+      "pages": 47
+    },
+    {
+      "category": "programming_assignments",
+      "title": "Performance Analysis on a Quad-Core CPU",
+      "url": "https://codeload.github.com/stanford-cs149/asst1/zip/refs/heads/master",
+      "path": "programming_assignments/archives/asst1.zip",
+      "extract_to": "programming_assignments/asst1",
+      "archive_root": "asst1-master",
+      "page": "https://github.com/stanford-cs149/asst1",
+      "bytes": 724533,
+      "sha256": "99b7b01d038a81455e22f9bb56a77fa632ef5360cdcd0b309b301f63144134a9",
+      "status": "ok",
+      "repository_files": 37
+    },
+    {
+      "category": "programming_assignments",
+      "title": "Building a Task Execution Library",
+      "url": "https://codeload.github.com/stanford-cs149/asst2/zip/refs/heads/master",
+      "path": "programming_assignments/archives/asst2.zip",
+      "extract_to": "programming_assignments/asst2",
+      "archive_root": "asst2-master",
+      "page": "https://github.com/stanford-cs149/asst2",
+      "bytes": 1028533,
+      "sha256": "8f9a62cf0b93e5411022e68474da63c015d3bbb288bc96af352fa6905a679d02",
+      "status": "ok",
+      "repository_files": 40
+    },
+    {
+      "category": "programming_assignments",
+      "title": "A Simple CUDA Renderer",
+      "url": "https://codeload.github.com/stanford-cs149/asst3/zip/refs/heads/master",
+      "path": "programming_assignments/archives/asst3.zip",
+      "extract_to": "programming_assignments/asst3",
+      "archive_root": "asst3-master",
+      "page": "https://github.com/stanford-cs149/asst3",
+      "bytes": 4292510,
+      "sha256": "cd06c26aa4ce7cc48c0b0c9fcfc6b5136e3db3b2f12738602998d35b70f07599",
+      "status": "ok",
+      "repository_files": 61
+    },
+    {
+      "category": "programming_assignments",
+      "title": "Fused Conv+MaxPool on Trainium2",
+      "url": "https://codeload.github.com/stanford-cs149/asst4-trainium2/zip/refs/heads/main",
+      "path": "programming_assignments/archives/asst4-trainium2.zip",
+      "extract_to": "programming_assignments/asst4-trainium2",
+      "archive_root": "asst4-trainium2-main",
+      "page": "https://github.com/stanford-cs149/asst4-trainium2",
+      "bytes": 10297180,
+      "sha256": "ff192b211fc062712c824f98d30fea503ac076c05419a328704037765806330c",
+      "status": "ok",
+      "repository_files": 65
+    },
+    {
+      "category": "programming_assignments",
+      "title": "Write a Fast CUDA Kernel",
+      "url": "https://codeload.github.com/stanford-cs149/asst5-kernels/zip/refs/heads/main",
+      "path": "programming_assignments/archives/asst5-kernels.zip",
+      "extract_to": "programming_assignments/asst5-kernels",
+      "archive_root": "asst5-kernels-main",
+      "page": "https://github.com/stanford-cs149/asst5-kernels",
+      "bytes": 5228334,
+      "sha256": "acb1a707d8763b6f98a775fdd736a011e9b4708086824e7057bad6f616aff579",
+      "status": "ok",
+      "repository_files": 71
+    },
+    {
+      "category": "readings",
+      "title": "ISPC User Guide",
+      "url": "https://ispc.github.io/ispc.html",
+      "path": "readings/ispc.html",
+      "bytes": 446723,
+      "sha256": "11ca3d2a0584083270fb77cb2dd95ca6d048ec0f5b3ac25a9638935a2c9652fc",
+      "status": "ok"
+    },
+    {
+      "category": "readings",
+      "title": "CS221 K-Means Handout",
+      "url": "https://stanford.edu/~cpiech/cs221/handouts/kmeans.html",
+      "path": "readings/kmeans.html",
+      "bytes": 17827,
+      "sha256": "0cfe5a788aa6f4e72f44e9981631bd0385492bbc63b4738a4401361adf026a28",
+      "status": "ok"
+    },
+    {
+      "category": "readings",
+      "title": "Intel Intrinsics Guide",
+      "url": "https://www.intel.com/content/www/us/en/docs/intrinsics-guide/index.html",
+      "path": "readings/intel_intrinsics.html",
+      "bytes": 115456,
+      "sha256": "149d216d63e88608590e1e30d82ff5f666283a9b5d02d76c6cffd0978ee5c9d7",
+      "status": "ok"
+    },
+    {
+      "category": "readings",
+      "title": "CUDA C++ Programming Guide",
+      "url": "https://docs.nvidia.com/cuda/pdf/CUDA_C_Programming_Guide.pdf",
+      "path": "readings/cuda_c_programming_guide.pdf",
+      "bytes": 4660774,
+      "sha256": "d1e2b16bc6ed17df22e0fe0043fea6b095d982e7f7471d89121706ec5b10e71e",
+      "status": "ok",
+      "pages": 598
+    },
+    {
+      "category": "readings",
+      "title": "NVIDIA T4 Datasheet",
+      "url": "https://www.nvidia.com/content/dam/en-zz/Solutions/Data-Center/tesla-t4/t4-tensor-core-datasheet-951643.pdf",
+      "path": "readings/nvidia_t4_datasheet.pdf",
+      "bytes": 424208,
+      "sha256": "57f6b54378a88ba488dc32b4fc61f5ee7d757f131ae00fe575a635a6fe02daec",
+      "status": "ok",
+      "pages": 2
+    },
+    {
+      "category": "readings",
+      "title": "NeuronCore-v3 Architecture",
+      "url": "https://awsdocs-neuron.readthedocs-hosted.com/en/latest/about-neuron/arch/neuron-hardware/neuron-core-v3.html",
+      "path": "readings/neuron_core_v3.html",
+      "bytes": 254745,
+      "sha256": "9daa01b0b79173999f4721dd9bb091376c5e76d2a57ee222b0f918cd43ccca2a",
+      "status": "ok"
+    },
+    {
+      "category": "readings",
+      "title": "NKI Performance Optimizations",
+      "url": "https://awsdocs-neuron.readthedocs-hosted.com/en/latest/nki/deep-dives/nki_perf_guide.html",
+      "path": "readings/nki_performance.html",
+      "bytes": 344911,
+      "sha256": "efb20c01048d662778fdd655c93d74ae368b4676f5146c25b95559fe22fdcac3",
+      "status": "ok"
+    },
+    {
+      "category": "readings",
+      "title": "NKI nc_matmul Reference",
+      "url": "https://awsdocs-neuron.readthedocs-hosted.com/en/latest/nki/api/generated/nki.isa.nc_matmul.html",
+      "path": "readings/nki_nc_matmul.html",
+      "bytes": 280680,
+      "sha256": "50c344f7985e2dd383e171db50f41988365c1fd6926f23998da7d5916f2a6106",
+      "status": "ok"
+    },
+    {
+      "category": "readings",
+      "title": "NKI nc_transpose Reference",
+      "url": "https://awsdocs-neuron.readthedocs-hosted.com/en/latest/nki/api/generated/nki.isa.nc_transpose.html",
+      "path": "readings/nki_nc_transpose.html",
+      "bytes": 250335,
+      "sha256": "ea8b4a8e14d9370293750b5da19970531154f09d729cda8e64d5a22884d67b01",
+      "status": "ok"
+    },
+    {
+      "category": "readings",
+      "title": "NKI tensor_copy Reference",
+      "url": "https://awsdocs-neuron.readthedocs-hosted.com/en/latest/nki/api/generated/nki.isa.tensor_copy.html",
+      "path": "readings/nki_tensor_copy.html",
+      "bytes": 251907,
+      "sha256": "eef92729014dedb4ea0e857c7c26e060a5f159356eee87aa9597337be5e995aa",
+      "status": "ok"
+    },
+    {
+      "category": "readings",
+      "title": "Triton Documentation",
+      "url": "https://triton-lang.org/main/index.html",
+      "path": "readings/triton.html",
+      "bytes": 10846,
+      "sha256": "fc578c0d7e0d39f550925c0f2e7a407f7c8bcbbfa5948b2461b00c9593ddf811",
+      "status": "ok"
+    },
+    {
+      "category": "readings",
+      "title": "TileLang Documentation",
+      "url": "https://tilelang.com/",
+      "path": "readings/tilelang.html",
+      "bytes": 108287,
+      "sha256": "2c13ee111e6740741934623e660b80f8dd9613f10a68e7c6066e75060b9ebd84",
+      "status": "ok"
+    },
+    {
+      "category": "course_pages",
+      "title": "Course Schedule",
+      "url": "https://gfxcourses.stanford.edu/cs149/fall25/",
+      "path": "course_pages/home.html",
+      "bytes": 16780,
+      "sha256": "d23b6d1b7b573cc0b2e9b69797c9d8ef7d22ebfe1363f75e3f939b17423c202c",
+      "status": "ok"
+    },
+    {
+      "category": "course_pages",
+      "title": "Course Information",
+      "url": "https://gfxcourses.stanford.edu/cs149/fall25/courseinfo",
+      "path": "course_pages/courseinfo.html",
+      "bytes": 15687,
+      "sha256": "d950de3bfe66cb178ee3630904a6078baeebc84886446240c9216cd1b32015c8",
+      "status": "ok"
+    },
+    {
+      "category": "course_pages",
+      "title": "Lecture List",
+      "url": "https://gfxcourses.stanford.edu/cs149/fall25/lecture/",
+      "path": "course_pages/lectures.html",
+      "bytes": 9511,
+      "sha256": "743d14db6539168c3a89403aa7647a7f22abdca3fb950adbd2061d189558b5aa",
+      "status": "ok"
+    },
+    {
+      "category": "readings",
+      "title": "Reference from programming_assignments/asst1/README.md",
+      "url": "http://ispc.github.io/",
+      "path": "readings/references/591458411f_index.html",
+      "bytes": 6438,
+      "sha256": "2d9670c2a7116c16fd4dfe80b7e225902dcf2360eb72125055fb55eeabb312e4",
+      "status": "ok"
+    },
+    {
+      "category": "readings",
+      "title": "Reference from programming_assignments/asst1/README.md",
+      "url": "https://ispc.github.io/downloads.html",
+      "path": "readings/references/d6e0025908_downloads.html",
+      "bytes": 7096,
+      "sha256": "91e1a522ba788ddbdd6152839ee384a97a80c9635ad3a3ef7d6255722843bf82",
+      "status": "ok"
+    },
+    {
+      "category": "readings",
+      "title": "Reference from programming_assignments/asst1/README.md",
+      "url": "http://ispc.github.io/example.html",
+      "path": "readings/references/3260d4e0af_example.html",
+      "bytes": 13647,
+      "sha256": "3768682499a66aaa89cdca06a01a7f970406f62f90917f380eeb86abbf0e5202",
+      "status": "ok"
+    },
+    {
+      "category": "readings",
+      "title": "Reference from programming_assignments/asst2/README.md",
+      "url": "http://ispc.github.io/ispc.html",
+      "path": "readings/references/a7be627537_ispc.html",
+      "bytes": 446723,
+      "sha256": "11ca3d2a0584083270fb77cb2dd95ca6d048ec0f5b3ac25a9638935a2c9652fc",
+      "status": "ok"
+    },
+    {
+      "category": "readings",
+      "title": "Reference from programming_assignments/asst3/README.md",
+      "url": "http://docs.nvidia.com/cuda/pdf/CUDA_C_Programming_Guide.pdf",
+      "path": "readings/references/e26d201912_CUDA_C_Programming_Guide.pdf",
+      "bytes": 4660774,
+      "sha256": "d1e2b16bc6ed17df22e0fe0043fea6b095d982e7f7471d89121706ec5b10e71e",
+      "status": "ok",
+      "pages": 598
+    },
+    {
+      "category": "readings",
+      "title": "Reference from programming_assignments/asst3/README.md",
+      "url": "https://docs.nvidia.com/cuda/cuda-c-programming-guide/",
+      "path": "readings/references/d2a9bf55d3_cuda-c-programming-guide.html",
+      "bytes": 3926035,
+      "sha256": "29c3f35ecf6e2a6765e64b44c6943f698fa7e71601995c969da78107b76ce847",
+      "status": "ok"
+    },
+    {
+      "category": "readings",
+      "title": "Reference from programming_assignments/asst3/README.md",
+      "url": "http://docs.nvidia.com/cuda/",
+      "path": "readings/references/b498fcc930_cuda.html",
+      "bytes": 46773,
+      "sha256": "e4a4469e8fc210ea202e7f9b3bdc0044e33c76077a303961aa3c1834d5c6fb0c",
+      "status": "ok"
+    },
+    {
+      "category": "readings",
+      "title": "Reference from programming_assignments/asst3/README.md",
+      "url": "https://isocpp.org/faq",
+      "path": "readings/references/d9db272fe8_faq.html",
+      "bytes": 23949,
+      "sha256": "c4df1e187c60a2319d1630ef20ccf985a5f08e5993091cf614e4af67370c751d",
+      "status": "ok"
+    },
+    {
+      "category": "readings",
+      "title": "Reference from programming_assignments/asst3/README.md",
+      "url": "https://docs.nvidia.com/cuda/cuda-runtime-api/api-sync-behavior.html",
+      "path": "readings/references/26359dab3e_api-sync-behavior.html",
+      "bytes": 10214,
+      "sha256": "3875df1ca0b486896bb79669b56f4829a15f41e7b61fdd4a10910e87d06e3bf0",
+      "status": "ok"
+    },
+    {
+      "category": "readings",
+      "title": "Reference from programming_assignments/asst3/README.md",
+      "url": "https://docs.nvidia.com/cuda/archive/12.2.2/thrust/index.html?highlight=group%20prefix%20sums",
+      "path": "readings/references/b081535a46_index.html",
+      "bytes": 125917,
+      "sha256": "c296557268c31bed2ce25414617513e54dfae17f74117f6dfdea92d50fd90cd0",
+      "status": "ok"
+    },
+    {
+      "category": "readings",
+      "title": "Reference from programming_assignments/asst3/README.md",
+      "url": "https://docs.nvidia.com/cuda/archive/12.2.1/thrust/index.html",
+      "path": "readings/references/b397735da4_index.html",
+      "bytes": 125127,
+      "sha256": "5438a27cc86466adc88095b749b0e45e91fe661ce9f5b2724ea76f367ac79723",
+      "status": "ok"
+    },
+    {
+      "category": "readings",
+      "title": "Reference from programming_assignments/asst4-trainium2/README.md",
+      "url": "https://awsdocs-neuron.readthedocs-hosted.com/en/latest/general/nki/programming_model.html",
+      "path": "readings/references/eed7be5192_programming_model.html",
+      "bytes": 360622,
+      "sha256": "c3c3f2b4607e25ed353f9e5ab0a90fcb8af87cfdfa2d154b72830c92e625478b",
+      "status": "ok"
+    },
+    {
+      "category": "readings",
+      "title": "Reference from programming_assignments/asst4-trainium2/README.md",
+      "url": "https://awsdocs-neuron.readthedocs-hosted.com/en/latest/general/nki/api/generated/nki.language.affine_range.html",
+      "path": "readings/references/f4aa31fc85_nki.language.affine_range.html",
+      "bytes": 248752,
+      "sha256": "f4ed3d045f152048712e5075f36e36080f9d6a800ce735352832eb20b60a92c6",
+      "status": "ok"
+    },
+    {
+      "category": "readings",
+      "title": "Reference from programming_assignments/asst4-trainium2/README.md",
+      "url": "https://awsdocs-neuron.readthedocs-hosted.com/en/latest/general/nki/api/generated/nki.language.sequential_range.html",
+      "path": "readings/references/58049251d3_nki.language.sequential_range.html",
+      "bytes": 248812,
+      "sha256": "2c468f38ed801f92c9c0f4ac6b1734e3d993be19357a032f1c92f391b1ca8a32",
+      "status": "ok"
+    },
+    {
+      "category": "readings",
+      "title": "Reference from programming_assignments/asst4-trainium2/README.md",
+      "url": "https://awsdocs-neuron.readthedocs-hosted.com/en/latest/tools/neuron-sys-tools/neuron-profile-user-guide.html",
+      "path": "readings/references/521ae6438c_neuron-profile-user-guide.html",
+      "bytes": 215886,
+      "sha256": "b0633cd0afd0cfa9056c56aa99b5947baf28bc0cd724bfaecaf80b0132dc5937",
+      "status": "ok",
+      "resolved_url": "https://awsdocs-neuron.readthedocs-hosted.com/en/v2.26.0/tools/neuron-sys-tools/neuron-profile-user-guide.html"
+    },
+    {
+      "category": "readings",
+      "title": "Reference from programming_assignments/asst4-trainium2/README.md",
+      "url": "https://awsdocs-neuron.readthedocs-hosted.com/en/latest/general/nki/nki_perf_guide.html",
+      "path": "readings/references/b497aa34d7_nki_perf_guide.html",
+      "bytes": 344911,
+      "sha256": "efb20c01048d662778fdd655c93d74ae368b4676f5146c25b95559fe22fdcac3",
+      "status": "ok"
+    },
+    {
+      "category": "readings",
+      "title": "Reference from programming_assignments/asst4-trainium2/README.md",
+      "url": "https://awsdocs-neuron.readthedocs-hosted.com/en/latest/nki/tutorials",
+      "path": "readings/references/6acbd5623e_tutorials.html",
+      "bytes": 137951,
+      "sha256": "c9d9e39a9acaa98113fc95a3aee22a58f9b08384ae47af235458ec76103d4273",
+      "status": "ok",
+      "resolved_url": "https://awsdocs-neuron.readthedocs-hosted.com/en/v2.26.0/general/nki/tutorials.html"
+    },
+    {
+      "category": "readings",
+      "title": "Reference from programming_assignments/asst4-trainium2/README.md",
+      "url": "https://awsdocs-neuron.readthedocs-hosted.com/en/latest/general/nki/api/generated/nki.isa.nc_matmul.html",
+      "path": "readings/references/2c3d88e634_nki.isa.nc_matmul.html",
+      "bytes": 280680,
+      "sha256": "50c344f7985e2dd383e171db50f41988365c1fd6926f23998da7d5916f2a6106",
+      "status": "ok"
+    },
+    {
+      "category": "readings",
+      "title": "Reference from programming_assignments/asst4-trainium2/README.md",
+      "url": "https://awsdocs-neuron.readthedocs-hosted.com/en/latest/nki/tutorials/matrix_multiplication.html",
+      "path": "readings/references/b168d1beda_matrix_multiplication.html",
+      "bytes": 261082,
+      "sha256": "7475603b7c25786f02efbcd03a73c929b39e50aeefbed4dba393b918987f9cee",
+      "status": "ok",
+      "resolved_url": "https://awsdocs-neuron.readthedocs-hosted.com/en/v2.26.0/general/nki/tutorials/matrix_multiplication.html"
+    },
+    {
+      "category": "readings",
+      "title": "Reference from programming_assignments/asst4-trainium2/README.md",
+      "url": "https://awsdocs-neuron.readthedocs-hosted.com/en/latest/general/nki/tutorials.html",
+      "path": "readings/references/1ada262df3_tutorials.html",
+      "bytes": 252759,
+      "sha256": "fec8a475c2117e4fd6b59e68e914f24b000db24fbc139abaa8e74fcfae8d3686",
+      "status": "ok"
+    },
+    {
+      "category": "readings",
+      "title": "Reference from programming_assignments/asst4-trainium2/README.md",
+      "url": "https://awsdocs-neuron.readthedocs-hosted.com/en/latest/general/nki/api/index.html",
+      "path": "readings/references/61dd6683de_index.html",
+      "bytes": 249808,
+      "sha256": "e8b13b3299fee70a3f1836a2c1618bc50414bb727186fe9751b7c84b9589cb65",
+      "status": "ok"
+    },
+    {
+      "category": "readings",
+      "title": "Reference from programming_assignments/asst4-trainium2/README.md",
+      "url": "https://awsdocs-neuron.readthedocs-hosted.com/en/latest/nki/api/generated/nki.isa.tensor_reduce.html",
+      "path": "readings/references/75e77f2bdd_nki.isa.tensor_reduce.html",
+      "bytes": 256883,
+      "sha256": "aa9fea991f1a0be2d101432a479266108493482c3ed1c1c685c513fc1b92a2a1",
+      "status": "ok"
+    },
+    {
+      "category": "readings",
+      "title": "Reference from programming_assignments/asst4-trainium2/README.md",
+      "url": "https://awsdocs-neuron.readthedocs-hosted.com/en/latest/nki/api/generated/nki.isa.tensor_tensor.html",
+      "path": "readings/references/dfc7be72a4_nki.isa.tensor_tensor.html",
+      "bytes": 255938,
+      "sha256": "2e1bce6adc714536599d44d4a9b3c45bf5070db449b2034559efa0941dbd03fe",
+      "status": "ok"
+    },
+    {
+      "category": "readings",
+      "title": "Reference from programming_assignments/asst4-trainium2/README.md",
+      "url": "https://awsdocs-neuron.readthedocs-hosted.com/en/latest/nki/api/generated/nki.simulate_kernel.html",
+      "path": "readings/references/c50a68c499_nki.simulate_kernel.html",
+      "bytes": 168179,
+      "sha256": "492708178842a4ddf215f9e8100c96a3305c6ecbeba16f1c0017ee5f13fde6f7",
+      "status": "ok"
+    },
+    {
+      "category": "readings",
+      "title": "Reference from programming_assignments/asst4-trainium2/README.md",
+      "url": "https://awsdocs-neuron.readthedocs-hosted.com/en/v2.26.0/general/nki/nki_block_dimension_migration_guide.html",
+      "path": "readings/references/5131ed7894_nki_block_dimension_migration_guide.html",
+      "bytes": 184244,
+      "sha256": "e6a3ed0317d69c189a2b6c02f7f12fd701878202dfde766a218f96d79aef1075",
+      "status": "ok"
+    },
+    {
+      "category": "readings",
+      "title": "Reference from programming_assignments/asst4-trainium2/README.md",
+      "url": "https://awsdocs-neuron.readthedocs-hosted.com/en/latest/nki/api/generated/nki.language.mgrid.html",
+      "path": "readings/references/b68cea63ee_nki.language.mgrid.html",
+      "bytes": 166395,
+      "sha256": "89cb79b814ff8a2ef36a462e9f00c246c001aac2593845fb31be3bc34e31a27e",
+      "status": "ok"
+    },
+    {
+      "category": "readings",
+      "title": "Reference from programming_assignments/asst5-kernels/README.md",
+      "url": "https://developer.nvidia.com/nvidia-development-tools-solutions-err_nvgpuctrperm-permission-issue-performance-counters",
+      "path": "readings/references/76e172507b_nvidia-development-tools-solutions-err_nvgpuctrperm-permission-issue-performance-counters.html",
+      "bytes": 52577,
+      "sha256": "54094e6057d03a9f1dfb129f7eef9e16551829b8257c4069d7f87925c395518b",
+      "status": "ok"
+    },
+    {
+      "category": "readings",
+      "title": "Reference from programming_assignments/asst5-kernels/README.md",
+      "url": "https://developer.nvidia.com/tools-overview/nsight-compute/get-started",
+      "path": "readings/references/759ba1abd2_get-started.html",
+      "bytes": 82406,
+      "sha256": "676c0055cd266153c2d69ced7af4b3187e528c0dc02135f6fc09cec11b5f6006",
+      "status": "ok"
+    },
+    {
+      "category": "readings",
+      "title": "Reference from programming_assignments/asst5-kernels/problems/1d-occupancy-decoder/README.md",
+      "url": "https://triton-lang.org/main/getting-started/tutorials/index.html",
+      "path": "readings/references/9fa3459966_index.html",
+      "bytes": 14846,
+      "sha256": "f0eb5af4dc37b7681af9bd57d03c66cf4f5423519a2ad62cd16198ec2071ae9d",
+      "status": "ok"
+    }
+  ]
+}

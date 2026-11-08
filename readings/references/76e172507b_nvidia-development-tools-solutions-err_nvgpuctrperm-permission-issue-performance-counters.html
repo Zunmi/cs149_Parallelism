@@ -1,0 +1,1098 @@
+<!DOCTYPE html>
+<html lang='en' class='h-100'>
+<head>
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="csrf-param" content="authenticity_token" />
+<meta name="csrf-token" content="Izjos7wVfzUXLVSPpbDIRsIRzSPxe_SWVHrjAvTjhDv54CAozHaXXdqT7SOoSEybj4bd_r3ycxNMGn6ZOa5ycg" />
+  <meta name="csp-nonce" />
+  <title>NVIDIA Development Tools Solutions - ERR_NVGPUCTRPERM: Permission issue with Performance Counters | NVIDIA Developer</title>
+<link rel="canonical" href="https://developer.nvidia.com/nvidia-development-tools-solutions-err_nvgpuctrperm-permission-issue-performance-counters">
+<link rel="alternate" href="https://developer.nvidia.com/nvidia-development-tools-solutions-err_nvgpuctrperm-permission-issue-performance-counters" hreflang="x-default">
+<link rel="alternate" href="https://developer.nvidia.com/nvidia-development-tools-solutions-err_nvgpuctrperm-permission-issue-performance-counters" hreflang="en-us">
+<meta property="og:site_name" content="NVIDIA Developer">
+<meta property="og:title" content="NVIDIA Development Tools Solutions - ERR_NVGPUCTRPERM: Permission issue with Performance Counters">
+<meta property="og:type" content="website">
+<meta property="og:image" content="https://developer.download.nvidia.com/images/og-default.jpg">
+<meta property="og:url" content="https://developer.nvidia.com/nvidia-development-tools-solutions-err_nvgpuctrperm-permission-issue-performance-counters">
+<meta name="twitter:title" content="NVIDIA Development Tools Solutions - ERR_NVGPUCTRPERM: Permission issue with Performance Counters">
+<meta name="twitter:image" content="https://developer.download.nvidia.com/images/og-default.jpg">
+<meta name="twitter:site" content="@NVIDIA">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:creator" content="@NVIDIA">
+<meta name="nv-cre-date" content="2023-09-18T17:02:23.418Z">
+<meta name="nv-pub-date" content="2026-06-29T22:55:00.498Z">
+<meta property="industry" content="HPC / Scientific Computing">
+
+  <link rel="stylesheet" href="https://developer.nvidia.com/assets/application-b1311f8e3775d0111068ffb570bc2dbc9f97b4e9b142bf9583af462cd93ca62f.css" media="all" />
+  <link rel="stylesheet" href="https://developer.nvidia.com/assets/devzone3/shared/modal-b27162ea9a12461a0b0076440408cdd94ddf4273a6a89539e4b81f4641416436.css" media="all" />
+  
+  <link rel="stylesheet" href="https://developer.nvidia.com/assets/one-trust-bea625cf16a072ce5fdb0707a19f2645daf63c05eb1a016db72773eba008fc07.css" />
+  <script src="https://cdn.cookielaw.org/scripttemplates/otSDKStub.js" charset="UTF-8" data-document-language="true" data-domain-script="3e2b62ff-7ae7-4ac5-87c8-d5949ecafff5"></script>
+
+<script src="https://images.nvidia.com/aem-dam/Solutions/ot-js/ot-custom.js"></script>
+
+<script>
+  function OptanonWrapper() {
+    let event = new Event('bannerLoaded');
+    window.dispatchEvent(event);
+
+      if (window.OnetrustActiveGroups && window.OnetrustActiveGroups.includes("C0002")) {
+        window.DD_RUM && window.DD_RUM.init({
+          clientToken: 'pub0430c74fae5d2b467bcb8d48b13e5b32',
+          applicationId: '9fc963c7-14e6-403d-bdec-ee671550bb7f',
+          site: 'datadoghq.com',
+          service: 'devzone',
+          env: 'prod',
+          version: 'v2.60.0',
+          sessionSampleRate: 10,
+          sessionReplaySampleRate: 5,
+          trackUserInteractions: true,
+          trackResources: true,
+          trackLongTasks: true,
+          defaultPrivacyLevel: 'mask-user-input',
+        });
+      }
+  }
+</script>
+
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "name": "NVIDIA Developer",
+    "url": "https://developer.nvidia.com",
+    "logo": "https://www.nvidia.com/en-us/about-nvidia/legal-info/logo-brand-usage/_jcr_content/root/responsivegrid/nv_container_392921705/nv_container_412055486/nv_image.coreimg.100.630.png/1703060329095/nvidia-logo-horz.png",
+    "sameAs": [
+      "https://github.com/nvidia",
+      "https://www.linkedin.com/company/nvidia/",
+      "https://x.com/nvidiadeveloper"
+    ]
+  }
+</script>
+
+  
+  <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" as="style" type="text/css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
+  <link rel="stylesheet" href="https://developer.nvidia.com/assets/devzone3/vars-cd3a0769a3c2f2d9ea6b83ac53ce86bceef4c719e4dbd22ed41d48d01f200901.css" media="all" />
+  <link rel="stylesheet" href="https://developer.nvidia.com/assets/devzone3/new/application-9f23f8b7c393ec4cf46b5284d149f84c5301d9373ceca59acb23e4318443bbfa.css" media="all" />
+  <link rel="stylesheet" href="https://developer.nvidia.com/assets/feed-aggregator/feed-aggregator-9ace7521871242143cb35fa86d5be702c4dacb409600041fa6a5b14fa2a71dde.css" media="all" />
+  <link rel="stylesheet" href="https://developer.nvidia.com/assets/twentytwenty/css/twentytwenty-4ef2ccd719d09a97572e93c499c1fb11cc971d2a3519cfe105dcff2be92f65b9.css" media="all" />
+
+  <script src="https://developer.nvidia.com/assets/horizontal-chart/d3.v4.min-41cfecdf7c41476e805de7afacf4aacdd1a4be6947fbecf95217e947ebc2faf5.js"></script>
+  <script src="https://developer.nvidia.com/assets/horizontal-chart/visualize-d-16cf14d4b63d6031e6c18983e91ac6d2b1b1f8140d15e351a9c847f8610b7e5b.js"></script>
+  <link rel="stylesheet" href="https://developer.nvidia.com/assets/sf-validation/sf-validation-805362e079494cd052f713be5f91a44eb602f545c342f794abbd4a8050c0acb3.css" />
+
+  <script src="https://assets.adobedtm.com/5d4962a43b79/c1061d2c5e7b/launch-191c2462b890.min.js" data-ot-ignore="true"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.3/jquery.min.js" integrity="sha512-STof4xm1wgkfm7heWqFJVn58Hm3EtS31XFaagaa8VMReCXAkQnJZ+jEy8PCC/iT18dFy95WcExNHFTqLyp72eQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+    <script src="https://api-prod.nvidia.com/search/nvidia-gallery-widget.js"></script>
+
+<script src="https://developer.nvidia.com/assets/devzone3/modules/nvidia_editor/nod_widgets-8c38a7d04ed3c3acd9117aa126bf76d7902d3c57c72b76dbf3c281c96ed09975.js"></script>
+
+
+  <link rel="icon" type="image/x-icon" href="https://developer.nvidia.com/assets/favicon-81bff16cada05fcff11e5711f7e6212bdc2e0a32ee57cd640a8cf66c87a6cbe6.ico" />
+</head>
+
+<body class='d-flex flex-column h-100' data-theme='devzone3_new'>
+
+<div id='header'></div>
+
+
+
+
+
+
+
+
+  
+
+<main class="main-content dz3-main-section dz-new-theme page-nvidia-development-tools-solutions-err_nvgpuctrperm-permission-issue-performance-counters page-nvidia-development-tools-solutions-err_nvgpuctrperm-permission-issue-performance-counters" data-id="1057">
+  <section class="sct--m">
+    <div class="cntnr--cw">
+        <h1 class="h--large">NVIDIA Development Tools Solutions - ERR_NVGPUCTRPERM: Permission issue with Performance Counters</h1>
+    </div>
+
+    <div class="cntnr--cw">
+
+        <h2 id="overview" class="h--medium txt-clr--blck">Overview</h2>
+        <p>You may encounter the following error message when using NVIDIA tools:</p>
+
+        <p>
+        <strong><em>ERR_NVGPUCTRPERM: The user running &lt;tool_name/application_name&gt; does not have permission to access NVIDIA GPU Performance Counters or the Hardware Event System on the target device.</em></strong>
+        </p>
+
+        <p>If you are receiving this error, then:</p>
+        <p> 1. You are using a tool that accesses the GPU Performance Counters or the GPU Hardware Event System. These counters and events are developer-specific features that provide low-level access to GPU hardware.</p>
+        <p> 2. Your system administrator or a recent NVIDIA driver installation has disabled access to GPU Performance Counters for regular users due to <a href="https://nvidia.custhelp.com/app/answers/detail/a_id/4738">Security Notice: NVIDIA Response to “Rendered Insecure: GPU Side Channel Attacks are Practical” - November 2018</a>. Your tool is affected by this restriction when using driver versions 419.17+ on Windows or 418.43+ on Linux.</p>
+        
+
+        <p>
+        To avoid this error, <a href="#elevated-privileges">run the tool or application with elevated privileges</a> or
+        <a href="#non-admin-access">enable access for non-admin users</a>. For problems following these instructions, see the
+        <a href="#troubleshooting">troubleshooting guide</a>.
+        </p>
+
+        <h3 id="elevated-privileges" class="h--medium">Run with Elevated Privileges</h3>
+
+
+        <p>Run the tool or application being profiled with administrative privileges on the target device:</p>
+
+        <ul class="nv-list">
+            <li><p>Linux Desktop: Launch the tool with <code>sudo</code> or as a user with the <code>CAP_SYS_ADMIN</code> capability set. Starting in driver version R565, the <code>CAP_PERFMON</code> capability will also allow access. When <a target="_blank" href="https://developer.nvidia.com/blog/using-nsight-compute-in-containers/">profiling within a container</a>, access must be <a href="https://developer.nvidia.com/nvidia-development-tools-solutions-err_nvgpuctrperm-permission-issue-performance-counters#AllUsersTag">enabled on the host</a>, or the container must be started with the appropriate permissions by passing <code>--cap-add=SYS_ADMIN</code> as an admin user.</p></li>
+                
+            <li class="ps-4">Note that <code>CAP_PERFMON</code> will not work in secure execution mode unless profiling within a container as described above.</li>
+                
+            
+            <li>Windows: Launch the tool by right-clicking the tool and selecting “Run as administrator”, or run the full command from an Administrator command prompt.</li>
+            <li>DRIVE, Tegra, and QNX: Launch the tool with <code>sudo</code> or as the root user.</li>
+            <li>See also <a href="#tool-specific-solutions">tool-specific</a> information for further details.
+            </li>
+        </ul>
+
+    </div>
+
+    <div class="cntnr--cw pt-4">
+
+        <h2 id="non-admin-access" class="h--medium txt-clr--blck">Enable Access for Non-Admin Users</h2>
+        <h3 id="linux-desktop-platforms" class="h--small">Linux Desktop</h3>
+        <p>GPU Performance Counter control requires Linux display driver 418.43 or later.
+        Also see the “Restricting access to GPU Performance Counters” section of the <code>README.txt</code> in the Linux driver.
+        </p>
+
+        <p>
+        Historically, profiling access was controlled via kernel registry keys.
+        Starting with driver version R610, NVIDIA introduces a capabilities-based permission system that provides more granular control over profiling and tracing access.
+        See the <a href="#permission-modes-interactions">Permission Modes Interactions</a> section for details on how these two modes interact.
+        </p>
+
+        <p>
+        <strong>In a future release</strong>, the regkey-based method will be removed. The NVIDIA capabilities method described below replaces it.
+        Users with <code>CAP_SYS_ADMIN</code> or <code>CAP_PERFMON</code> capabilities will retain the same unrestricted profiling permissions.
+        </p>
+
+        <h3 id="quick-start-r610" class="h--small">Quick Start: Grant Full Profiling Access to All Users (R610+)</h3>
+
+        <p>To grant all non-admin users full profiling access, run the following script as root:</p>
+
+        <pre><code>for cap in profiler-device profiler-context trace-device; do
+    minor=$(awk -v c="$cap" '$1==c{print $2}' /proc/driver/nvidia-caps/sys-minors)
+    nvidia-modprobe -f /proc/driver/nvidia/capabilities/$cap
+    chmod a+r /dev/nvidia-caps/nvidia-cap$minor
+    echo "DeviceFileModify: 0" &gt; /proc/driver/nvidia/capabilities/"$cap"
+done</code></pre>
+
+        <p>
+        For granular control per user, per group, or per capability, see <a href="#nvidia-capabilities-method">NVIDIA Capabilities Method</a>.
+        </p>
+
+        <h3 id="nvidia-capabilities-method" class="h--small">NVIDIA Capabilities Method (R610+)</h3>
+        <p>For R610+ drivers, access to profiling and tracing resources is controlled using “nvidia-capabilities”.
+        Each profiling capability is represented by its own system-wide device node in the file system.
+        This NVIDIA-specific permission system is unrelated to Linux’s native capability mechanism (e.g. <code>CAP_SYS_ADMIN</code>).
+        </p>
+
+        <p>Access to a specific capability is required to perform certain actions through the driver.
+        If a user has file read access to the capability, the action will be carried out; otherwise, the action will fail.
+        Root, or any user with <code>CAP_SYS_ADMIN</code> or <code>CAP_PERFMON</code> privileges, is always granted profiling capabilities.
+        </p>
+
+        <p> Access to these nodes can be controlled on a per-user or per-group basis without requiring full admin privileges.
+        For R610, NVIDIA introduces capabilities that represent profiling and hardware tracing subsystems:
+        </p>
+
+        <ul class="nv-list">
+        <li><code>profiler-context</code>: Grants profiling access to intra-context scope.</li>
+        <li><code>profiler-device</code>: Grants profiling access to both intra-context scope and device-level scope. Includes permission granted by <code>profiler-context</code>.</li>
+        <li><code>trace-device</code>: Grants permission to collect GPU HW tracing in device-level scope.</li>
+        </ul>
+
+        <p><strong>Note:</strong> Profiling capabilities are granted system-wide and cannot be scoped to individual GPUs.
+        However, they do not extend existing GPU access. A user can only profile GPUs they already have access to.
+        </p>
+
+        <h3 id="granting-nvidia-capability-permission" class="h--small">Granting Non-Admin Profiling Permission via NVIDIA Capability</h3>
+
+        <p>The capabilities system is based on a combination of the <code>/proc</code> and <code>/dev</code> file systems.
+        Files under <code>/proc/driver/nvidia/capabilities</code> point to device nodes under <code>/dev</code>, through which cgroups can control access to the capability.
+        </p>
+
+        <h3 id="installing-capability-device-nodes" class="h--small">1. Installing Capability Device Nodes</h3>
+
+        <p>The following <code>profiler-device</code> capability example shows the <code>DeviceFileMinor</code>, <code>DeviceFileMode</code>, and <code>DeviceFileModify</code> fields.
+        </p>
+
+        <pre><code>$ cat /proc/driver/nvidia/capabilities/profiler-device
+DeviceFileMinor: 4324
+DeviceFileMode: 256
+DeviceFileModify: 1</code></pre>
+
+        <p>The standard location for these device nodes is under <code>/dev/nvidia-caps</code>:</p>
+
+        <pre><code>$ ls -al /dev/nvidia-caps/nvidia-cap*
+cr-------- 1 root root 510,    1 Mar 31 22:31 /dev/nvidia-caps/nvidia-cap1
+cr--r--r-- 1 root root 510,    2 Mar 31 22:31 /dev/nvidia-caps/nvidia-cap2</code></pre>
+
+        <p>
+        These device nodes cannot be automatically created or deleted by the NVIDIA driver at the same time it creates or deletes files under
+        <code>/proc/driver/nvidia/capabilities</code> due to GPL compliance issues.
+        Instead, the user-level program <code>nvidia-modprobe</code> can be invoked from user space to create them.
+        </p>
+
+        <pre><code>$ nvidia-modprobe \
+    -f /proc/driver/nvidia/capabilities/profiler-device \
+    -f /proc/driver/nvidia/capabilities/profiler-context</code></pre>
+
+        <p><code>nvidia-modprobe</code> looks at <code>DeviceFileMode</code> in each capability file and creates the device node with the indicated permissions.
+        For example, <code>DeviceFileMode: 256</code> corresponds to <code>0400</code>.
+        </p>
+
+        <pre><code>$ ls -al /dev/nvidia-caps/nvidia-cap*
+cr-------- 1 root root 510,    1 Mar 31 22:31 /dev/nvidia-caps/nvidia-cap1
+cr--r--r-- 1 root root 510,    2 Mar 31 22:31 /dev/nvidia-caps/nvidia-cap2
+cr-------- 1 root root 510, 4324 Mar 31 22:34 /dev/nvidia-caps/nvidia-cap4324
+cr-------- 1 root root 510, 4325 Mar 31 22:32 /dev/nvidia-caps/nvidia-cap4325</code></pre>
+
+        <p>The device node minor numbers map directly to the values in <code>/proc/driver/nvidia-caps/sys-minors</code>.
+        The following examples use <code>nvidia-cap4324</code>, which corresponds to <code>profiler-device</code>.
+        </p>
+
+        <pre><code>$ cat /proc/driver/nvidia-caps/sys-minors
+fabric-imex-mgmt 4323
+profiler-device 4324
+profiler-context 4325
+trace-device 4326</code></pre>
+
+        <p>Programs such as <code>nvidia-smi</code> automatically invoke <code>nvidia-modprobe</code>, when available, to create these device nodes.
+        It is important to set <code>DeviceFileModify: 0</code> to prevent other programs from overwriting the setting after device-node creation.
+        </p>
+
+        <pre><code># Update the file with a DeviceFileModify setting of 0
+$ echo "DeviceFileModify: 0" &gt; /proc/driver/nvidia/capabilities/profiler-context</code></pre>
+
+        <p>To change this in the future, reset it to <code>DeviceFileModify: 1</code> using the same command sequence.
+        </p>
+
+        <h3 id="granting-profiling-permission" class="h--small">2. Granting Profiling Permission</h3>
+
+        <p>You can grant a capability to a specific user, a group, or all users with the following options.</p>
+
+        <p><strong>Option 1: Grant profiling capability permission for all non-admin users.</strong></p>
+        <pre><code>$ chmod a+r /dev/nvidia-caps/nvidia-cap4324
+$ ls -al /dev/nvidia-caps/nvidia-cap4324
+cr--r--r-- 1 root root 510, 4324 Mar 31 22:34 /dev/nvidia-caps/nvidia-cap4324</code></pre>
+
+        <p><strong>Option 2: Grant profiling capability permission for a specific user.</strong></p>
+        <p>Example for granting the <code>profiler-device</code> capability to Linux account <code>userA</code>:</p>
+        <pre><code>$ setfacl -m u:userA:r /dev/nvidia-caps/nvidia-cap4324
+$ ls -al /dev/nvidia-caps/nvidia-cap4324
+c---r-----+ 1 root root 510, 4324 Mar 31 22:34 /dev/nvidia-caps/nvidia-cap4324</code></pre>
+
+        <p><strong>Option 3: Grant profiling capability permission for a user group.</strong></p>
+        <p>Example for granting the <code>profiler-device</code> capability to a Linux user group:</p>
+        <pre><code># Create a new Linux user group
+$ sudo groupadd performance-counter-group
+
+# Add userA to the group
+$ sudo usermod -aG performance-counter-group userA
+
+# Grant profiler-device capability access to the group
+$ sudo chmod g+r /dev/nvidia-caps/nvidia-cap4324</code></pre>
+
+        <h3 id="legacy-regkey-method" class="h--small">Legacy Kernel Regkey-Based Method</h3>
+
+        <p id="linux-enable-access-permanently" class="p--large"><strong>Enable Access Permanently</strong></p>
+
+        <ul class="nv-list">
+            <li><p>To allow access for any user, create a file with the <code>.conf </code>extension containing options <code>nvidia NVreg_RestrictProfilingToAdminUsers=0</code> in <code>/etc/modprobe.d.</code></p></li>
+            <li><p>To restrict access to sudo or admin users (<code>CAP_SYS_ADMIN</code> or <code>CAP_PERFMON</code> capability set), create a file with the <code>.conf</code> extension containing options <code>nvidia NVreg_RestrictProfilingToAdminUsers=1</code> in <code>/etc/modprobe.d.</code></p></li>
+        </ul>
+
+        <p><strong>Notes:</strong></p>
+        <ul class="nv-list">
+            <li>A reboot may be required for the change to take effect.</li>
+            <li>On some systems, or when using a package manager to install the driver, it may be necessary to rebuild the initrd after writing a configuration file to
+                <code>/etc/modprobe.d</code>.
+            <li class="ps-4">For Red Hat-based distributions, rebuild the initrd with <code>dracut --regenerate-all -f</code>.</li>
+            <li class="ps-4">For Debian-based distributions, rebuild the initrd with <code>update-initramfs -u -k all</code>.</li>
+
+            </li>
+        </ul>
+
+        <p id="linux-enable-access-temporarily" class="p--large"><strong>Enable Access Temporarily</strong></p>
+
+        <p> 1. Before you can insert the kernel module with the required key set or unset, stop the window manager and unload all NVIDIA kernel modules.
+            As root, or with <code>sudo</code>:</p>
+
+            <ul class="nv-list">
+            <li>Stop the window manager with <code>systemctl isolate multi-user</code>, or your system-specific solution.</li>
+            <li>Unload modules with <code>modprobe -rf nvidia_uvm nvidia_drm nvidia_modeset nvidia-vgpu-vfio nvidia</code>.</li>
+            </ul>
+
+        <p> 2. To allow access for any user, run <code>modprobe nvidia NVreg_RestrictProfilingToAdminUsers=0</code>.</p>
+        <p> 3. To restrict access to admin users or non-admin users that have the <code>CAP_SYS_ADMIN</code> or <code>CAP_PERFMON</code> capability set, run modprobe nvidia <code>NVreg_RestrictProfilingToAdminUsers=1</code>.</p>
+        <p> 4. If desired, restart the window manager with <code>systemctl isolate graphical</code>, or your system-specific solution.</p>
+
+        <p><strong>Notes:</strong></p>
+        <ul class="nv-list">
+            <li>Instructions are for systemd-based distributions. For non-systemd-based distributions, a different procedure is required.</li>
+            <li>For successful unloading, no processes may be using these modules.</li>
+            <li>On Ubuntu systems, when installing via distro-native packages, the kernel module is renamed from nvidia to nvidia-xxx, and nvidia is aliased to nvidia-xxx, where xxx is the major number of the driver. For example, a 418.67 driver would use nvidia-418.</li>
+            <li>In case of problems with the above instructions or for non-systemd-based distributions, see the <a href="#troubleshooting">troubleshooting guide</a> at the end of this page.</li>
+        </ul>
+
+        <h3 id="permission-modes-interactions" class="h--small">Permission Modes Interactions</h3>
+        <p>
+        When the kernel registry key <code>NVreg_RestrictProfilingToAdminUsers=1</code> is set, all non-admin profiling access is restricted.
+        Access can be controlled and overridden via the new capabilities system on R610+.
+        When <code>NVreg_RestrictProfilingToAdminUsers=0</code>, all non-admin users have full profiling access regardless of capability settings.
+        </p>
+        <br>
+
+        <h3 id="windows-platforms" class="h--small">Windows</h3>
+
+        <p id="windows-nvidia-app" class="p--large">NVIDIA App</p>
+
+        <p>The <a target="_blank" href="https://www.nvidia.com/en-us/software/nvidia-app/">NVIDIA App</a> is the current way to control access to GPU performance counters. Starting with version 11.0.6, the controls can be found under <strong>System &gt; Advanced &gt; Developer &gt; Manage GPU Performance Counters</strong>. Choose the appropriate permissions from the drop-down menu. Note that administrative privileges are required to change this setting.</p>
+        <br>
+
+        <img src="https://developer.download.nvidia.com/images/NVIDIA-app-control-panel.png" alt="NVIDIA App control panel" title="NVIDIA App control panel">
+
+        <p id="windows-control-panel" class="p--large">Windows Control Panel</p>
+
+        <p><strong>Note:</strong> Starting with driver R610, Windows Control Panel support is deprecated and will be dropped in a future release. Use the NVIDIA App controls described above.</p>
+
+        <p>The NVIDIA Control Panel is installed with your display driver and supports Microsoft Compute Driver Model (MCDM) on r570 and later, Windows Display Driver Model (WDDM), and Tesla Compute Cluster (TCC) driver modes. You must launch the control panel as a system administrator to manage GPU Performance Counters. The relevant option in the control panel requires display driver 419.17 or later.</p>
+
+        <p>Right-click your desktop for quick access to the NVIDIA Control Panel, or launch it from the Windows Control Panel.</p>
+        <br>
+
+            <p class="text-center">
+            <img
+                alt="NVIDIA Control Panel Desktop menu with Enable Developer Settings selected"
+                src="https://d29g4g2dyqv443.cloudfront.net/sites/default/files/akamai/tools/Common/SupportSolutions/ERR_NVGPUCTRPERM_NvCtrlPanel-EnableDeveloperSettings.PNG"
+                title="Windows: Enable Developer Settings"
+            >
+            </p>
+            <br>
+            <p class="text-center">
+            <strong>Windows Step 1: Open the NVIDIA Control Panel, select “Desktop”, and ensure “Enable Developer Settings” is checked.</strong>
+            </p>
+            <br>
+              
+            <p class="text-center">
+            <img
+                alt="NVIDIA Control Panel Manage GPU Performance Counters screen with allow access for all users selected"
+                src="https://d29g4g2dyqv443.cloudfront.net/sites/default/files/akamai/tools/Common/SupportSolutions/ERR_NVGPUCTRPERM_NvCtrlPanel-AllowAccessToPerfCtrs.PNG"
+                title="Windows: Allow Access for All Users"
+            >
+            </p>
+            <br>
+            <p class="text-center">
+            <strong>Windows Step 2: Under “Developer” &gt; “Manage GPU Performance Counters”, select “Allow access to the GPU performance counter to all users” to enable unrestricted profiling.<sup>[1]</sup></strong>
+            </p>
+            <br>
+        
+        
+
+        <p>
+        <sup>[1]</sup> Note: The 425.25 Windows driver control panel for Tesla family GPUs may not respect the performance counter access setting.
+        If you encounter this issue, see the
+        <a href="https://developer.nvidia.com/nvidia-development-tools-solutions-err_nvgpuctrperm-telsaonwindows-no425.25controlpanel">Tesla on Windows Control Panel Issue</a>
+        page.
+        </p>
+        <br>
+
+        <p id="windows-mcdm-r565-earlier" class="p--large">Windows MCDM Driver Mode (r565 and Earlier)</p>
+
+        <p>The NVIDIA Control Panel for drivers prior to r570 does not currently support Microsoft Compute Driver Model (MCDM) and will report <code>NVIDIA Display settings are not available</code>. To allow non-admin profiling while using MCDM driver mode before r570:</p>
+        <p> 1. Put the Tesla GPU into TCC mode using <code>nvidia-smi -dm 1</code>. A reboot is required for the change to take effect.</p>
+        <p> 2. Launch the NVIDIA Control Panel and enable the non-admin profiling option for the TCC GPU, as described above.</p>
+        <p> 3. Put the GPU back into MCDM mode using <code>nvidia-smi -dm 2</code>. A reboot is required for the change to take effect. The TCC setting continues to apply for the MCDM GPU.</p>
+
+        <h3 id="drive-tegra-qnx-platforms" class="h--small">DRIVE, Tegra, and QNX</h3>
+
+        <p>You must enable GPU profiler support and profile as <code>sudo</code> or the root user for access to GPU Performance Counters.
+        To enable GPU profiler and debugger support:
+        </p>
+        <ul class="nv-list">
+            <li>Set the <code>support-gpu-tools</code> device tree property in the GPU device node to <code>1</code>.</li>
+            <li>Recompile the Device Tree following the instructions in the appropriate DRIVE OS SDK Development Guide:
+            <li class="ps-4">DRIVE OS Linux SDK Development Guide</li>
+            <li class="ps-4">DRIVE OS QNX SDK Development Guide</li>
+        </li>
+        <li>Flash the updated DTB.</li>
+        </ul>
+        <br>
+
+        <h3 id="troubleshooting" class="h--medium">Troubleshooting</h3>
+
+        <p id="troubleshooting-linux-desktop" class="p--large">Linux Desktop</p>
+
+        <p><strong>Diagnosing kernel module unload errors</strong></p>
+        <p>
+        If you encounter errors when unloading kernel modules that indicate they are still in use, processes still have handles to the relevant devices in
+        <code>/dev</code>. To identify which process is causing the error, use <code>sudo lsof /dev/nvidia*</code>.
+        This lists all processes holding handles to GPU device nodes. All listed processes must be terminated before the kernel modules can be unloaded.
+        </p>
+
+        <p><strong>Verifying profiling access</strong></p>
+        <p>The method for verifying profiling access depends on which permission method is in use.</p>
+
+        <p>
+        <strong>Legacy regkey-based method:</strong> The currently loaded parameters for the <code>nvidia</code> kernel module can be viewed in
+        <code>/proc/driver/nvidia/params</code>. The boolean flag <code>RmProfilingAdminOnly</code> reflects the state of the
+        <code>NVreg_RestrictProfilingToAdminUsers</code> regkey. When set to <code>1</code>, only administrative users are allowed to access GPU Performance Counters.
+        When set to <code>0</code>, all users have access. On R610+ drivers, this flag only reflects the regkey state and does not account for capability-based access grants.
+        </p>
+
+        <p>
+        <strong>Capability-based method (R610+):</strong> To verify whether a user has access to a specific profiling capability, look up the capability’s device node minor number from
+        <code>/proc/driver/nvidia-caps/sys-minors</code>:
+        </p>
+
+        <pre><code>$ cat /proc/driver/nvidia-caps/sys-minors
+fabric-imex-mgmt 4323
+profiler-device 4324
+profiler-context 4325
+trace-device 4326</code></pre>
+
+        <p>Then check the permissions on the corresponding device node:</p>
+
+        <pre><code>$ ls -al /dev/nvidia-caps/nvidia-cap&lt;minor&gt;</code></pre>
+
+        <p>If ACL-based access was configured via <code>setfacl</code>, use:</p>
+
+        <pre><code>$ getfacl /dev/nvidia-caps/nvidia-cap&lt;minor&gt;</code></pre>
+
+        <p><strong>Verifying modprobe.d configuration</strong></p>
+        <p>To check whether the <code>modprobe.d</code> file was correctly included in your initrd, run one of the following commands:</p>
+
+        <ul class="nv-list">
+        <li>Debian-based distributions: <code>sudo lsinitramfs /boot/initrd.img | grep /etc/modprobe.d</code></li>
+        <li>Red Hat-based distributions: <code>sudo lsinitrd | grep /etc/modprobe.d</code></li>
+        </ul>
+
+        <p>
+        The <code>.conf</code> file you created should appear in the output.
+        Both commands search the default initrd file. To specify which initrd to search, see the manual pages for these commands.
+        </p>
+
+        <h3 id="tool-specific-solutions" class="h--medium">Tool-Specific Solutions</h3>
+
+        <p>The following tools may encounter this issue and may have tool-specific information on the associated pages:</p>
+
+        <ul class="nv-list">
+            <li><a href="https://developer.nvidia.com/nvidia-development-tools-solutions-err-nvgpuctrperm-nsight-graphics">Nsight Graphics</a></li>
+            <li><a href="https://developer.nvidia.com/nvidia-development-tools-solutions-err-nvgpuctrperm-nsightcompute">Nsight Compute</a></li>
+            <li><a href="https://docs.nvidia.com/nsight-systems/UserGuide/index.html#gpu-metric-sampling">Nsight Systems</a></li>
+            <li><a href="https://developer.nvidia.com/nvidia-development-tools-solutions-err-nvgpuctrperm-nsightcompute">Nsight Visual Studio Edition - Nsight Compute CUDA Profiler</a></li>
+            <li><a href="https://developer.nvidia.com/nvidia-development-tools-solutions-err-nvgpuctrperm-nvprof">nvprof</a></li>
+            <li><a href="https://developer.nvidia.com/nvidia-development-tools-solutions-err-nvgpuctrperm-nvvp">Visual Profiler</a></li>
+            <li><a href="https://developer.nvidia.com/nvidia-development-tools-solutions-err-nvgpuctrperm-cupti">CUPTI</a></li>
+        </ul>
+
+    </div>
+
+</section>
+
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const allLinks = document.querySelectorAll('.dz3-main-section.dz-new-theme a');
+      allLinks.forEach((link) => {
+        let hasIcon = link.querySelector('span.fas');
+        if(hasIcon) {
+          link.classList.add('has-cta-icon');
+        }
+      });
+    });
+  </script>
+</main>
+
+
+
+
+<div id='footer' class='mt-auto'></div>
+
+  <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script>
+  jQuery.event.props = [];
+</script>
+<script src="https://developer.nvidia.com/assets/devzone3/new/popper.min-a9eb3f3101919a18965114cfdcd0138652ec03b2b58cfb26806f9a256564c858.js"></script>
+
+
+  <script src="https://developer.nvidia.com/assets/feed-aggregator/feed-aggregator-7f147443abc2d1300a239c29e4ba3ca0d0d2eb0dc66b608765e2b3be50e18e10.js"></script>
+
+    <script src="https://developer.nvidia.com/assets/devzone3/new/dist/dz3-new-bundle-5e5224f77427893f6e6e8928b699298c96fb16292431055f18e740803e7ddea8.js"></script>
+
+  <script src="https://developer.nvidia.com/assets/twentytwenty/js/jquery.event.move-16041d2e384b513c1b202af51fc404a0643b8c38ff823bb4326520ad5a82b761.js"></script>
+  <script src="https://developer.nvidia.com/assets/twentytwenty/js/jquery.twentytwenty-835622257095d5bd0719a5484d68213ccc8708a321dd3deded777d1e6623b499.js"></script>
+
+  <script>
+  const template = document.createElement('template');
+  template.innerHTML = `
+<style>
+@import "https://developer.nvidia.com/assets/feed-aggregator/feed-aggregator-9ace7521871242143cb35fa86d5be702c4dacb409600041fa6a5b14fa2a71dde.css";
+.feed-aggregator-component .card {
+  box-shadow: 0 4px 5px 0 rgba(0,0,0,0.14), 0 1px 10px 0 rgba(0,0,0,0.12), 0 2px 4px -1px rgba(0,0,0,0.3) !important;
+}
+.feed-aggregator-component .card:hover {
+  box-shadow: 0 0 8px 0 rgba(0,0,0,0.13), 0 14px 32px 5px rgba(0,0,0,0.13) !important;
+}
+</style>
+<div class="feed-aggregator-component"></div>
+`;
+  const hosts = {
+    'en': 'https://developer.nvidia.com/blog',
+    'cn': 'https://developer.nvidia.com/zh-cn/blog',
+  }
+
+  class FeedAggregatorElement extends HTMLElement {
+    constructor() {
+      super();
+      this._shadowRoot = this.attachShadow({ 'mode': 'open' });
+      this._shadowRoot.appendChild(template.content.cloneNode(true));
+    }
+
+    connectedCallback() {
+      const categories = this.getAttribute('categories');
+      const tags = this.getAttribute('tags');
+      const perPage = this.getAttribute('per-page');
+      const excludedTags = this.getAttribute('excluded-tags');
+
+      let locale = this.getAttribute('locale');
+      if (!locale) {
+        locale = 'en';
+      }
+      let targetElement = this._shadowRoot.querySelector(".feed-aggregator-component");
+      let feed = {
+        id: 'blog',
+        host: hosts[locale],
+        type: 'json',
+        minCount: 2,
+      };
+      if (categories && categories !== 'all') {
+        feed['category_ids'] = categories.split(',');
+      }
+      if (tags && tags !== 'all') {
+        feed['tag_ids'] = tags.split(',');
+      }
+      if(excludedTags && excludedTags !== 'null'){
+        feed['excluded_tag_ids'] = excludedTags.split(',');
+      }
+      document.addEventListener("DOMContentLoaded", function () {
+        new FeedAggregator({
+          target: targetElement,
+          props: {
+            count: perPage,
+            openInNewTab: true,
+            showExcerpts: true,
+            feeds: [feed]
+          }
+        });
+      })
+    }
+  }
+
+  window.customElements.define('feed-aggregator', FeedAggregatorElement);
+</script>
+
+
+<template id='application-button-template'>
+  <style>
+      @import "https://developer.nvidia.com/assets/application-button/application-button-68ca7e1e3aa49ec79169d49226e34ee0c341d27a15a38b28ce975cb2467e123e.css";
+  </style>
+  <a href='' class='nvidia-application-button'>Join now</a>
+</template>
+
+<script>
+  async function fetchMembershipState () {
+    const userInfo = await fetch('/api/user');
+    const {status} = userInfo;
+    if (status === 401) {
+      let error = new Error('Unauthorized');
+      error.statusCode = status;
+      throw error;
+    }
+
+    // TODO: Figure out how to get DZ4 program
+
+    // Fetch page info.
+    const {pathname} = location;
+    const pageInfo = await fetch(`${pathname}.json`);
+    const pageData = await pageInfo.json();
+
+    // Fetch membership info
+    return pageData;
+  }
+
+  const initApplicationButton = (element) => {
+    const linkElement = element.querySelector('a');
+    fetchMembershipState()
+      .then(data => {
+        console.log(data);
+      })
+      .catch(error => {
+        switch (error.statusCode) {
+          default:
+            linkElement.innerHTML = 'Login';
+            linkElement.href = '/login';
+        }
+      });
+  };
+
+  class NvidiaApplicationButton extends HTMLElement {
+    constructor() {
+      const template = document.getElementById('application-button-template');
+      super();
+      this._shadowRoot = this.attachShadow({ 'mode': 'open' });
+      this._shadowRoot.appendChild(template.content.cloneNode(true));
+    }
+    connectedCallback() {
+      const element = this._shadowRoot;
+      document.addEventListener('DOMContentLoaded', () => {
+        initApplicationButton(element);
+      });
+    }
+  }
+  window.customElements.define('nv-application-button', NvidiaApplicationButton);
+</script>
+
+<template id='application-text-template'>
+  <p></p>
+</template>
+
+<script>
+  class NvidiaApplicationText extends HTMLElement {
+    constructor() {
+      const template = document.getElementById('application-text-template');
+      super();
+      this._shadowRoot = this.attachShadow({ 'mode': 'open' });
+      this._shadowRoot.appendChild(template.content.cloneNode(true));
+    }
+    connectedCallback() {
+
+    }
+  }
+  window.customElements.define('nv-application-text', NvidiaApplicationText);
+</script>
+
+
+
+
+<template id='nv-sf-form-validator-template'>
+  <script src="https://developer.nvidia.com/assets/sf-validation/moment-620a5949fff0ad37198f07464b91d7b7c110ecdb6f94ca90ca7d2e1b471f1da8.js"></script>
+  <script src="https://developer.nvidia.com/assets/sf-validation/validate.min-2160a65c1b5d4a5966544ad25af8fe99f11c636a99c516fee6c7afd3b1f21409.js"></script>
+  <p></p>
+</template>
+
+<script>
+  class NvidiaSalesforceValidator extends HTMLElement {
+    constructor() {
+      const template = document.getElementById('nv-sf-form-validator-template');
+      super();
+      this._shadowRoot = this.attachShadow({'mode': 'open'});
+      this._shadowRoot.appendChild(template.content.cloneNode(true));
+    }
+
+    initComponent() {
+      if (!window.sfv) {
+        return;
+      }
+      validate.extend(validate.validators.datetime, {
+        parse: function (value, options) {
+          if (moment(value, options.format, true).isValid()) {
+            return +moment.utc(value);
+          }
+        },
+        format: function (value, options) {
+          var format = options.dateOnly ? "MM/DD/YYYY" : "MM/DD/YYYY hh:mm";
+          return moment.utc(value).format(format);
+        }
+      });
+
+      function showErrors(errors) {
+        $.each(errors, function (index, element) {
+          $('input[name="' + errors[index]['attribute'] + '"]').each(function (i, e) {
+            var errorMessage = errors[index]['options']['message'];
+            $('<div class="js-validation-errors">' + errorMessage + '</div>').insertAfter(e);
+          }).focus();
+        });
+      }
+
+      function isValidForm(form, constraints) {
+        var errors = validate(form, constraints, {format: "detailed"});
+        if (errors) {
+          showErrors(errors);
+          return false;
+        }
+        return true;
+      }
+
+      $.each(window.sfv, function (index, element) {
+        $(element.target).on('click', function (event) {
+          $('.js-validation-errors').remove();
+          if (!isValidForm(element.form, element.constraints)) {
+            event.preventDefault();
+          }
+        });
+      });
+    }
+
+    connectedCallback() {
+      document.addEventListener('DOMContentLoaded', () => {
+        this.initComponent();
+      });
+    }
+  }
+
+  window.customElements.define('nv-sf-form-validator', NvidiaSalesforceValidator);
+</script>
+
+
+<script src="https://developer.nvidia.com/assets/horizontal-chart/d3.v4.min-41cfecdf7c41476e805de7afacf4aacdd1a4be6947fbecf95217e947ebc2faf5.js"></script>
+<script src="https://developer.nvidia.com/assets/horizontal-chart/visualize-d-16cf14d4b63d6031e6c18983e91ac6d2b1b1f8140d15e351a9c847f8610b7e5b.js"></script>
+
+<template id="chart-template">
+  <style>
+      @import "https://developer.nvidia.com/assets/devzone3/modules/nvidia_tokens/nvidia-charts-6cd359a7ee3970fbfc15904a87ff96d214c208297870d8db7f6a5fa2c449bea7.css";
+  </style>
+  <div class="horizontal-chart-component">
+    <div class="chart-container">
+      <h4 class="chart-title"></h4>
+      <p class="chart-subtitle"></p>
+      <div class="legend"></div>
+      <svg data-nvidia-chart="true" data-chart-legend=""></svg>
+      <p class="chart-footnote"></p>
+    </div>
+  </div>
+</template>
+
+<script>
+  function chartInit(element) {
+    const chart = element.querySelector('svg[data-nvidia-chart]');
+    const isRendered = chart.getAttribute("data-rendered");
+    if (isRendered) {
+      return;
+    }
+
+    const svgChart = d3.select(chart);
+    const bars = JSON.parse(chart.dataset['chartBars']);
+    const ticks = JSON.parse(chart.dataset['chartTicks']);
+    const xAxisLabel = chart.dataset['xAxisLabel'];
+    const yAxisLabel = chart.dataset['yAxisLabel'];
+    const barPadding = chart.dataset['barPadding'];
+    const milestone = null;
+
+    const isGrouped = chart.dataset['isGrouped'] === 'true';
+    if (isGrouped) {
+      const legend = JSON.parse(chart.dataset['chartLegend']);
+      createGroupedHorizontalBarChart(svgChart, bars, barPadding, legend, ticks, milestone, xAxisLabel, yAxisLabel, false);
+    } else {
+      createHorizontalBarChart(svgChart, bars, barPadding, ticks, xAxisLabel, yAxisLabel, "", false);
+    }
+
+    chart.dataset['rendered'] = 'true';
+  }
+
+  $('a[data-toggle="tab"]').on("click", function (event) {
+    setTimeout(() => {
+      // Triggering 'resize' event to redraw charts.
+      window.dispatchEvent(new Event('resize'));
+
+      const target = jQuery(event.target).parents('.nav.nav-tabs').siblings('.tab-content').find('.tab-pane.active');
+      if (target.length > 0) {
+        const svg = jQuery(target).find('horizontal-chart');
+        if (svg.length) {
+          svg.each((idx, el) => {
+            setTimeout(function () {
+              const chartContainer = el._shadowRoot.querySelector('.chart-container');
+              chartInit(chartContainer);
+            }, 300);
+          });
+        }
+      }
+    }, 50);
+  });
+
+  async function loadFileSource(url) {
+    try{
+      const response = await fetch(url);
+      return response.json();
+    }catch (e) {
+      console.warn(`Failed to load chart data. URL: ${url}`);
+    }
+    return {};
+  }
+
+  class HorizontalChartElement extends HTMLElement {
+    constructor() {
+      const horizontalCharTemplate = document.getElementById('chart-template');
+      super();
+      this._shadowRoot = this.attachShadow({ 'mode': 'open' });
+      this._shadowRoot.appendChild(horizontalCharTemplate.content.cloneNode(true));
+    }
+    connectedCallback() {
+      const url = this.getAttribute('source');
+      const element = this._shadowRoot;
+      document.addEventListener("DOMContentLoaded", function () {
+        loadFileSource(url).then(data => {
+          const {
+            chartTitle: title,
+            chartSubtitle: subTitle,
+            chartFootnote: footNote,
+            chartId: id,
+            isGrouped: isGrouped,
+            legendData,
+            barPadding,
+            xAxisLabel,
+            yAxisLabel,
+            bars,
+            ticks
+          } = data;
+          element.querySelector('.chart-title').innerHTML = title;
+
+          // Subtitle
+          if (subTitle) {
+            element.querySelector('.chart-subtitle').innerHTML = subTitle;
+          } else {
+            element.querySelector('.chart-subtitle').remove();
+          }
+
+          // Chart
+          const svgElement = element.querySelector('.chart-container svg');
+          svgElement.id = id;
+
+          const dataAttributes = [
+            ['isGrouped', isGrouped ? 'true' : 'false', ''],
+            ['chartLegend', JSON.stringify(legendData), ''],
+            ['xAxisLabel', xAxisLabel, ''],
+            ['yAxisLabel', yAxisLabel, ''],
+            ['barPadding', barPadding, 5],
+            ['chartBars', bars, ''],
+            ['chartTicks', ticks, ''],
+          ];
+          dataAttributes.forEach(dataAttribute => {
+            if (dataAttribute[0] === 'chartBars' && dataAttribute[1]) {
+              dataAttribute[1] = JSON.stringify(dataAttribute[1]);
+            }
+            if (dataAttribute[0] === 'chartTicks' && dataAttribute[1]) {
+              dataAttribute[1] = JSON.stringify(dataAttribute[1]);
+            }
+
+            svgElement.dataset[dataAttribute[0]] = dataAttribute[1] ? dataAttribute[1] : dataAttribute[2];
+          });
+
+          // Caption
+          if (footNote) {
+            element.querySelector('.chart-footnote').innerHTML = footNote;
+          } else {
+            element.querySelector('.chart-footnote').remove();
+          }
+
+          // Init chart
+          const chartContainer = element.querySelector('.chart-container');
+          setTimeout(function () {
+            if (jQuery(chartContainer).is(':visible')) {
+              chartInit(chartContainer);
+            }
+          }, 300);
+        });
+      })
+    }
+  }
+
+  window.customElements.define('horizontal-chart', HorizontalChartElement);
+</script>
+
+
+
+<script src="https://developer.nvidia.com/assets/nv-developer-menu-8ae864e49d5d53c328146a66e7ad6d73242af7511f642a7d1aa1ffedd496f826.js"></script>
+  <div id='footer' class='mt-auto'></div>
+  <script src="https://www.nvidia.com/content/dam/en-zz/Solutions/librarian/bundle-search-prod-pub-v3.1.js"></script>
+  <div id="librarian-overlay"></div>
+  <script defer>
+    setTimeout(() => {
+      LIBRARIAN.Home.mount({
+        elementId: 'librarian-overlay',
+        searchPage: false,
+        placeholder: '',
+        site: 'https://developer.nvidia.com',
+        retainFilters: true,
+        overlay: true,
+        pillsOpen: true,
+        suggestedSearchPills: ["CUDA Toolkit","cuDNN Installation Guide","Computer Vision for Self-Driving Cars","DGX SuperPOD","NVIDIA Container Toolkit","Documentation for Triton Inference Server","NeMo Framework Fundamentals","TensorRT","Download SDK Manager","NVIDIA API Guides","Omniverse Renderer Microservice","CUDA Programming Guide","vGPU","Networking Solutions","Building a RAG Powered AI Chatbot"]
+      })
+    }, 1000)
+  </script>
+<script>
+  // The menu CDN publishes en-US and zh-CN only. Any other available locale
+  // (ja-JP reaches here via the login page and the /ja-jp/ path prefix) would
+  // 404 the header and footer fetches and report a menu error, so fall back
+  // rather than lose the nav.
+  const MENU_LOCALES = ['en-US', 'zh-CN'];
+
+  let menuLocale = 'en';
+
+  if (menuLocale == 'en') {
+    menuLocale = 'en-US';
+  }
+
+  if (!MENU_LOCALES.includes(menuLocale)) {
+    menuLocale = 'en-US';
+  }
+
+  function mountHeader(data = false) {
+    const headerTarget = document.getElementById('header');
+    if (!headerTarget) {
+      return;
+    }
+    let options = {
+      baseURL: window.location.origin,
+      signedIn: false,
+      locale: menuLocale
+    };
+
+    if (data) {
+      options.secondaryMenu = data;
+    }
+
+
+    options.showMembershipCardLink = true;
+
+    new NVDeveloperHeader({
+      target: headerTarget,
+      props: options
+    });
+  }
+
+  function mountFooter(data = false) {
+    const footerTarget = document.getElementById('footer');
+    if (!footerTarget) {
+      return;
+    }
+    let options = {
+      menu: data,
+      locale: menuLocale
+    };
+
+    new NVDeveloperFooter({
+      target: document.getElementById('footer'),
+      props: options
+    });
+  }
+
+  let url = 'd29g4g2dyqv443.cloudfront.net';
+  let headerMenuURL = "https://d29g4g2dyqv443.cloudfront.net/menu/en-US/header-secondary.json";
+
+  if (headerMenuURL) {
+    fetch(headerMenuURL)
+      .then(response => response.json())
+      .then(data => {
+        mountHeader(data);
+      })
+      .catch((error) => {
+        mountHeader();
+        window.nv.tracing.addError('menu', error);
+      });
+  } else {
+    mountHeader();
+  }
+
+  fetch(`https://${url}/menu/${menuLocale}/footer.json`)
+    .then(response => response.json())
+    .then(data => {
+      mountFooter(data);
+    })
+    .catch((error) => {
+      mountFooter();
+      window.nv.tracing.addError('menu', error);
+    });
+</script>
+
+  <script src="https://www.datadoghq-browser-agent.com/us1/v5/datadog-rum.js"></script>
+
+
+
+<script>
+  let silentAuthHost = 'www.nvidia.com';
+  let crossOriginPageUrl = `https://${silentAuthHost}/auth/hints/`;
+
+  function readHint() {
+    return new Promise((resolve) => {
+      const { origin: targetOrigin } = new URL(crossOriginPageUrl);
+
+      const iframe = document.createElement('iframe');
+      iframe.hidden = true;
+      iframe.src = crossOriginPageUrl;
+
+      function responseHandler(event) {
+        if (event.origin === targetOrigin) {
+          iframe.parentNode.removeChild(iframe);
+          return resolve(event.data);
+        }
+      }
+
+      window.addEventListener('message', responseHandler, { once: true });
+
+      iframe.onload = () => {
+        iframe.contentWindow.postMessage({ type: 'read' }, targetOrigin);
+      }
+
+      document.body.appendChild(iframe);
+    });
+  }
+
+  function writeHint(login_hint, idp_id, timestamp, sub) {
+    const { origin: targetOrigin } = new URL(crossOriginPageUrl);
+
+    const iframe = document.createElement('iframe');
+    iframe.hidden = true;
+    iframe.src = crossOriginPageUrl;
+
+    iframe.onload = () => {
+      const message = { type: 'write', login_hint, idp_id, timestamp, sub };
+      iframe.contentWindow.postMessage(message, targetOrigin);
+    }
+
+    document.body.appendChild(iframe);
+  }
+
+  function deleteHint() {
+    const { origin: targetOrigin } = new URL(crossOriginPageUrl);
+
+    const iframe = document.createElement('iframe');
+    iframe.hidden = true;
+    iframe.src = crossOriginPageUrl;
+
+    iframe.onload = () => {
+      iframe.contentWindow.postMessage({ type: 'delete' }, targetOrigin);
+    }
+
+    document.body.appendChild(iframe);
+  }
+
+
+</script>
+
+<script>_satellite.pageBottom();</script>
+<script src="https://developer.nvidia.com/assets/nv-alert/nv-alert-2fcf4faf418bd05dbbfc6d06c67713fd512ff67b25b6059be61edd35a7bcc0ed.js"></script>
+<script src="https://developer.nvidia.com/packs/js/runtime-f904b50470fcb0ec9bf4.js" defer="defer"></script>
+<script src="https://developer.nvidia.com/packs/js/4692-e2ed051c68e93113bb58.js" defer="defer"></script>
+<script src="https://developer.nvidia.com/packs/js/2681-6ac336ff34441936c0fb.js" defer="defer"></script>
+<script src="https://developer.nvidia.com/packs/js/2778-e8f3c5f27fbb1956fdb2.js" defer="defer"></script>
+<script src="https://developer.nvidia.com/packs/js/9878-baa65d618824b708a55b.js" defer="defer"></script>
+<script src="https://developer.nvidia.com/packs/js/8465-f321c9c28242e4383fa8.js" defer="defer"></script>
+<script src="https://developer.nvidia.com/packs/js/4622-1cd0dbd2a0f0b5243900.js" defer="defer"></script>
+<script src="https://developer.nvidia.com/packs/js/3566-4da32dac193512480c1b.js" defer="defer"></script>
+<script src="https://developer.nvidia.com/packs/js/486-1ddc749b634c231b0122.js" defer="defer"></script>
+<script src="https://developer.nvidia.com/packs/js/8311-71b2da0387dad11f356f.js" defer="defer"></script>
+<script src="https://developer.nvidia.com/packs/js/1252-6d8bb3f37b33aca41843.js" defer="defer"></script>
+<script src="https://developer.nvidia.com/packs/js/8823-bac8f579788282b3f2cd.js" defer="defer"></script>
+<script src="https://developer.nvidia.com/packs/js/775-f1e30132fa79d9ff8c3f.js" defer="defer"></script>
+<script src="https://developer.nvidia.com/packs/js/6900-b1b00a8ef19d3868862c.js" defer="defer"></script>
+<script src="https://developer.nvidia.com/packs/js/application-0583f79dc71e088940e6.js" defer="defer"></script>
+<script src="https://developer.nvidia.com/packs/js/ls_track-d4505a41101e752062c8.js" defer="defer"></script>
+</body>
+</html>

@@ -1,0 +1,837 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en">
+<head>
+<script src="https://cdn.cookielaw.org/scripttemplates/otSDKStub.js" type="text/javascript"
+  data-document-language="true" charset="UTF-8" data-domain-script="3e2b62ff-7ae7-4ac5-87c8-d5949ecafff5">
+</script>
+<script type="text/javascript">
+  function OptanonWrapper() {
+    var event = new Event('bannerLoaded');
+    window.dispatchEvent(event);
+  }
+</script>
+<script src="https://images.nvidia.com/aem-dam/Solutions/ot-js/ot-custom.js" type="text/javascript">
+</script>
+
+  <meta charset="utf-8">
+<meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/">
+<meta content="The API reference guide for Thrust, the CUDA C++ template library." name="description">
+<meta content="CUDA Thrust, CUDA Thrust installation, CUDA Thrust vectors, CUDA Thrust transforms, CUDA Thrust reductions, CUDA Thrust prefix-sums, CUDA Thrust reordering, CUDA Thrust fancy iterators, CUDA Thrust sorting, CUDA Thrust iterators" name="keywords">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>1. Introduction — thrust 12.2 documentation</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css">
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css">
+      <link rel="stylesheet" href="../_static/design-style.b7bb847fb20b106c3d81b95245e65545.min.css" type="text/css">
+      <link rel="stylesheet" href="../_static/omni-style.css" type="text/css">
+      <link rel="stylesheet" href="../_static/api-styles.css" type="text/css">
+    <link rel="shortcut icon" href="../_static/favicon.ico">
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="./" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/mermaid-init.js"></script>
+        <script src="../_static/design-tabs.js"></script>
+        <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+        <script src="../_static/geoip/geoip.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html">
+    <link rel="search" title="Search" href="search.html">
+    <link rel="prev" title="Contents" href="contents.html">
+ 
+<script src="//assets.adobedtm.com/5d4962a43b79/c1061d2c5e7b/launch-191c2462b890.min.js"></script>
+ 
+
+<link rel="stylesheet" href="/common-libs/common.css">
+<script src="/common-libs/common.js"></script>
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+            <a href="contents.html">
+            <img src="../_static/Logo_and_CUDA.png" class="logo" alt="Logo">
+          </a>
+
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs">
+    <input type="hidden" name="check_keywords" value="yes">
+    <input type="hidden" name="area" value="default">
+  </form>
+</div>
+        </div>
+<div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1 current">
+<a class="current reference internal" href="#">1. Introduction</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#installation-and-versioning">1.1. Installation and Versioning</a></li>
+</ul>
+</li>
+<li class="toctree-l1">
+<a class="reference internal" href="#vectors">2. Vectors</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#thrust-namespace">2.1. Thrust Namespace</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#iterators-and-static-dispatching">2.2. Iterators and Static Dispatching</a></li>
+</ul>
+</li>
+<li class="toctree-l1">
+<a class="reference internal" href="#algorithms">3. Algorithms</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#transformations">3.1. Transformations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#reductions">3.2. Reductions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#prefix-sums">3.3. Prefix-Sums</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#reordering">3.4. Reordering</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#sorting">3.5. Sorting</a></li>
+</ul>
+</li>
+<li class="toctree-l1">
+<a class="reference internal" href="#fancy-iterators">4. Fancy Iterators</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#constant-iterator">4.1. constant_iterator</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#counting-iterator">4.2. counting_iterator</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#transform-iterator">4.3. transform_iterator</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#permutation-iterator">4.4. permutation_iterator</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#zip-iterator">4.5. zip_iterator</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="#additional-resources">5. Additional Resources</a></li>
+<li class="toctree-l1">
+<a class="reference internal" href="#notices">6. Notices</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#notice">6.1. Notice</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#opencl">6.2. OpenCL</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#trademarks">6.3. Trademarks</a></li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="contents.html">thrust</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+
+
+  
+
+<li>
+<a href="../index.html" class="icon icon-home"></a> »</li>
+<li>
+<span class="section-number">1. </span>Introduction</li>
+
+      <li class="wy-breadcrumbs-aside">
+      </li>
+<li class="wy-breadcrumbs-aside">
+
+
+  <span>v12.2 |</span>
+
+
+
+  <a href="../pdf/Thrust_Quick_Start_Guide.pdf" class="reference external">PDF</a>
+
+
+
+  <span>|</span>
+
+
+
+  <a href="https://developer.nvidia.com/cuda-toolkit-archive" class="reference external">Archive</a>
+
+
+  <span> </span>
+</li>
+
+  </ul>
+  <hr>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <p class="rubric-h1 rubric">Thrust</p>
+<p>The API reference guide for Thrust, the CUDA C++ template library.</p>
+<section id="introduction">
+<h1>
+<span class="section-number">1. </span>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline"></a>
+</h1>
+<p>Thrust is a C++ template library for CUDA based on the Standard Template Library (STL). Thrust allows you to implement high performance parallel applications with minimal programming effort through a high-level interface that is fully interoperable with CUDA C.</p>
+<p>Thrust provides a rich collection of data parallel primitives such as scan, sort, and reduce, which can be composed together to implement complex algorithms with concise, readable source code. By describing your computation in terms of these high-level abstractions you provide Thrust with the freedom to select the most efficient implementation automatically. As a result, Thrust can be utilized in rapid prototyping of CUDA applications, where programmer productivity matters most, as well as in production, where robustness and absolute performance are crucial.</p>
+<p>This document describes how to develop CUDA applications with Thrust. The tutorial is intended to be accessible, even if you have limited C++ or CUDA experience.</p>
+<section id="installation-and-versioning">
+<h2>
+<span class="section-number">1.1. </span>Installation and Versioning<a class="headerlink" href="#installation-and-versioning" title="Permalink to this headline"></a>
+</h2>
+<p>Installing the CUDA Toolkit will copy Thrust header files to the standard CUDA include directory for your system. Since Thrust is a template library of header files, no further installation is necessary to start using Thrust.</p>
+<p>In addition, new versions of Thrust continue to be available online through the GitHub <a class="reference external" href="https://thrust.github.io/">Thrust project page</a>.</p>
+</section>
+</section>
+<section id="vectors">
+<h1>
+<span class="section-number">2. </span>Vectors<a class="headerlink" href="#vectors" title="Permalink to this headline"></a>
+</h1>
+<p>Thrust provides two <a class="reference external" href="http://en.wikipedia.org/wiki/Vector_(C++)">vector</a> containers, <code class="docutils literal notranslate"><span class="pre">host_vector</span></code> and <code class="docutils literal notranslate"><span class="pre">device_vector</span></code>. As the names suggest, <code class="docutils literal notranslate"><span class="pre">host_vector</span></code> is stored in host memory while <code class="docutils literal notranslate"><span class="pre">device_vector</span></code> lives in GPU device memory. Thrust’s vector containers are just like <code class="docutils literal notranslate"><span class="pre">std::vector</span></code> in the <a class="reference external" href="http://www.sgi.com/tech/stl/Vector.html">C++ STL</a>. Like <code class="docutils literal notranslate"><span class="pre">std::vector</span></code>, <code class="docutils literal notranslate"><span class="pre">host_vector</span></code> and <code class="docutils literal notranslate"><span class="pre">device_vector</span></code> are generic containers (able to store any data type) that can be resized dynamically. The following source code illustrates the use of Thrust’s vector containers.</p>
+<div class="highlight-c notranslate">
+<div class="highlight"><pre><span></span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;thrust/host_vector.h&gt;</span><span class="cp"></span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;thrust/device_vector.h&gt;</span><span class="cp"></span>
+
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;iostream&gt;</span><span class="cp"></span>
+
+<span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="w"></span>
+<span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="c1">// H has storage for 4 integers</span>
+<span class="w">    </span><span class="n">thrust</span><span class="o">::</span><span class="n">host_vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="w"> </span><span class="n">H</span><span class="p">(</span><span class="mi">4</span><span class="p">);</span><span class="w"></span>
+
+<span class="w">    </span><span class="c1">// initialize individual elements</span>
+<span class="w">    </span><span class="n">H</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">14</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="n">H</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">20</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="n">H</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">38</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="n">H</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">46</span><span class="p">;</span><span class="w"></span>
+
+<span class="w">    </span><span class="c1">// H.size() returns the size of vector H</span>
+<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">"H has size "</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">H</span><span class="p">.</span><span class="n">size</span><span class="p">()</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span><span class="w"></span>
+
+<span class="w">    </span><span class="c1">// print contents of H</span>
+<span class="w">    </span><span class="k">for</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">H</span><span class="p">.</span><span class="n">size</span><span class="p">();</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="p">)</span><span class="w"></span>
+<span class="w">        </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">"H["</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">"] = "</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">H</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span><span class="w"></span>
+
+<span class="w">    </span><span class="c1">// resize H</span>
+<span class="w">    </span><span class="n">H</span><span class="p">.</span><span class="n">resize</span><span class="p">(</span><span class="mi">2</span><span class="p">);</span><span class="w"></span>
+
+<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">"H now has size "</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">H</span><span class="p">.</span><span class="n">size</span><span class="p">()</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span><span class="w"></span>
+
+<span class="w">    </span><span class="c1">// Copy host_vector H to device_vector D</span>
+<span class="w">    </span><span class="n">thrust</span><span class="o">::</span><span class="n">device_vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="w"> </span><span class="n">D</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">H</span><span class="p">;</span><span class="w"></span>
+
+<span class="w">    </span><span class="c1">// elements of D can be modified</span>
+<span class="w">    </span><span class="n">D</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">99</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="n">D</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">88</span><span class="p">;</span><span class="w"></span>
+
+<span class="w">    </span><span class="c1">// print contents of D</span>
+<span class="w">    </span><span class="k">for</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">D</span><span class="p">.</span><span class="n">size</span><span class="p">();</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="p">)</span><span class="w"></span>
+<span class="w">        </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">"D["</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">"] = "</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">D</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span><span class="w"></span>
+
+<span class="w">    </span><span class="c1">// H and D are automatically deleted when the function returns</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+</pre></div>
+</div>
+<p>As this example shows, the <code class="docutils literal notranslate"><span class="pre">=</span></code> operator can be used to copy a <code class="docutils literal notranslate"><span class="pre">host_vector</span></code> to a <code class="docutils literal notranslate"><span class="pre">device_vector</span></code> (or vice-versa). The <code class="docutils literal notranslate"><span class="pre">=</span></code> operator can also be used to copy <code class="docutils literal notranslate"><span class="pre">host_vector</span></code> to <code class="docutils literal notranslate"><span class="pre">host_vector</span></code> or <code class="docutils literal notranslate"><span class="pre">device_vector</span></code> to <code class="docutils literal notranslate"><span class="pre">device_vector</span></code>. Also note that individual elements of a <code class="docutils literal notranslate"><span class="pre">device_vector</span></code> can be accessed using the standard bracket notation. However, because each of these accesses requires a call to <code class="docutils literal notranslate"><span class="pre">cudaMemcpy</span></code>, they should be used sparingly. We’ll look at some more efficient techniques later.</p>
+<p>It’s often useful to initialize all the elements of a vector to a specific value, or to copy only a certain set of values from one vector to another. Thrust provides a few ways to do these kinds of operations.</p>
+<div class="highlight-c notranslate">
+<div class="highlight"><pre><span></span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;thrust/host_vector.h&gt;</span><span class="cp"></span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;thrust/device_vector.h&gt;</span><span class="cp"></span>
+
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;thrust/copy.h&gt;</span><span class="cp"></span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;thrust/fill.h&gt;</span><span class="cp"></span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;thrust/sequence.h&gt;</span><span class="cp"></span>
+
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;iostream&gt;</span><span class="cp"></span>
+
+<span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="w"></span>
+<span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="c1">// initialize all ten integers of a device_vector to 1</span>
+<span class="w">    </span><span class="n">thrust</span><span class="o">::</span><span class="n">device_vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="w"> </span><span class="n">D</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">);</span><span class="w"></span>
+
+<span class="w">    </span><span class="c1">// set the first seven elements of a vector to 9</span>
+<span class="w">    </span><span class="n">thrust</span><span class="o">::</span><span class="n">fill</span><span class="p">(</span><span class="n">D</span><span class="p">.</span><span class="n">begin</span><span class="p">(),</span><span class="w"> </span><span class="n">D</span><span class="p">.</span><span class="n">begin</span><span class="p">()</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">7</span><span class="p">,</span><span class="w"> </span><span class="mi">9</span><span class="p">);</span><span class="w"></span>
+
+<span class="w">    </span><span class="c1">// initialize a host_vector with the first five elements of D</span>
+<span class="w">    </span><span class="n">thrust</span><span class="o">::</span><span class="n">host_vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="w"> </span><span class="n">H</span><span class="p">(</span><span class="n">D</span><span class="p">.</span><span class="n">begin</span><span class="p">(),</span><span class="w"> </span><span class="n">D</span><span class="p">.</span><span class="n">begin</span><span class="p">()</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">5</span><span class="p">);</span><span class="w"></span>
+
+<span class="w">    </span><span class="c1">// set the elements of H to 0, 1, 2, 3, ...</span>
+<span class="w">    </span><span class="n">thrust</span><span class="o">::</span><span class="n">sequence</span><span class="p">(</span><span class="n">H</span><span class="p">.</span><span class="n">begin</span><span class="p">(),</span><span class="w"> </span><span class="n">H</span><span class="p">.</span><span class="n">end</span><span class="p">());</span><span class="w"></span>
+
+<span class="w">    </span><span class="c1">// copy all of H back to the beginning of D</span>
+<span class="w">    </span><span class="n">thrust</span><span class="o">::</span><span class="n">copy</span><span class="p">(</span><span class="n">H</span><span class="p">.</span><span class="n">begin</span><span class="p">(),</span><span class="w"> </span><span class="n">H</span><span class="p">.</span><span class="n">end</span><span class="p">(),</span><span class="w"> </span><span class="n">D</span><span class="p">.</span><span class="n">begin</span><span class="p">());</span><span class="w"></span>
+
+<span class="w">    </span><span class="c1">// print D</span>
+<span class="w">    </span><span class="k">for</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">D</span><span class="p">.</span><span class="n">size</span><span class="p">();</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="p">)</span><span class="w"></span>
+<span class="w">        </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">"D["</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">"] = "</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">D</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span><span class="w"></span>
+
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+</pre></div>
+</div>
+<p>Here we’ve illustrated use of the <code class="docutils literal notranslate"><span class="pre">fill</span></code>, <code class="docutils literal notranslate"><span class="pre">copy</span></code>, and <code class="docutils literal notranslate"><span class="pre">sequence</span></code> functions. The <code class="docutils literal notranslate"><span class="pre">copy</span></code> function can be used to copy a range of host or device elements to another host or device vector. Like the corresponding STL function, <code class="docutils literal notranslate"><span class="pre">thrust::fill</span></code> simply sets a range of elements to a specific value. Thrust’s <code class="docutils literal notranslate"><span class="pre">sequence</span></code> function can be used to create a sequence of equally spaced values.</p>
+<section id="thrust-namespace">
+<h2>
+<span class="section-number">2.1. </span>Thrust Namespace<a class="headerlink" href="#thrust-namespace" title="Permalink to this headline"></a>
+</h2>
+<p>You’ll notice that we use things like <code class="docutils literal notranslate"><span class="pre">thrust::host_vector</span></code> or <code class="docutils literal notranslate"><span class="pre">thrust::copy</span></code> in our examples. The <code class="docutils literal notranslate"><span class="pre">thrust::</span></code> part tells the C++ compiler that we want to look inside the <code class="docutils literal notranslate"><span class="pre">thrust</span></code>namespace for a specific function or class. <a class="reference external" href="http://en.wikipedia.org/wiki/Namespace_%28computer_science%29">Namespaces</a> are a nice way to avoid name collisions. For instance, <code class="docutils literal notranslate"><span class="pre">thrust::copy</span></code> is different from <code class="docutils literal notranslate"><span class="pre">std::copy</span></code> provided in the STL. C++ namespaces allow us to distinguish between these two <code class="docutils literal notranslate"><span class="pre">copy</span></code> functions.</p>
+</section>
+<section id="iterators-and-static-dispatching">
+<h2>
+<span class="section-number">2.2. </span>Iterators and Static Dispatching<a class="headerlink" href="#iterators-and-static-dispatching" title="Permalink to this headline"></a>
+</h2>
+<p>In this section we used expressions like <code class="docutils literal notranslate"><span class="pre">H.begin()</span></code> and <code class="docutils literal notranslate"><span class="pre">H.end()</span></code> or offsets like <code class="docutils literal notranslate"><span class="pre">D.begin()</span> <span class="pre">+</span> <span class="pre">7</span></code>. The result of <code class="docutils literal notranslate"><span class="pre">begin()</span></code> and <code class="docutils literal notranslate"><span class="pre">end()</span></code> is called an iterator in C++. In the case of vector containers, which are really just arrays, iterators can be thought of as pointers to array elements. Therefore, <code class="docutils literal notranslate"><span class="pre">H.begin()</span></code> is an iterator that points to the first element of the array stored inside the <code class="docutils literal notranslate"><span class="pre">H</span></code> vector. Similarly, <code class="docutils literal notranslate"><span class="pre">H.end()</span></code> points to the element one past the last element of the <code class="docutils literal notranslate"><span class="pre">H</span></code> vector.</p>
+<p>Although vector iterators are similar to pointers they carry more information with them. Notice that we did not have to tell <code class="docutils literal notranslate"><span class="pre">thrust::fill</span></code> that it was operating on a <code class="docutils literal notranslate"><span class="pre">device_vector</span></code> iterator. This information is captured in the type of the iterator returned by <code class="docutils literal notranslate"><span class="pre">D.begin()</span></code> which is different than the type returned by <code class="docutils literal notranslate"><span class="pre">H.begin()</span></code>. When a Thrust function is called, it inspects the type of the iterator to determine whether to use a host or a device implementation. This process is known as static dispatching since the host/device dispatch is resolved at compile time. Note that this implies that there is no runtime overhead to the dispatch process.</p>
+<p>You may wonder what happens when a “raw” pointer is used as an argument to a Thrust function. Like the STL, Thrust permits this usage and it will dispatch the host path of the algorithm. If the pointer in question is in fact a pointer to device memory then you’ll need to wrap it with <code class="docutils literal notranslate"><span class="pre">thrust::device_ptr</span></code> before calling the function. For example:</p>
+<div class="highlight-c notranslate">
+<div class="highlight"><pre><span></span><span class="kt">size_t</span><span class="w"> </span><span class="n">N</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">10</span><span class="p">;</span><span class="w"></span>
+
+<span class="c1">// raw pointer to device memory</span>
+<span class="kt">int</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">raw_ptr</span><span class="p">;</span><span class="w"></span>
+<span class="n">cudaMalloc</span><span class="p">((</span><span class="kt">void</span><span class="w"> </span><span class="o">**</span><span class="p">)</span><span class="w"> </span><span class="o">&amp;</span><span class="n">raw_ptr</span><span class="p">,</span><span class="w"> </span><span class="n">N</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">sizeof</span><span class="p">(</span><span class="kt">int</span><span class="p">));</span><span class="w"></span>
+
+<span class="c1">// wrap raw pointer with a device_ptr</span>
+<span class="n">thrust</span><span class="o">::</span><span class="n">device_ptr</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="w"> </span><span class="n">dev_ptr</span><span class="p">(</span><span class="n">raw_ptr</span><span class="p">);</span><span class="w"></span>
+
+<span class="c1">// use device_ptr in thrust algorithms</span>
+<span class="n">thrust</span><span class="o">::</span><span class="n">fill</span><span class="p">(</span><span class="n">dev_ptr</span><span class="p">,</span><span class="w"> </span><span class="n">dev_ptr</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">N</span><span class="p">,</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="p">)</span><span class="w"> </span><span class="mi">0</span><span class="p">);</span><span class="w"></span>
+</pre></div>
+</div>
+<p>To extract a raw pointer from a <code class="docutils literal notranslate"><span class="pre">device_ptr</span></code> the <code class="docutils literal notranslate"><span class="pre">raw_pointer_cast</span></code> should be applied as follows:</p>
+<div class="highlight-c notranslate">
+<div class="highlight"><pre><span></span><span class="kt">size_t</span><span class="w"> </span><span class="n">N</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">10</span><span class="p">;</span><span class="w"></span>
+
+<span class="c1">// create a device_ptr</span>
+<span class="n">thrust</span><span class="o">::</span><span class="n">device_ptr</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="w"> </span><span class="n">dev_ptr</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">thrust</span><span class="o">::</span><span class="n">device_malloc</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="p">(</span><span class="n">N</span><span class="p">);</span><span class="w"></span>
+
+<span class="c1">// extract raw pointer from device_ptr</span>
+<span class="kt">int</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">raw_ptr</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">thrust</span><span class="o">::</span><span class="n">raw_pointer_cast</span><span class="p">(</span><span class="n">dev_ptr</span><span class="p">);</span><span class="w"></span>
+</pre></div>
+</div>
+<p>Another reason to distinguish between iterators and pointers is that iterators can be used to traverse many kinds of data structures. For example, the STL provides a linked list container (<code class="docutils literal notranslate"><span class="pre">std::list</span></code>) that provides bidirectional (but not random access) iterators. Although Thrust does not provide device implementations of such containers, it is compatible with them.</p>
+<div class="highlight-c notranslate">
+<div class="highlight"><pre><span></span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;thrust/device_vector.h&gt;</span><span class="cp"></span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;thrust/copy.h&gt;</span><span class="cp"></span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;list&gt;</span><span class="cp"></span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;vector&gt;</span><span class="cp"></span>
+
+<span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="w"></span>
+<span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="c1">// create an STL list with 4 values</span>
+<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">list</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="w"> </span><span class="n">stl_list</span><span class="p">;</span><span class="w"></span>
+
+<span class="w">    </span><span class="n">stl_list</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="mi">10</span><span class="p">);</span><span class="w"></span>
+<span class="w">    </span><span class="n">stl_list</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="mi">20</span><span class="p">);</span><span class="w"></span>
+<span class="w">    </span><span class="n">stl_list</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="mi">30</span><span class="p">);</span><span class="w"></span>
+<span class="w">    </span><span class="n">stl_list</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="mi">40</span><span class="p">);</span><span class="w"></span>
+
+<span class="w">    </span><span class="c1">// initialize a device_vector with the list</span>
+<span class="w">    </span><span class="n">thrust</span><span class="o">::</span><span class="n">device_vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="w"> </span><span class="n">D</span><span class="p">(</span><span class="n">stl_list</span><span class="p">.</span><span class="n">begin</span><span class="p">(),</span><span class="w"> </span><span class="n">stl_list</span><span class="p">.</span><span class="n">end</span><span class="p">());</span><span class="w"></span>
+
+<span class="w">    </span><span class="c1">// copy a device_vector into an STL vector</span>
+<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="w"> </span><span class="n">stl_vector</span><span class="p">(</span><span class="n">D</span><span class="p">.</span><span class="n">size</span><span class="p">());</span><span class="w"></span>
+<span class="w">    </span><span class="n">thrust</span><span class="o">::</span><span class="n">copy</span><span class="p">(</span><span class="n">D</span><span class="p">.</span><span class="n">begin</span><span class="p">(),</span><span class="w"> </span><span class="n">D</span><span class="p">.</span><span class="n">end</span><span class="p">(),</span><span class="w"> </span><span class="n">stl_vector</span><span class="p">.</span><span class="n">begin</span><span class="p">());</span><span class="w"></span>
+
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+</pre></div>
+</div>
+<p>For Future Reference: The iterators we’ve covered so far are useful, but fairly basic. In addition to these normal iterators, Thrust also provides a collection of fancy iterators with names like <code class="docutils literal notranslate"><span class="pre">counting_iterator</span></code> and <code class="docutils literal notranslate"><span class="pre">zip_iterator</span></code>. While they look and feel like normal iterators, fancy iterators are capable of more exciting things. We’ll revisit this topic later in the tutorial.</p>
+</section>
+</section>
+<section id="algorithms">
+<h1>
+<span class="section-number">3. </span>Algorithms<a class="headerlink" href="#algorithms" title="Permalink to this headline"></a>
+</h1>
+<p>Thrust provides a large number of common parallel algorithms. Many of these algorithms have direct analogs in the STL, and when an equivalent STL function exists, we choose the name (e.g. <code class="docutils literal notranslate"><span class="pre">thrust::sort</span></code> and <code class="docutils literal notranslate"><span class="pre">std::sort</span></code>).</p>
+<p>All algorithms in Thrust have implementations for both host and device. Specifically, when a Thrust algorithm is invoked with a host iterator, then the host path is dispatched. Similarly, a device implementation is called when a device iterator is used to define a range.</p>
+<p>With the exception of <code class="docutils literal notranslate"><span class="pre">thrust::copy</span></code>, which can copy data between host and device, all iterator arguments to a Thrust algorithm should live in the same place: either all on the host or all on the device. When this requirement is violated the compiler will produce an error message.</p>
+<section id="transformations">
+<h2>
+<span class="section-number">3.1. </span>Transformations<a class="headerlink" href="#transformations" title="Permalink to this headline"></a>
+</h2>
+<p>Transformations are algorithms that apply an operation to each element in a set of (zero or more) input ranges and then stores the result in a destination range. One example we have already seen is <code class="docutils literal notranslate"><span class="pre">thrust::fill</span></code>, which sets all elements of a range to a specified value. Other transformations include <code class="docutils literal notranslate"><span class="pre">thrust::sequence</span></code>, <code class="docutils literal notranslate"><span class="pre">thrust::replace</span></code>, and of course <code class="docutils literal notranslate"><span class="pre">thrust::transform</span></code>. Refer to the <a class="reference external" href="https://thrust.github.io/doc/group__transformations.html">documentation</a> for a complete listing.</p>
+<p>The following source code demonstrates several of the transformation algorithms. Note that <code class="docutils literal notranslate"><span class="pre">thrust::negate</span></code> and <code class="docutils literal notranslate"><span class="pre">thrust::modulus</span></code> are known as functors in C++ terminology. Thrust provides these and other common functors like <code class="docutils literal notranslate"><span class="pre">plus</span></code> and <code class="docutils literal notranslate"><span class="pre">multiplies</span></code> in the file <code class="docutils literal notranslate"><span class="pre">thrust/functional.h</span></code>.</p>
+<div class="highlight-c notranslate">
+<div class="highlight"><pre><span></span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;thrust/device_vector.h&gt;</span><span class="cp"></span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;thrust/transform.h&gt;</span><span class="cp"></span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;thrust/sequence.h&gt;</span><span class="cp"></span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;thrust/copy.h&gt;</span><span class="cp"></span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;thrust/fill.h&gt;</span><span class="cp"></span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;thrust/replace.h&gt;</span><span class="cp"></span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;thrust/functional.h&gt;</span><span class="cp"></span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;iostream&gt;</span><span class="cp"></span>
+
+<span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="w"></span>
+<span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="c1">// allocate three device_vectors with 10 elements</span>
+<span class="w">    </span><span class="n">thrust</span><span class="o">::</span><span class="n">device_vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="w"> </span><span class="n">X</span><span class="p">(</span><span class="mi">10</span><span class="p">);</span><span class="w"></span>
+<span class="w">    </span><span class="n">thrust</span><span class="o">::</span><span class="n">device_vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="w"> </span><span class="n">Y</span><span class="p">(</span><span class="mi">10</span><span class="p">);</span><span class="w"></span>
+<span class="w">    </span><span class="n">thrust</span><span class="o">::</span><span class="n">device_vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="w"> </span><span class="n">Z</span><span class="p">(</span><span class="mi">10</span><span class="p">);</span><span class="w"></span>
+
+<span class="w">    </span><span class="c1">// initialize X to 0,1,2,3, ....</span>
+<span class="w">    </span><span class="n">thrust</span><span class="o">::</span><span class="n">sequence</span><span class="p">(</span><span class="n">X</span><span class="p">.</span><span class="n">begin</span><span class="p">(),</span><span class="w"> </span><span class="n">X</span><span class="p">.</span><span class="n">end</span><span class="p">());</span><span class="w"></span>
+
+<span class="w">    </span><span class="c1">// compute Y = -X</span>
+<span class="w">    </span><span class="n">thrust</span><span class="o">::</span><span class="n">transform</span><span class="p">(</span><span class="n">X</span><span class="p">.</span><span class="n">begin</span><span class="p">(),</span><span class="w"> </span><span class="n">X</span><span class="p">.</span><span class="n">end</span><span class="p">(),</span><span class="w"> </span><span class="n">Y</span><span class="p">.</span><span class="n">begin</span><span class="p">(),</span><span class="w"> </span><span class="n">thrust</span><span class="o">::</span><span class="n">negate</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="p">());</span><span class="w"></span>
+
+<span class="w">    </span><span class="c1">// fill Z with twos</span>
+<span class="w">    </span><span class="n">thrust</span><span class="o">::</span><span class="n">fill</span><span class="p">(</span><span class="n">Z</span><span class="p">.</span><span class="n">begin</span><span class="p">(),</span><span class="w"> </span><span class="n">Z</span><span class="p">.</span><span class="n">end</span><span class="p">(),</span><span class="w"> </span><span class="mi">2</span><span class="p">);</span><span class="w"></span>
+
+<span class="w">    </span><span class="c1">// compute Y = X mod 2</span>
+<span class="w">    </span><span class="n">thrust</span><span class="o">::</span><span class="n">transform</span><span class="p">(</span><span class="n">X</span><span class="p">.</span><span class="n">begin</span><span class="p">(),</span><span class="w"> </span><span class="n">X</span><span class="p">.</span><span class="n">end</span><span class="p">(),</span><span class="w"> </span><span class="n">Z</span><span class="p">.</span><span class="n">begin</span><span class="p">(),</span><span class="w"> </span><span class="n">Y</span><span class="p">.</span><span class="n">begin</span><span class="p">(),</span><span class="w"> </span><span class="n">thrust</span><span class="o">::</span><span class="n">modulus</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="p">());</span><span class="w"></span>
+
+<span class="w">    </span><span class="c1">// replace all the ones in Y with tens</span>
+<span class="w">    </span><span class="n">thrust</span><span class="o">::</span><span class="n">replace</span><span class="p">(</span><span class="n">Y</span><span class="p">.</span><span class="n">begin</span><span class="p">(),</span><span class="w"> </span><span class="n">Y</span><span class="p">.</span><span class="n">end</span><span class="p">(),</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">10</span><span class="p">);</span><span class="w"></span>
+
+<span class="w">    </span><span class="c1">// print Y</span>
+<span class="w">    </span><span class="n">thrust</span><span class="o">::</span><span class="n">copy</span><span class="p">(</span><span class="n">Y</span><span class="p">.</span><span class="n">begin</span><span class="p">(),</span><span class="w"> </span><span class="n">Y</span><span class="p">.</span><span class="n">end</span><span class="p">(),</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">ostream_iterator</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="p">,</span><span class="w"> </span><span class="s">"</span><span class="se">\n</span><span class="s">"</span><span class="p">));</span><span class="w"></span>
+
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+</pre></div>
+</div>
+<p>While the functors in <code class="docutils literal notranslate"><span class="pre">thrust/functional.h</span></code> cover most of the built-in arithmetic and comparison operations, we often want to do something different. For example, consider the vector operation <code class="docutils literal notranslate"><span class="pre">y</span> <span class="pre">&lt;-</span> <span class="pre">a</span> <span class="pre">*</span> <span class="pre">x</span> <span class="pre">+</span> <span class="pre">y</span></code> where <code class="docutils literal notranslate"><span class="pre">x</span></code> and <code class="docutils literal notranslate"><span class="pre">y</span></code> are vectors and <code class="docutils literal notranslate"><span class="pre">a</span></code> is a scalar constant. This is the well-known SAXPY operation provided by any <a class="reference external" href="http://en.wikipedia.org/wiki/Basic_Linear_Algebra_Subprograms">BLAS</a> library.</p>
+<p>If we want to implement SAXPY with Thrust we have a few options. The first is to use two transformations (one addition and one multiplication) and a temporary vector filled with the value <code class="docutils literal notranslate"><span class="pre">a</span></code>. A better choice is to use a single transformation with a user-defined functor that does exactly what we want. We illustrate both approaches in the source code below.</p>
+<div class="highlight-c notranslate">
+<div class="highlight"><pre><span></span><span class="k">struct</span><span class="w"> </span><span class="nc">saxpy_functor</span><span class="w"></span>
+<span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="k">const</span><span class="w"> </span><span class="kt">float</span><span class="w"> </span><span class="n">a</span><span class="p">;</span><span class="w"></span>
+
+<span class="w">    </span><span class="n">saxpy_functor</span><span class="p">(</span><span class="kt">float</span><span class="w"> </span><span class="n">_a</span><span class="p">)</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">a</span><span class="p">(</span><span class="n">_a</span><span class="p">)</span><span class="w"> </span><span class="p">{}</span><span class="w"></span>
+
+<span class="w">    </span><span class="n">__host__</span><span class="w"> </span><span class="n">__device__</span><span class="w"></span>
+<span class="w">        </span><span class="kt">float</span><span class="w"> </span><span class="n">operator</span><span class="p">()(</span><span class="k">const</span><span class="w"> </span><span class="kt">float</span><span class="o">&amp;</span><span class="w"> </span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="kt">float</span><span class="o">&amp;</span><span class="w"> </span><span class="n">y</span><span class="p">)</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">            </span><span class="k">return</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">y</span><span class="p">;</span><span class="w"></span>
+<span class="w">        </span><span class="p">}</span><span class="w"></span>
+<span class="p">};</span><span class="w"></span>
+
+<span class="kt">void</span><span class="w"> </span><span class="nf">saxpy_fast</span><span class="p">(</span><span class="kt">float</span><span class="w"> </span><span class="n">A</span><span class="p">,</span><span class="w"> </span><span class="n">thrust</span><span class="o">::</span><span class="n">device_vector</span><span class="o">&lt;</span><span class="kt">float</span><span class="o">&gt;&amp;</span><span class="w"> </span><span class="n">X</span><span class="p">,</span><span class="w"> </span><span class="n">thrust</span><span class="o">::</span><span class="n">device_vector</span><span class="o">&lt;</span><span class="kt">float</span><span class="o">&gt;&amp;</span><span class="w"> </span><span class="n">Y</span><span class="p">)</span><span class="w"></span>
+<span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="c1">// Y &lt;- A * X + Y</span>
+<span class="w">    </span><span class="n">thrust</span><span class="o">::</span><span class="n">transform</span><span class="p">(</span><span class="n">X</span><span class="p">.</span><span class="n">begin</span><span class="p">(),</span><span class="w"> </span><span class="n">X</span><span class="p">.</span><span class="n">end</span><span class="p">(),</span><span class="w"> </span><span class="n">Y</span><span class="p">.</span><span class="n">begin</span><span class="p">(),</span><span class="w"> </span><span class="n">Y</span><span class="p">.</span><span class="n">begin</span><span class="p">(),</span><span class="w"> </span><span class="n">saxpy_functor</span><span class="p">(</span><span class="n">A</span><span class="p">));</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+
+<span class="kt">void</span><span class="w"> </span><span class="nf">saxpy_slow</span><span class="p">(</span><span class="kt">float</span><span class="w"> </span><span class="n">A</span><span class="p">,</span><span class="w"> </span><span class="n">thrust</span><span class="o">::</span><span class="n">device_vector</span><span class="o">&lt;</span><span class="kt">float</span><span class="o">&gt;&amp;</span><span class="w"> </span><span class="n">X</span><span class="p">,</span><span class="w"> </span><span class="n">thrust</span><span class="o">::</span><span class="n">device_vector</span><span class="o">&lt;</span><span class="kt">float</span><span class="o">&gt;&amp;</span><span class="w"> </span><span class="n">Y</span><span class="p">)</span><span class="w"></span>
+<span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="n">thrust</span><span class="o">::</span><span class="n">device_vector</span><span class="o">&lt;</span><span class="kt">float</span><span class="o">&gt;</span><span class="w"> </span><span class="n">temp</span><span class="p">(</span><span class="n">X</span><span class="p">.</span><span class="n">size</span><span class="p">());</span><span class="w"></span>
+
+<span class="w">    </span><span class="c1">// temp &lt;- A</span>
+<span class="w">    </span><span class="n">thrust</span><span class="o">::</span><span class="n">fill</span><span class="p">(</span><span class="n">temp</span><span class="p">.</span><span class="n">begin</span><span class="p">(),</span><span class="w"> </span><span class="n">temp</span><span class="p">.</span><span class="n">end</span><span class="p">(),</span><span class="w"> </span><span class="n">A</span><span class="p">);</span><span class="w"></span>
+
+<span class="w">    </span><span class="c1">// temp &lt;- A * X</span>
+<span class="w">    </span><span class="n">thrust</span><span class="o">::</span><span class="n">transform</span><span class="p">(</span><span class="n">X</span><span class="p">.</span><span class="n">begin</span><span class="p">(),</span><span class="w"> </span><span class="n">X</span><span class="p">.</span><span class="n">end</span><span class="p">(),</span><span class="w"> </span><span class="n">temp</span><span class="p">.</span><span class="n">begin</span><span class="p">(),</span><span class="w"> </span><span class="n">temp</span><span class="p">.</span><span class="n">begin</span><span class="p">(),</span><span class="w"> </span><span class="n">thrust</span><span class="o">::</span><span class="n">multiplies</span><span class="o">&lt;</span><span class="kt">float</span><span class="o">&gt;</span><span class="p">());</span><span class="w"></span>
+
+<span class="w">    </span><span class="c1">// Y &lt;- A * X + Y</span>
+<span class="w">    </span><span class="n">thrust</span><span class="o">::</span><span class="n">transform</span><span class="p">(</span><span class="n">temp</span><span class="p">.</span><span class="n">begin</span><span class="p">(),</span><span class="w"> </span><span class="n">temp</span><span class="p">.</span><span class="n">end</span><span class="p">(),</span><span class="w"> </span><span class="n">Y</span><span class="p">.</span><span class="n">begin</span><span class="p">(),</span><span class="w"> </span><span class="n">Y</span><span class="p">.</span><span class="n">begin</span><span class="p">(),</span><span class="w"> </span><span class="n">thrust</span><span class="o">::</span><span class="n">plus</span><span class="o">&lt;</span><span class="kt">float</span><span class="o">&gt;</span><span class="p">());</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+</pre></div>
+</div>
+<p>Both <code class="docutils literal notranslate"><span class="pre">saxpy_fast</span></code> and <code class="docutils literal notranslate"><span class="pre">saxpy_slow</span></code> are valid SAXPY implementations, however <code class="docutils literal notranslate"><span class="pre">saxpy_fast</span></code> will be significantly faster than <code class="docutils literal notranslate"><span class="pre">saxpy_slow</span></code>. Ignoring the cost of allocating the <code class="docutils literal notranslate"><span class="pre">temp</span></code> vector and the arithmetic operations we have the following costs:</p>
+<p><code class="docutils literal notranslate"><span class="pre">fast_saxpy</span></code>: performs 2N reads and N writes</p>
+<p><code class="docutils literal notranslate"><span class="pre">slow_saxpy</span></code>: performs 4N reads and 3N writes</p>
+<p>Since SAXPY is memory bound (its performance is limited by memory bandwidth, not floating point performance) the larger number of reads and writes makes <code class="docutils literal notranslate"><span class="pre">saxpy_slow</span></code> much more expensive. In contrast, <code class="docutils literal notranslate"><span class="pre">saxpy_fast</span></code> will perform about as fast as SAXPY in an optimized BLAS implementation. In memory bound algorithms like SAXPY it is generally worthwhile to apply kernel fusion (combining multiple operations into a single kernel) to minimize the number of memory transactions.</p>
+<p><code class="docutils literal notranslate"><span class="pre">thrust::transform</span></code> only supports transformations with one or two input arguments (e.g. <span class="math notranslate nohighlight">\(f(x)\rightarrow y\)</span> and <span class="math notranslate nohighlight">\(f(x,x)\rightarrow y\)</span> ). When a transformation uses more than two input arguments it is necessary to use a different approach. The <a class="reference external" href="https://github.com/thrust/thrust/blob/master/examples/arbitrary_transformation.cu">arbitrary_transformation</a> example demonstrates a solution that uses <code class="docutils literal notranslate"><span class="pre">thrust::zip_iterator</span></code> and <code class="docutils literal notranslate"><span class="pre">thrust::for_each</span></code>.</p>
+</section>
+<section id="reductions">
+<h2>
+<span class="section-number">3.2. </span>Reductions<a class="headerlink" href="#reductions" title="Permalink to this headline"></a>
+</h2>
+<p>A reduction algorithm uses a binary operation to reduce an input sequence to a single value. For example, the sum of an array of numbers is obtained by reducing the array with a plus operation. Similarly, the maximum of an array is obtained by reducing with an operator that takes two inputs and returns the maximum. The sum of an array is implemented with <code class="docutils literal notranslate"><span class="pre">thrust::reduce</span></code> as follows:</p>
+<div class="highlight-c notranslate">
+<div class="highlight"><pre><span></span><span class="kt">int</span><span class="w"> </span><span class="n">sum</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">thrust</span><span class="o">::</span><span class="n">reduce</span><span class="p">(</span><span class="n">D</span><span class="p">.</span><span class="n">begin</span><span class="p">(),</span><span class="w"> </span><span class="n">D</span><span class="p">.</span><span class="n">end</span><span class="p">(),</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="p">)</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="n">thrust</span><span class="o">::</span><span class="n">plus</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="p">());</span><span class="w"></span>
+</pre></div>
+</div>
+<p>The first two arguments to <code class="docutils literal notranslate"><span class="pre">reduce</span></code> define the range of values while the third and fourth parameters provide the initial value and reduction operator respectively. Actually, this kind of reduction is so common that it is the default choice when no initial value or operator is provided. The following three lines are therefore equivalent:</p>
+<div class="highlight-c notranslate">
+<div class="highlight"><pre><span></span><span class="kt">int</span><span class="w"> </span><span class="n">sum</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">thrust</span><span class="o">::</span><span class="n">reduce</span><span class="p">(</span><span class="n">D</span><span class="p">.</span><span class="n">begin</span><span class="p">(),</span><span class="w"> </span><span class="n">D</span><span class="p">.</span><span class="n">end</span><span class="p">(),</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="p">)</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="n">thrust</span><span class="o">::</span><span class="n">plus</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="p">());</span><span class="w"></span>
+<span class="kt">int</span><span class="w"> </span><span class="n">sum</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">thrust</span><span class="o">::</span><span class="n">reduce</span><span class="p">(</span><span class="n">D</span><span class="p">.</span><span class="n">begin</span><span class="p">(),</span><span class="w"> </span><span class="n">D</span><span class="p">.</span><span class="n">end</span><span class="p">(),</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="p">)</span><span class="w"> </span><span class="mi">0</span><span class="p">);</span><span class="w"></span>
+<span class="kt">int</span><span class="w"> </span><span class="n">sum</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">thrust</span><span class="o">::</span><span class="n">reduce</span><span class="p">(</span><span class="n">D</span><span class="p">.</span><span class="n">begin</span><span class="p">(),</span><span class="w"> </span><span class="n">D</span><span class="p">.</span><span class="n">end</span><span class="p">())</span><span class="w"></span>
+</pre></div>
+</div>
+<p>Although <code class="docutils literal notranslate"><span class="pre">thrust::reduce</span></code> is sufficient to implement a wide variety of reductions, Thrust provides a few additional functions for convenience (like the STL). For example, <code class="docutils literal notranslate"><span class="pre">thrust::count</span></code> returns the number of instances of a specific value in a given sequence:</p>
+<div class="highlight-c notranslate">
+<div class="highlight"><pre><span></span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;thrust/count.h&gt;</span><span class="cp"></span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;thrust/device_vector.h&gt;</span><span class="cp"></span>
+<span class="p">...</span><span class="w"></span>
+<span class="c1">// put three 1s in a device_vector</span>
+<span class="n">thrust</span><span class="o">::</span><span class="n">device_vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="w"> </span><span class="n">vec</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span><span class="mi">0</span><span class="p">);</span><span class="w"></span>
+<span class="n">vec</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span><span class="w"></span>
+<span class="n">vec</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span><span class="w"></span>
+<span class="n">vec</span><span class="p">[</span><span class="mi">4</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span><span class="w"></span>
+
+<span class="c1">// count the 1s</span>
+<span class="kt">int</span><span class="w"> </span><span class="n">result</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">thrust</span><span class="o">::</span><span class="n">count</span><span class="p">(</span><span class="n">vec</span><span class="p">.</span><span class="n">begin</span><span class="p">(),</span><span class="w"> </span><span class="n">vec</span><span class="p">.</span><span class="n">end</span><span class="p">(),</span><span class="w"> </span><span class="mi">1</span><span class="p">);</span><span class="w"></span>
+<span class="c1">// result is three</span>
+</pre></div>
+</div>
+<p>Other reduction operations include <code class="docutils literal notranslate"><span class="pre">thrust::count_if</span></code>, <code class="docutils literal notranslate"><span class="pre">thrust::min_element</span></code>, <code class="docutils literal notranslate"><span class="pre">thrust::max_element</span></code>, <code class="docutils literal notranslate"><span class="pre">thrust::is_sorted</span></code>, <code class="docutils literal notranslate"><span class="pre">thrust::inner_product</span></code>, and several others. Refer to the <a class="reference external" href="http://thrust.github.com/doc/group__reductions.html">documentation</a> for a complete listing.</p>
+<p>The SAXPY example in the Transformations section showed how kernel fusion can be used to reduce the number of memory transfers used by a transformation kernel. With <code class="docutils literal notranslate"><span class="pre">thrust::transform_reduce</span></code> we can also apply kernel fusion to reduction kernels. Consider the following example which computes the <a class="reference external" href="http://en.wikipedia.org/wiki/Norm_(mathematics)#Euclidean_norm">norm</a> of a vector.</p>
+<div class="highlight-c notranslate">
+<div class="highlight"><pre><span></span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;thrust/transform_reduce.h&gt;</span><span class="cp"></span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;thrust/functional.h&gt;</span><span class="cp"></span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;thrust/device_vector.h&gt;</span><span class="cp"></span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;thrust/host_vector.h&gt;</span><span class="cp"></span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;cmath&gt;</span><span class="cp"></span>
+
+<span class="c1">// square&lt;T&gt; computes the square of a number f(x) -&gt; x*x</span>
+<span class="n">template</span><span class="w"> </span><span class="o">&lt;</span><span class="n">typename</span><span class="w"> </span><span class="n">T</span><span class="o">&gt;</span><span class="w"></span>
+<span class="k">struct</span><span class="w"> </span><span class="nc">square</span><span class="w"></span>
+<span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="n">__host__</span><span class="w"> </span><span class="n">__device__</span><span class="w"></span>
+<span class="w">        </span><span class="n">T</span><span class="w"> </span><span class="n">operator</span><span class="p">()(</span><span class="k">const</span><span class="w"> </span><span class="n">T</span><span class="o">&amp;</span><span class="w"> </span><span class="n">x</span><span class="p">)</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">            </span><span class="k">return</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">x</span><span class="p">;</span><span class="w"></span>
+<span class="w">        </span><span class="p">}</span><span class="w"></span>
+<span class="p">};</span><span class="w"></span>
+
+<span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="w"></span>
+<span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="c1">// initialize host array</span>
+<span class="w">    </span><span class="kt">float</span><span class="w"> </span><span class="n">x</span><span class="p">[</span><span class="mi">4</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="mf">1.0</span><span class="p">,</span><span class="w"> </span><span class="mf">2.0</span><span class="p">,</span><span class="w"> </span><span class="mf">3.0</span><span class="p">,</span><span class="w"> </span><span class="mf">4.0</span><span class="p">};</span><span class="w"></span>
+
+<span class="w">    </span><span class="c1">// transfer to device</span>
+<span class="w">    </span><span class="n">thrust</span><span class="o">::</span><span class="n">device_vector</span><span class="o">&lt;</span><span class="kt">float</span><span class="o">&gt;</span><span class="w"> </span><span class="n">d_x</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">4</span><span class="p">);</span><span class="w"></span>
+
+<span class="w">    </span><span class="c1">// setup arguments</span>
+<span class="w">    </span><span class="n">square</span><span class="o">&lt;</span><span class="kt">float</span><span class="o">&gt;</span><span class="w">        </span><span class="n">unary_op</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="n">thrust</span><span class="o">::</span><span class="n">plus</span><span class="o">&lt;</span><span class="kt">float</span><span class="o">&gt;</span><span class="w"> </span><span class="n">binary_op</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="kt">float</span><span class="w"> </span><span class="n">init</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"></span>
+
+<span class="w">    </span><span class="c1">// compute norm</span>
+<span class="w">    </span><span class="kt">float</span><span class="w"> </span><span class="n">norm</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">sqrt</span><span class="p">(</span><span class="w"> </span><span class="n">thrust</span><span class="o">::</span><span class="n">transform_reduce</span><span class="p">(</span><span class="n">d_x</span><span class="p">.</span><span class="n">begin</span><span class="p">(),</span><span class="w"> </span><span class="n">d_x</span><span class="p">.</span><span class="n">end</span><span class="p">(),</span><span class="w"> </span><span class="n">unary_op</span><span class="p">,</span><span class="w"> </span><span class="n">init</span><span class="p">,</span><span class="w"> </span><span class="n">binary_op</span><span class="p">)</span><span class="w"> </span><span class="p">);</span><span class="w"></span>
+
+<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">norm</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span><span class="w"></span>
+
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+</pre></div>
+</div>
+<p>Here we have a unary operator called <code class="docutils literal notranslate"><span class="pre">square</span></code> that squares each element of the input sequence. The sum of squares is then computed using a standard <code class="docutils literal notranslate"><span class="pre">plus</span></code> reduction. Like the slower version of the SAXPY transformation, we could implement <code class="docutils literal notranslate"><span class="pre">norm</span></code> with multiple passes: first a <code class="docutils literal notranslate"><span class="pre">transform</span></code> using <code class="docutils literal notranslate"><span class="pre">square</span></code> or perhaps just <code class="docutils literal notranslate"><span class="pre">multiplies</span></code> and then a <code class="docutils literal notranslate"><span class="pre">plus</span></code> reduction over a temporary array. However this would be unnecessarily wasteful and considerably slower. By fusing the square operation with the reduction kernel we again have a highly optimized implementation which offers the same performance as hand-written kernels.</p>
+</section>
+<section id="prefix-sums">
+<h2>
+<span class="section-number">3.3. </span>Prefix-Sums<a class="headerlink" href="#prefix-sums" title="Permalink to this headline"></a>
+</h2>
+<p>Parallel prefix-sums, or scan operations, are important building blocks in many parallel algorithms such as stream compaction and radix sort. Consider the following source code which illustrates an inclusive scan operation using the default <code class="docutils literal notranslate"><span class="pre">plus</span></code> operator:</p>
+<div class="highlight-c notranslate">
+<div class="highlight"><pre><span></span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;thrust/scan.h&gt;</span><span class="cp"></span>
+
+<span class="kt">int</span><span class="w"> </span><span class="n">data</span><span class="p">[</span><span class="mi">6</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">};</span><span class="w"></span>
+
+<span class="n">thrust</span><span class="o">::</span><span class="n">inclusive_scan</span><span class="p">(</span><span class="n">data</span><span class="p">,</span><span class="w"> </span><span class="n">data</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">6</span><span class="p">,</span><span class="w"> </span><span class="n">data</span><span class="p">);</span><span class="w"> </span><span class="c1">// in-place scan</span>
+
+<span class="c1">// data is now {1, 1, 3, 5, 6, 9}</span>
+</pre></div>
+</div>
+<p>In an inclusive scan each element of the output is the corresponding <a class="reference external" href="http://en.wikipedia.org/wiki/Partial_sum#Basic_properties">partial sum</a> of the input range. For example, <code class="docutils literal notranslate"><span class="pre">data[2]</span> <span class="pre">=</span> <span class="pre">data[0]</span> <span class="pre">+</span> <span class="pre">data[1]</span> <span class="pre">+</span> <span class="pre">data[2]</span></code>. An exclusive scan is similar, but shifted by one place to the right:</p>
+<div class="highlight-c notranslate">
+<div class="highlight"><pre><span></span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;thrust/scan.h&gt;</span><span class="cp"></span>
+
+<span class="kt">int</span><span class="w"> </span><span class="n">data</span><span class="p">[</span><span class="mi">6</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">};</span><span class="w"></span>
+
+<span class="n">thrust</span><span class="o">::</span><span class="n">exclusive_scan</span><span class="p">(</span><span class="n">data</span><span class="p">,</span><span class="w"> </span><span class="n">data</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">6</span><span class="p">,</span><span class="w"> </span><span class="n">data</span><span class="p">);</span><span class="w"> </span><span class="c1">// in-place scan</span>
+
+<span class="c1">// data is now {0, 1, 1, 3, 5, 6}</span>
+</pre></div>
+</div>
+<p>So now <code class="docutils literal notranslate"><span class="pre">data[2]</span> <span class="pre">=</span> <span class="pre">data[0]</span> <span class="pre">+</span> <span class="pre">data[1]</span></code>. As these examples show, <code class="docutils literal notranslate"><span class="pre">inclusive_scan</span></code> and <code class="docutils literal notranslate"><span class="pre">exclusive_scan</span></code> are permitted to be performed in-place. Thrust also provides the functions <code class="docutils literal notranslate"><span class="pre">transform_inclusive_scan</span></code> and <code class="docutils literal notranslate"><span class="pre">transform_exclusive_scan</span></code> which apply a unary function to the input sequence before performing the scan. Refer to the <a class="reference external" href="http://thrust.github.com/doc/group__prefixsums.html">documentation</a> for a complete list of scan variants.</p>
+</section>
+<section id="reordering">
+<h2>
+<span class="section-number">3.4. </span>Reordering<a class="headerlink" href="#reordering" title="Permalink to this headline"></a>
+</h2>
+<p>Thrust provides support for partitioning and stream compaction through the following algorithms:</p>
+<p><code class="docutils literal notranslate"><span class="pre">copy_if</span></code> : copy elements that pass a predicate test</p>
+<p><code class="docutils literal notranslate"><span class="pre">partition</span></code> : reorder elements according to a predicate (true values precede false values)</p>
+<p><code class="docutils literal notranslate"><span class="pre">remove</span></code> and <code class="docutils literal notranslate"><span class="pre">remove_if</span></code> : remove elements that fail a predicate test</p>
+<p><code class="docutils literal notranslate"><span class="pre">unique</span></code>: remove consecutive duplicates within a sequence</p>
+<p>Refer to the <a class="reference external" href="http://thrust.github.com/doc/group__reordering.html">documentation</a> for a complete list of reordering functions and examples of their usage.</p>
+</section>
+<section id="sorting">
+<h2>
+<span class="section-number">3.5. </span>Sorting<a class="headerlink" href="#sorting" title="Permalink to this headline"></a>
+</h2>
+<p>Thrust offers several functions to sort data or rearrange data according to a given criterion. The <code class="docutils literal notranslate"><span class="pre">thrust::sort</span></code> and <code class="docutils literal notranslate"><span class="pre">thrust::stable_sort</span></code> functions are direct analogs of <a class="reference external" href="http://www.sgi.com/tech/stl/sort.html">sort</a> and <a class="reference external" href="http://www.sgi.com/tech/stl/stable_sort.html">stable_sort</a> in the STL.</p>
+<div class="highlight-c notranslate">
+<div class="highlight"><pre><span></span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;thrust/sort.h&gt;</span><span class="cp"></span>
+
+<span class="p">...</span><span class="w"></span>
+<span class="k">const</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">N</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">6</span><span class="p">;</span><span class="w"></span>
+<span class="kt">int</span><span class="w"> </span><span class="n">A</span><span class="p">[</span><span class="n">N</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">8</span><span class="p">,</span><span class="w"> </span><span class="mi">5</span><span class="p">,</span><span class="w"> </span><span class="mi">7</span><span class="p">};</span><span class="w"></span>
+
+<span class="n">thrust</span><span class="o">::</span><span class="n">sort</span><span class="p">(</span><span class="n">A</span><span class="p">,</span><span class="w"> </span><span class="n">A</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">N</span><span class="p">);</span><span class="w"></span>
+
+<span class="c1">// A is now {1, 2, 4, 5, 7, 8}</span>
+</pre></div>
+</div>
+<p>In addition, Thrust provides <code class="docutils literal notranslate"><span class="pre">thrust::sort_by_key</span></code> and <code class="docutils literal notranslate"><span class="pre">thrust::stable_sort_by_key</span></code>, which sort key-value pairs stored in separate places.</p>
+<div class="highlight-c notranslate">
+<div class="highlight"><pre><span></span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;thrust/sort.h&gt;</span><span class="cp"></span>
+
+<span class="p">...</span><span class="w"></span>
+<span class="k">const</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">N</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">6</span><span class="p">;</span><span class="w"></span>
+<span class="kt">int</span><span class="w">    </span><span class="n">keys</span><span class="p">[</span><span class="n">N</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="w">  </span><span class="mi">1</span><span class="p">,</span><span class="w">   </span><span class="mi">4</span><span class="p">,</span><span class="w">   </span><span class="mi">2</span><span class="p">,</span><span class="w">   </span><span class="mi">8</span><span class="p">,</span><span class="w">   </span><span class="mi">5</span><span class="p">,</span><span class="w">   </span><span class="mi">7</span><span class="p">};</span><span class="w"></span>
+<span class="kt">char</span><span class="w"> </span><span class="n">values</span><span class="p">[</span><span class="n">N</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="sc">'a'</span><span class="p">,</span><span class="w"> </span><span class="sc">'b'</span><span class="p">,</span><span class="w"> </span><span class="sc">'c'</span><span class="p">,</span><span class="w"> </span><span class="sc">'d'</span><span class="p">,</span><span class="w"> </span><span class="sc">'e'</span><span class="p">,</span><span class="w"> </span><span class="sc">'f'</span><span class="p">};</span><span class="w"></span>
+
+<span class="n">thrust</span><span class="o">::</span><span class="n">sort_by_key</span><span class="p">(</span><span class="n">keys</span><span class="p">,</span><span class="w"> </span><span class="n">keys</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">N</span><span class="p">,</span><span class="w"> </span><span class="n">values</span><span class="p">);</span><span class="w"></span>
+
+<span class="c1">// keys is now   {  1,   2,   4,   5,   7,   8}</span>
+<span class="c1">// values is now {'a', 'c', 'b', 'e', 'f', 'd'}</span>
+</pre></div>
+</div>
+<p>Like their STL brethren, the sorting functions also accept user-defined comparison operators:</p>
+<div class="highlight-c notranslate">
+<div class="highlight"><pre><span></span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;thrust/sort.h&gt;</span><span class="cp"></span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;thrust/functional.h&gt;</span><span class="cp"></span>
+
+<span class="p">...</span><span class="w"></span>
+<span class="k">const</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">N</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">6</span><span class="p">;</span><span class="w"></span>
+<span class="kt">int</span><span class="w"> </span><span class="n">A</span><span class="p">[</span><span class="n">N</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">8</span><span class="p">,</span><span class="w"> </span><span class="mi">5</span><span class="p">,</span><span class="w"> </span><span class="mi">7</span><span class="p">};</span><span class="w"></span>
+
+<span class="n">thrust</span><span class="o">::</span><span class="n">stable_sort</span><span class="p">(</span><span class="n">A</span><span class="p">,</span><span class="w"> </span><span class="n">A</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">N</span><span class="p">,</span><span class="w"> </span><span class="n">thrust</span><span class="o">::</span><span class="n">greater</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="p">());</span><span class="w"></span>
+
+<span class="c1">// A is now {8, 7, 5, 4, 2, 1}</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="fancy-iterators">
+<h1>
+<span class="section-number">4. </span>Fancy Iterators<a class="headerlink" href="#fancy-iterators" title="Permalink to this headline"></a>
+</h1>
+<p>Fancy iterators perform a variety of valuable purposes. In this section we’ll show how fancy iterators allow us to attack a broader class of problems with the standard Thrust algorithms. For those familiar with the <a class="reference external" href="http://www.boost.org/">Boost C++ Library</a>, note that our fancy iterators were inspired by (and generally derived from) those in the <a class="reference external" href="http://www.boost.org/doc/libs/1_40_0/libs/iterator/doc/index.html">Boost Iterator Library</a>.</p>
+<section id="constant-iterator">
+<h2>
+<span class="section-number">4.1. </span>constant_iterator<a class="headerlink" href="#constant-iterator" title="Permalink to this headline"></a>
+</h2>
+<p>Arguably the simplest of the bunch, <code class="docutils literal notranslate"><span class="pre">constant_iterator</span></code> is simply an iterator that returns the same value whenever we access it. In the following example we initialize a constant iterator with the value 10.</p>
+<div class="highlight-c notranslate">
+<div class="highlight"><pre><span></span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;thrust/iterator/constant_iterator.h&gt;</span><span class="cp"></span>
+<span class="p">...</span><span class="w"></span>
+<span class="c1">// create iterators</span>
+<span class="n">thrust</span><span class="o">::</span><span class="n">constant_iterator</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="w"> </span><span class="n">first</span><span class="p">(</span><span class="mi">10</span><span class="p">);</span><span class="w"></span>
+<span class="n">thrust</span><span class="o">::</span><span class="n">constant_iterator</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="w"> </span><span class="n">last</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">first</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">3</span><span class="p">;</span><span class="w"></span>
+
+<span class="n">first</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="w">   </span><span class="c1">// returns 10</span>
+<span class="n">first</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="w">   </span><span class="c1">// returns 10</span>
+<span class="n">first</span><span class="p">[</span><span class="mi">100</span><span class="p">]</span><span class="w"> </span><span class="c1">// returns 10</span>
+
+<span class="c1">// sum of [first, last)</span>
+<span class="n">thrust</span><span class="o">::</span><span class="n">reduce</span><span class="p">(</span><span class="n">first</span><span class="p">,</span><span class="w"> </span><span class="n">last</span><span class="p">);</span><span class="w">   </span><span class="c1">// returns 30 (i.e. 3 * 10)</span>
+</pre></div>
+</div>
+<p>Whenever an input sequence of constant values is needed, <code class="docutils literal notranslate"><span class="pre">constant_iterator</span></code> is a convenient and efficient solution.</p>
+</section>
+<section id="counting-iterator">
+<h2>
+<span class="section-number">4.2. </span>counting_iterator<a class="headerlink" href="#counting-iterator" title="Permalink to this headline"></a>
+</h2>
+<p>If a sequence of increasing values is required, then <code class="docutils literal notranslate"><span class="pre">counting_iterator</span></code> is the appropriate choice. Here we initialize a <code class="docutils literal notranslate"><span class="pre">counting_iterator</span></code> with the value 10 and access it like an array.</p>
+<div class="highlight-c notranslate">
+<div class="highlight"><pre><span></span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;thrust/iterator/counting_iterator.h&gt;</span><span class="cp"></span>
+<span class="p">...</span><span class="w"></span>
+<span class="c1">// create iterators</span>
+<span class="n">thrust</span><span class="o">::</span><span class="n">counting_iterator</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="w"> </span><span class="n">first</span><span class="p">(</span><span class="mi">10</span><span class="p">);</span><span class="w"></span>
+<span class="n">thrust</span><span class="o">::</span><span class="n">counting_iterator</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="w"> </span><span class="n">last</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">first</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">3</span><span class="p">;</span><span class="w"></span>
+
+<span class="n">first</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="w">   </span><span class="c1">// returns 10</span>
+<span class="n">first</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="w">   </span><span class="c1">// returns 11</span>
+<span class="n">first</span><span class="p">[</span><span class="mi">100</span><span class="p">]</span><span class="w"> </span><span class="c1">// returns 110</span>
+
+<span class="c1">// sum of [first, last)</span>
+<span class="n">thrust</span><span class="o">::</span><span class="n">reduce</span><span class="p">(</span><span class="n">first</span><span class="p">,</span><span class="w"> </span><span class="n">last</span><span class="p">);</span><span class="w">   </span><span class="c1">// returns 33 (i.e. 10 + 11 + 12)</span>
+</pre></div>
+</div>
+<p>While <code class="docutils literal notranslate"><span class="pre">constant_iterator</span></code> and <code class="docutils literal notranslate"><span class="pre">counting_iterator</span></code> act as arrays, they don’t actually require any memory storage. Whenever we dereference one of these iterators it generates the appropriate value on-the-fly and returns it to the calling function.</p>
+</section>
+<section id="transform-iterator">
+<h2>
+<span class="section-number">4.3. </span>transform_iterator<a class="headerlink" href="#transform-iterator" title="Permalink to this headline"></a>
+</h2>
+<p>In the Algorithms section we spoke about kernel fusion, i.e. combining separate algorithms like <code class="docutils literal notranslate"><span class="pre">transform</span></code> and <code class="docutils literal notranslate"><span class="pre">reduce</span></code> into a single <code class="docutils literal notranslate"><span class="pre">transform_reduce</span></code> operation. The <code class="docutils literal notranslate"><span class="pre">transform_iterator</span></code> allows us to apply the same technique, even when we don’t have a special <code class="docutils literal notranslate"><span class="pre">transform_xxx</span></code> version of the algorithm. This example shows another way to fuse a transformation with a reduction, this time with just plain <code class="docutils literal notranslate"><span class="pre">reduce</span></code> applied to a <code class="docutils literal notranslate"><span class="pre">transform_iterator</span></code>.</p>
+<div class="highlight-c notranslate">
+<div class="highlight"><pre><span></span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;thrust/iterator/transform_iterator.h&gt;</span><span class="cp"></span>
+<span class="c1">// initialize vector</span>
+<span class="n">thrust</span><span class="o">::</span><span class="n">device_vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="w"> </span><span class="n">vec</span><span class="p">(</span><span class="mi">3</span><span class="p">);</span><span class="w"></span>
+<span class="n">vec</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">10</span><span class="p">;</span><span class="w"> </span><span class="n">vec</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">20</span><span class="p">;</span><span class="w"> </span><span class="n">vec</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">30</span><span class="p">;</span><span class="w"></span>
+
+<span class="c1">// create iterator (type omitted)</span>
+<span class="p">...</span><span class="w"></span>
+<span class="n">first</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">thrust</span><span class="o">::</span><span class="n">make_transform_iterator</span><span class="p">(</span><span class="n">vec</span><span class="p">.</span><span class="n">begin</span><span class="p">(),</span><span class="w"> </span><span class="n">negate</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="p">());</span><span class="w"></span>
+<span class="p">...</span><span class="w"></span>
+<span class="n">last</span><span class="w">  </span><span class="o">=</span><span class="w"> </span><span class="n">thrust</span><span class="o">::</span><span class="n">make_transform_iterator</span><span class="p">(</span><span class="n">vec</span><span class="p">.</span><span class="n">end</span><span class="p">(),</span><span class="w">   </span><span class="n">negate</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="p">());</span><span class="w"></span>
+
+<span class="n">first</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="w">   </span><span class="c1">// returns -10</span>
+<span class="n">first</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="w">   </span><span class="c1">// returns -20</span>
+<span class="n">first</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="w">   </span><span class="c1">// returns -30</span>
+
+<span class="c1">// sum of [first, last)</span>
+<span class="n">thrust</span><span class="o">::</span><span class="n">reduce</span><span class="p">(</span><span class="n">first</span><span class="p">,</span><span class="w"> </span><span class="n">last</span><span class="p">);</span><span class="w">   </span><span class="c1">// returns -60 (i.e. -10 + -20 + -30)</span>
+</pre></div>
+</div>
+<p>Note, we have omitted the types for iterators <code class="docutils literal notranslate"><span class="pre">first</span></code> and <code class="docutils literal notranslate"><span class="pre">last</span></code> for simplicity. One downside of <code class="docutils literal notranslate"><span class="pre">transform_iterator</span></code> is that it can be cumbersome to specify the full type of the iterator, which can be quite lengthy. For this reason, it is common practice to simply put the call to <code class="docutils literal notranslate"><span class="pre">make_transform_iterator</span></code> in the arguments of the algorithm being invoked. For example,</p>
+<div class="highlight-c notranslate">
+<div class="highlight"><pre><span></span><span class="c1">// sum of [first, last)</span>
+<span class="n">thrust</span><span class="o">::</span><span class="n">reduce</span><span class="p">(</span><span class="n">thrust</span><span class="o">::</span><span class="n">make_transform_iterator</span><span class="p">(</span><span class="n">vec</span><span class="p">.</span><span class="n">begin</span><span class="p">(),</span><span class="w"> </span><span class="n">negate</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="p">()),</span><span class="w"></span>
+<span class="w">               </span><span class="n">thrust</span><span class="o">::</span><span class="n">make_transform_iterator</span><span class="p">(</span><span class="n">vec</span><span class="p">.</span><span class="n">end</span><span class="p">(),</span><span class="w">   </span><span class="n">negate</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="p">()));</span><span class="w"></span>
+</pre></div>
+</div>
+<p>allows us to avoid creating a variable to store <code class="docutils literal notranslate"><span class="pre">first</span></code> and <code class="docutils literal notranslate"><span class="pre">last</span></code>.</p>
+</section>
+<section id="permutation-iterator">
+<h2>
+<span class="section-number">4.4. </span>permutation_iterator<a class="headerlink" href="#permutation-iterator" title="Permalink to this headline"></a>
+</h2>
+<p>In the previous section we showed how <code class="docutils literal notranslate"><span class="pre">transform_iterator</span></code> is used to fuse a transformation with another algorithm to avoid unnecessary memory operations. The <code class="docutils literal notranslate"><span class="pre">permutation_iterator</span></code> is similar: it allows us to fuse gather and scatter operations with Thrust algorithms, or even other fancy iterators. The following example shows how to fuse a gather operation with a reduction.</p>
+<div class="highlight-c notranslate">
+<div class="highlight"><pre><span></span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;thrust/iterator/permutation_iterator.h&gt;</span><span class="cp"></span>
+
+<span class="p">...</span><span class="w"></span>
+
+<span class="c1">// gather locations</span>
+<span class="n">thrust</span><span class="o">::</span><span class="n">device_vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="w"> </span><span class="n">map</span><span class="p">(</span><span class="mi">4</span><span class="p">);</span><span class="w"></span>
+<span class="n">map</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">3</span><span class="p">;</span><span class="w"></span>
+<span class="n">map</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span><span class="w"></span>
+<span class="n">map</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"></span>
+<span class="n">map</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">5</span><span class="p">;</span><span class="w"></span>
+
+<span class="c1">// array to gather from</span>
+<span class="n">thrust</span><span class="o">::</span><span class="n">device_vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="w"> </span><span class="n">source</span><span class="p">(</span><span class="mi">6</span><span class="p">);</span><span class="w"></span>
+<span class="n">source</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">10</span><span class="p">;</span><span class="w"></span>
+<span class="n">source</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">20</span><span class="p">;</span><span class="w"></span>
+<span class="n">source</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">30</span><span class="p">;</span><span class="w"></span>
+<span class="n">source</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">40</span><span class="p">;</span><span class="w"></span>
+<span class="n">source</span><span class="p">[</span><span class="mi">4</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">50</span><span class="p">;</span><span class="w"></span>
+<span class="n">source</span><span class="p">[</span><span class="mi">5</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">60</span><span class="p">;</span><span class="w"></span>
+
+<span class="c1">// fuse gather with reduction:</span>
+<span class="c1">//   sum = source[map[0]] + source[map[1]] + ...</span>
+<span class="kt">int</span><span class="w"> </span><span class="n">sum</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">thrust</span><span class="o">::</span><span class="n">reduce</span><span class="p">(</span><span class="n">thrust</span><span class="o">::</span><span class="n">make_permutation_iterator</span><span class="p">(</span><span class="n">source</span><span class="p">.</span><span class="n">begin</span><span class="p">(),</span><span class="w"> </span><span class="n">map</span><span class="p">.</span><span class="n">begin</span><span class="p">()),</span><span class="w"></span>
+<span class="w">                         </span><span class="n">thrust</span><span class="o">::</span><span class="n">make_permutation_iterator</span><span class="p">(</span><span class="n">source</span><span class="p">.</span><span class="n">begin</span><span class="p">(),</span><span class="w"> </span><span class="n">map</span><span class="p">.</span><span class="n">end</span><span class="p">()));</span><span class="w"></span>
+</pre></div>
+</div>
+<p>Here we have used the <code class="docutils literal notranslate"><span class="pre">make_permutation_iterator</span></code> function to simplify the construction of the <code class="docutils literal notranslate"><span class="pre">permutation_iterator</span></code>s. The first argument to <code class="docutils literal notranslate"><span class="pre">make_permutation_iterator</span></code> is the source array of the gather operation and the second is the list of map indices. Note that we pass in <code class="docutils literal notranslate"><span class="pre">source.begin()</span></code> for the first argument in both cases, but vary the second argument to define the beginning and end of the sequence.</p>
+<p>When a <code class="docutils literal notranslate"><span class="pre">permutation_iterator</span></code> is used as an output sequence of a function it is equivalent to fusing a scatter operation to the algorithm. In general <code class="docutils literal notranslate"><span class="pre">permutation_iterator</span></code> allows you to operate on a specific set of values in a sequence instead of the entire sequence.</p>
+</section>
+<section id="zip-iterator">
+<h2>
+<span class="section-number">4.5. </span>zip_iterator<a class="headerlink" href="#zip-iterator" title="Permalink to this headline"></a>
+</h2>
+<p>Keep reading, we’ve saved the best iterator for last! The <code class="docutils literal notranslate"><span class="pre">zip_iterator</span></code> is an extremely useful gadget: it takes multiple input sequences and yields a sequence of tuples. In this example we “zip” together a sequence of <code class="docutils literal notranslate"><span class="pre">int</span></code> and a sequence of <code class="docutils literal notranslate"><span class="pre">char</span></code> into a sequence of <code class="docutils literal notranslate"><span class="pre">tuple&lt;int,char&gt;</span></code> and compute the <code class="docutils literal notranslate"><span class="pre">tuple</span></code> with the maximum value.</p>
+<div class="highlight-c notranslate">
+<div class="highlight"><pre><span></span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;thrust/iterator/zip_iterator.h&gt;</span><span class="cp"></span>
+<span class="p">...</span><span class="w"></span>
+<span class="c1">// initialize vectors</span>
+<span class="n">thrust</span><span class="o">::</span><span class="n">device_vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="w">  </span><span class="n">A</span><span class="p">(</span><span class="mi">3</span><span class="p">);</span><span class="w"></span>
+<span class="n">thrust</span><span class="o">::</span><span class="n">device_vector</span><span class="o">&lt;</span><span class="kt">char</span><span class="o">&gt;</span><span class="w"> </span><span class="n">B</span><span class="p">(</span><span class="mi">3</span><span class="p">);</span><span class="w"></span>
+<span class="n">A</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">10</span><span class="p">;</span><span class="w">  </span><span class="n">A</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">20</span><span class="p">;</span><span class="w">  </span><span class="n">A</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">30</span><span class="p">;</span><span class="w"></span>
+<span class="n">B</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="sc">'x'</span><span class="p">;</span><span class="w"> </span><span class="n">B</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="sc">'y'</span><span class="p">;</span><span class="w"> </span><span class="n">B</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="sc">'z'</span><span class="p">;</span><span class="w"></span>
+
+<span class="c1">// create iterator (type omitted)</span>
+<span class="n">first</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">thrust</span><span class="o">::</span><span class="n">make_zip_iterator</span><span class="p">(</span><span class="n">thrust</span><span class="o">::</span><span class="n">make_tuple</span><span class="p">(</span><span class="n">A</span><span class="p">.</span><span class="n">begin</span><span class="p">(),</span><span class="w"> </span><span class="n">B</span><span class="p">.</span><span class="n">begin</span><span class="p">()));</span><span class="w"></span>
+<span class="n">last</span><span class="w">  </span><span class="o">=</span><span class="w"> </span><span class="n">thrust</span><span class="o">::</span><span class="n">make_zip_iterator</span><span class="p">(</span><span class="n">thrust</span><span class="o">::</span><span class="n">make_tuple</span><span class="p">(</span><span class="n">A</span><span class="p">.</span><span class="n">end</span><span class="p">(),</span><span class="w">   </span><span class="n">B</span><span class="p">.</span><span class="n">end</span><span class="p">()));</span><span class="w"></span>
+
+<span class="n">first</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="w">   </span><span class="c1">// returns tuple(10, 'x')</span>
+<span class="n">first</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="w">   </span><span class="c1">// returns tuple(20, 'y')</span>
+<span class="n">first</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="w">   </span><span class="c1">// returns tuple(30, 'z')</span>
+
+<span class="c1">// maximum of [first, last)</span>
+<span class="n">thrust</span><span class="o">::</span><span class="n">maximum</span><span class="o">&lt;</span><span class="w"> </span><span class="n">tuple</span><span class="o">&lt;</span><span class="kt">int</span><span class="p">,</span><span class="kt">char</span><span class="o">&gt;</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="n">binary_op</span><span class="p">;</span><span class="w"></span>
+<span class="n">thrust</span><span class="o">::</span><span class="n">tuple</span><span class="o">&lt;</span><span class="kt">int</span><span class="p">,</span><span class="kt">char</span><span class="o">&gt;</span><span class="w"> </span><span class="n">init</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">first</span><span class="p">[</span><span class="mi">0</span><span class="p">];</span><span class="w"></span>
+<span class="n">thrust</span><span class="o">::</span><span class="n">reduce</span><span class="p">(</span><span class="n">first</span><span class="p">,</span><span class="w"> </span><span class="n">last</span><span class="p">,</span><span class="w"> </span><span class="n">init</span><span class="p">,</span><span class="w"> </span><span class="n">binary_op</span><span class="p">);</span><span class="w"> </span><span class="c1">// returns tuple(30, 'z')</span>
+</pre></div>
+</div>
+<p>What makes <code class="docutils literal notranslate"><span class="pre">zip_iterator</span></code> so useful is that most algorithms accept either one, or occasionally two, input sequences. The <code class="docutils literal notranslate"><span class="pre">zip_iterator</span></code> allows us to combine many independent sequences into a single sequence of tuples, which can be processed by a broad set of algorithms.</p>
+<p>Refer to the <a class="reference external" href="https://github.com/thrust/thrust/blob/master/examples/arbitrary_transformation.cu">arbitrary_transformation</a> example to see how to implement a ternary transformation with <code class="docutils literal notranslate"><span class="pre">zip_iterator</span></code> and <code class="docutils literal notranslate"><span class="pre">for_each</span></code>. A simple extension of this example would allow you to compute transformations with multiple output sequences as well.</p>
+<p>In addition to convenience, <code class="docutils literal notranslate"><span class="pre">zip_iterator</span></code> allows us to implement programs more efficiently. For example, storing 3d points as an array of <code class="docutils literal notranslate"><span class="pre">float3</span></code> in CUDA is generally a bad idea, since array accesses are not properly coalesced. With <code class="docutils literal notranslate"><span class="pre">zip_iterator</span></code> we can store the three coordinates in three separate arrays, which does permit coalesced memory access. In this case, we use <code class="docutils literal notranslate"><span class="pre">zip_iterator</span></code> to create a virtual array of 3d vectors which we can feed in to Thrust algorithms. Refer to the <a class="reference external" href="https://github.com/thrust/thrust/blob/master/examples/dot_products_with_zip.cu">dot_products_with_zip</a> example for additional details.</p>
+</section>
+</section>
+<section id="additional-resources">
+<h1>
+<span class="section-number">5. </span>Additional Resources<a class="headerlink" href="#additional-resources" title="Permalink to this headline"></a>
+</h1>
+<p>This guide only scratches the surface of what you can do with Thrust. The following resources can help you learn to do more with Thrust or provide assistance when problems arise.</p>
+<p>Comprehensive <a class="reference external" href="https://github.com/thrust/thrust/wiki/Documentation">documentation</a> of Thrust’s API</p>
+<p>A list of <a class="reference external" href="https://github.com/thrust/thrust/wiki/Frequently-Asked-Questions">Frequently Asked Questions</a></p>
+<p>Collection of <a class="reference external" href="https://github.com/thrust/thrust/tree/master/examples">example</a> programs</p>
+<p>We strongly encourage users to subscribe to the <a class="reference external" href="http://groups.google.com/group/thrust-users">thrust-users</a> mailing list. The mailing list is a great place to seek out help from the Thrust developers and other Thrust users.</p>
+</section>
+<section id="notices">
+<h1>
+<span class="section-number">6. </span>Notices<a class="headerlink" href="#notices" title="Permalink to this headline"></a>
+</h1>
+<section id="notice">
+<h2>
+<span class="section-number">6.1. </span>Notice<a class="headerlink" href="#notice" title="Permalink to this headline"></a>
+</h2>
+<p>This document is provided for information purposes only and shall not be regarded as a warranty of a certain functionality, condition, or quality of a product. NVIDIA Corporation (“NVIDIA”) makes no representations or warranties, expressed or implied, as to the accuracy or completeness of the information contained in this document and assumes no responsibility for any errors contained herein. NVIDIA shall have no liability for the consequences or use of such information or for any infringement of patents or other rights of third parties that may result from its use. This document is not a commitment to develop, release, or deliver any Material (defined below), code, or functionality.</p>
+<p>NVIDIA reserves the right to make corrections, modifications, enhancements, improvements, and any other changes to this document, at any time without notice.</p>
+<p>Customer should obtain the latest relevant information before placing orders and should verify that such information is current and complete.</p>
+<p>NVIDIA products are sold subject to the NVIDIA standard terms and conditions of sale supplied at the time of order acknowledgement, unless otherwise agreed in an individual sales agreement signed by authorized representatives of NVIDIA and customer (“Terms of Sale”). NVIDIA hereby expressly objects to applying any customer general terms and conditions with regards to the purchase of the NVIDIA product referenced in this document. No contractual obligations are formed either directly or indirectly by this document.</p>
+<p>NVIDIA products are not designed, authorized, or warranted to be suitable for use in medical, military, aircraft, space, or life support equipment, nor in applications where failure or malfunction of the NVIDIA product can reasonably be expected to result in personal injury, death, or property or environmental damage. NVIDIA accepts no liability for inclusion and/or use of NVIDIA products in such equipment or applications and therefore such inclusion and/or use is at customer’s own risk.</p>
+<p>NVIDIA makes no representation or warranty that products based on this document will be suitable for any specified use. Testing of all parameters of each product is not necessarily performed by NVIDIA. It is customer’s sole responsibility to evaluate and determine the applicability of any information contained in this document, ensure the product is suitable and fit for the application planned by customer, and perform the necessary testing for the application in order to avoid a default of the application or the product. Weaknesses in customer’s product designs may affect the quality and reliability of the NVIDIA product and may result in additional or different conditions and/or requirements beyond those contained in this document. NVIDIA accepts no liability related to any default, damage, costs, or problem which may be based on or attributable to: (i) the use of the NVIDIA product in any manner that is contrary to this document or (ii) customer product designs.</p>
+<p>No license, either expressed or implied, is granted under any NVIDIA patent right, copyright, or other NVIDIA intellectual property right under this document. Information published by NVIDIA regarding third-party products or services does not constitute a license from NVIDIA to use such products or services or a warranty or endorsement thereof. Use of such information may require a license from a third party under the patents or other intellectual property rights of the third party, or a license from NVIDIA under the patents or other intellectual property rights of NVIDIA.</p>
+<p>Reproduction of information in this document is permissible only if approved in advance by NVIDIA in writing, reproduced without alteration and in full compliance with all applicable export laws and regulations, and accompanied by all associated conditions, limitations, and notices.</p>
+<p>THIS DOCUMENT AND ALL NVIDIA DESIGN SPECIFICATIONS, REFERENCE BOARDS, FILES, DRAWINGS, DIAGNOSTICS, LISTS, AND OTHER DOCUMENTS (TOGETHER AND SEPARATELY, “MATERIALS”) ARE BEING PROVIDED “AS IS.” NVIDIA MAKES NO WARRANTIES, EXPRESSED, IMPLIED, STATUTORY, OR OTHERWISE WITH RESPECT TO THE MATERIALS, AND EXPRESSLY DISCLAIMS ALL IMPLIED WARRANTIES OF NONINFRINGEMENT, MERCHANTABILITY, AND FITNESS FOR A PARTICULAR PURPOSE. TO THE EXTENT NOT PROHIBITED BY LAW, IN NO EVENT WILL NVIDIA BE LIABLE FOR ANY DAMAGES, INCLUDING WITHOUT LIMITATION ANY DIRECT, INDIRECT, SPECIAL, INCIDENTAL, PUNITIVE, OR CONSEQUENTIAL DAMAGES, HOWEVER CAUSED AND REGARDLESS OF THE THEORY OF LIABILITY, ARISING OUT OF ANY USE OF THIS DOCUMENT, EVEN IF NVIDIA HAS BEEN ADVISED OF THE POSSIBILITY OF SUCH DAMAGES. Notwithstanding any damages that customer might incur for any reason whatsoever, NVIDIA’s aggregate and cumulative liability towards customer for the products described herein shall be limited in accordance with the Terms of Sale for the product.</p>
+</section>
+<section id="opencl">
+<h2>
+<span class="section-number">6.2. </span>OpenCL<a class="headerlink" href="#opencl" title="Permalink to this headline"></a>
+</h2>
+<p>OpenCL is a trademark of Apple Inc. used under license to the Khronos Group Inc.</p>
+</section>
+<section id="trademarks">
+<h2>
+<span class="section-number">6.3. </span>Trademarks<a class="headerlink" href="#trademarks" title="Permalink to this headline"></a>
+</h2>
+<p>NVIDIA and the NVIDIA logo are trademarks or registered trademarks of NVIDIA Corporation in the U.S. and other countries. Other company and product names may be trademarks of the respective companies with which they are associated.</p>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+
+  <hr>
+
+  <div role="contentinfo">
+  <img src="../_static/NVIDIA-LogoBlack.svg" class="only-light"/>
+<img src="../_static/NVIDIA-LogoWhite.svg" class="only-dark"/>
+
+<p class="notices">
+<a href="https://www.nvidia.com/en-us/about-nvidia/privacy-policy/" target="_blank">Privacy Policy</a>
+|
+<a href="https://www.nvidia.com/en-us/about-nvidia/privacy-center/" target="_blank">Manage My Privacy</a>
+|
+<a href="https://www.nvidia.com/en-us/preferences/start/" target="_blank">Do Not Sell or Share My Data</a>
+|
+<a href="https://www.nvidia.com/en-us/about-nvidia/terms-of-service/" target="_blank">Terms of Service</a>
+|
+<a href="https://www.nvidia.com/en-us/about-nvidia/accessibility/" target="_blank">Accessibility</a>
+|
+<a href="https://www.nvidia.com/en-us/about-nvidia/company-policies/" target="_blank">Corporate Policies</a>
+|
+<a href="https://www.nvidia.com/en-us/product-security/" target="_blank">Product Security</a>
+|
+<a href="https://www.nvidia.com/en-us/contact/" target="_blank">Contact</a>
+</p>
+    <p>© Copyright 2011-2023, NVIDIA Corporation &amp; affiliates. All rights reserved.
+      <span class="lastupdated">Last updated on Aug 24, 2023.
+      </span></p>
+  </div>
+
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+ 
+<script type="text/javascript">if (typeof _satellite !== "undefined"){_satellite.pageBottom();}</script>
+ 
+
+
+<script type="text/javascript">_satellite.pageBottom();</script>
+</body>
+</html>

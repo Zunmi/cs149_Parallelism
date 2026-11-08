@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en">
+<head>
+  <meta charset="utf-8">
+<meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>2. API Synchronization behavior — CUDA Runtime API Reference Manual 13.4 documentation</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css">
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css">
+      <link rel="stylesheet" href="../_static/copybutton.css" type="text/css">
+      <link rel="stylesheet" href="../_static/design-style.b7bb847fb20b106c3d81b95245e65545.min.css" type="text/css">
+      <link rel="stylesheet" href="../_static/omni-style.css" type="text/css">
+      <link rel="stylesheet" href="../_static/api-styles.css" type="text/css">
+    <link rel="shortcut icon" href="../_static/favicon.ico">
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="./" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/mermaid-init.js"></script>
+        <script src="../_static/clipboard.min.js"></script>
+        <script src="../_static/copybutton.js"></script>
+        <script src="../_static/design-tabs.js"></script>
+        <script src="../_static/version.js"></script>
+        <script src="../_static/social-media.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html">
+    <link rel="search" title="Search" href="search.html">
+    <link rel="next" title="3. Stream synchronization behavior" href="stream-sync-behavior.html">
+    <link rel="prev" title="1. Difference between the driver and runtime APIs" href="driver-vs-runtime-api.html">
+ 
+
+    <!-- OneTrust Cookies Consent Notice start for nvidia.com -->
+    <script src="https://cdn.cookielaw.org/scripttemplates/otSDKStub.js" data-document-language="true" type="text/javascript" charset="UTF-8" data-domain-script="3e2b62ff-7ae7-4ac5-87c8-d5949ecafff5"></script>
+    <script type="text/javascript">
+    function OptanonWrapper() {
+        var event = new Event('bannerLoaded');
+        window.dispatchEvent(event);
+    }
+    </script>
+    <!-- OneTrust Cookies Consent Notice end for nvidia.com -->
+    <script type="text/javascript" src="https://images.nvidia.com/aem-dam/Solutions/ot-js/ot-custom.js"></script>
+    <script src="https://assets.adobedtm.com/5d4962a43b79/c1061d2c5e7b/launch-191c2462b890.min.js"></script>
+    
+
+
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+
+
+<a href="index.html">
+  <img src="../_static/Logo_and_CUDA.png" class="logo" alt="Logo">
+</a>
+
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs">
+    <input type="hidden" name="check_keywords" value="yes">
+    <input type="hidden" name="area" value="default">
+  </form>
+</div>
+        </div>
+<div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="driver-vs-runtime-api.html">1. Difference between the driver and runtime APIs</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">2. API Synchronization behavior</a></li>
+<li class="toctree-l1"><a class="reference internal" href="stream-sync-behavior.html">3. Stream synchronization behavior</a></li>
+<li class="toctree-l1"><a class="reference internal" href="graphs-thread-safety.html">4. Graph object thread safety</a></li>
+<li class="toctree-l1"><a class="reference internal" href="version-mixing-rules.html">5. Rules for version mixing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cuda_runtime_api/apis.html">6. APIs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cuda_runtime_api/structs.html">7. Structs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cuda_runtime_api/deprecated.html">8. Deprecated List</a></li>
+<li class="toctree-l1"><a class="reference internal" href="notices.html">9. Notices</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">CUDA Runtime API Reference Manual</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+
+
+  
+
+<li>
+<a href="../index.html" class="icon icon-home"></a> »</li>
+  
+<li>
+<span class="section-number">2. </span>API Synchronization behavior</li>
+
+      <li class="wy-breadcrumbs-aside">
+      </li>
+<li class="wy-breadcrumbs-aside">
+
+
+  <span>v13.4 |</span>
+
+
+
+
+
+  <a href="../pdf/CUDA_Runtime_API.pdf" class="reference external">PDF</a>
+
+
+
+
+  <span>|</span>
+
+
+
+  <a href="https://developer.nvidia.com/cuda-toolkit-archive" class="reference external">Archive</a>
+
+
+  <span> </span>
+</li>
+
+  </ul>
+  <hr>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="api-synchronization-behavior">
+<h1>
+<span class="section-number">2. </span>API Synchronization behavior<a class="headerlink" href="#api-synchronization-behavior" title="Permalink to this headline"></a>
+</h1>
+<p>The API provides memcpy/memset functions in both synchronous and asynchronous forms, the latter having an “Async” suffix. This is a misnomer as each function may exhibit synchronous or asynchronous behavior depending on the arguments passed to the function. The synchronous forms of these APIs issue these copies through the default stream.</p>
+<p>Any CUDA API call may block or synchronize for various reasons such as contention for or unavailability of internal resources. Such behavior is subject to change and undocumented behavior should not be relied upon.</p>
+<p class="rubric-h2 rubric">Memcpy</p>
+<p>In the reference documentation, each memcpy function is categorized as synchronous or asynchronous, corresponding to the definitions below.</p>
+<p><strong>Synchronous</strong></p>
+<ol class="arabic simple">
+<li><p>For transfers from pageable host memory to device memory, a stream sync is performed before the copy is initiated. The function will return once the pageable buffer has been copied to the staging memory for DMA transfer to device memory, but the DMA to final destination may not have completed.</p></li>
+<li><p>For transfers from pinned host memory to device memory, the function is synchronous with respect to the host.</p></li>
+<li><p>For transfers from device to either pageable or pinned host memory, the function returns only once the copy has completed.</p></li>
+<li><p>For transfers from device memory to device memory, no host-side synchronization is performed.</p></li>
+<li><p>For transfers from any host memory to any host memory, the function is fully synchronous with respect to the host.</p></li>
+</ol>
+<p><strong>Asynchronous</strong></p>
+<ol class="arabic simple">
+<li><p>For transfers between device memory and pageable host memory, the function might be synchronous with respect to host.</p></li>
+<li><p>For transfers from any host memory to any host memory, the function is fully synchronous with respect to the host.</p></li>
+<li><p>If pageable memory must first be staged to pinned memory, the driver may synchronize with the stream and stage the copy into pinned memory.</p></li>
+<li><p>For all other transfers, the function should be fully asynchronous.</p></li>
+</ol>
+<p class="rubric-h2 rubric">Memset</p>
+<p>The cudaMemset functions are asynchronous with respect to the host except when the target memory is pinned host memory. The Async versions are always asynchronous with respect to the host.</p>
+<p class="rubric-h2 rubric">Kernel Launches</p>
+<p>Kernel launches are asynchronous with respect to the host. Details of concurrent kernel execution and data transfers can be found in the CUDA Programmers Guide.</p>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+
+  <hr>
+
+  <div role="contentinfo">
+<img src="../_static/NVIDIA-LogoBlack.svg" class="only-light">
+<img src="../_static/NVIDIA-LogoWhite.svg" class="only-dark">
+
+<p>
+  Copyright © 2007-2026, NVIDIA Corporation &amp; affiliates. All rights reserved.
+</p>
+
+    <p>
+      <span class="lastupdated">Last updated on Oct 12, 2026.
+      </span></p>
+
+  </div>
+
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(false);
+      });
+  </script>
+ 
+
+    <script type="text/javascript">if (typeof _satellite !== "undefined") {_satellite.pageBottom();}</script>
+    <div class="footer-links">
+      <a class="external" href="https://www.nvidia.com/en-us/about-nvidia/privacy-policy/">Privacy Policy</a>
+      |
+      <a class="external" href="https://www.nvidia.com/en-us/about-nvidia/privacy-center/">Your Privacy Choices</a>
+      |
+      <a class="external" href="https://www.nvidia.com/en-us/about-nvidia/terms-of-service/">Terms of Service</a>
+      |
+      <a class="external" href="https://www.nvidia.com/en-us/about-nvidia/accessibility/">Accessibility</a>
+      |
+      <a class="external" href="https://www.nvidia.com/en-us/about-nvidia/company-policies/">Corporate Policies</a>
+      |
+      <a class="external" href="https://www.nvidia.com/en-us/product-security/">Product Security</a>
+      |
+      <a class="external" href="https://www.nvidia.com/en-us/contact/">Contact</a>
+    </div>
+    
+
+
+
+</body>
+</html>

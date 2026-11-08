@@ -1,0 +1,471 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <title>
+              Super-FAQ : 
+            Standard C++
+    </title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="/favicon.ico" rel="shortcut icon">
+    <link rel="apple-touch-icon" href="apple-touch-icon-57.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="apple-touch-icon-72.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="apple-touch-icon-114.png">
+    <link rel="apple-touch-icon" sizes="144x144" href="apple-touch-icon-144.png">
+    <link href="https://fonts.googleapis.com/css?family=Crimson+Text|Roboto|Roboto+Condensed:400,700&display=swap" rel="stylesheet">
+    <link href="/assets/css/app.css?v012" rel="stylesheet" media="all" type="text/css">
+    <link href="/assets/css/prettify.css" rel="stylesheet" media="all" type="text/css">
+
+    <script type="text/javascript" src="/assets/js/prettify.min.js"></script>    
+  </head>
+  
+  <body class="hide-sidebar">
+    <div id="root">
+    
+      <div id="crown">
+        <a id="sidebar-toggle" href="#sidebar">Show sidebar &raquo;</a>
+        <ul class="user">
+                          <li><a href="https://isocpp.org/member/login">Sign In / Suggest an Article</a></li>
+          <li><a href="https://isocpp.org/member/register">Register</a></li>
+                </ul>
+      </div>
+
+      <header id="top" role="banner">
+        <div class="container">
+          <h1>
+            <a href="https://isocpp.org/"><img src="/assets/images/cpp_logo.png" alt="Standard C++"></a>
+          </h1>
+          <nav role="navigation">
+            <ul id="nav-sub">
+<li class="first"><a href="https://isocpp.org/get-started">Get Started!</a></li>
+<li><a href="https://isocpp.org/tour">Tour</a></li>
+<li><a href="https://isocpp.org/guidelines">Core Guidelines</a></li>
+<li class="here"><a href="https://isocpp.org/faq">Super-FAQ</a></li>
+<li><a href="https://isocpp.org/std">Standardization</a></li>
+<li class="last"><a href="https://isocpp.org/about">About</a></li>
+</ul>
+          </nav>
+          <form action="/search/google">
+            <input type="text" name="q" id="q" maxlength="100" value="" class="textbox">
+            <input type="submit" value="Search" class="button">
+          </form>
+          <!--
+          <form method="post" action="https://isocpp.org/"  >
+<div class='hiddenFields'>
+<input type="hidden" name="ACT" value="6" />
+<input type="hidden" name="XID" value="1900860314ca4595bf0e87476d709419dc8ef9a5" />
+<input type="hidden" name="RES" value="" />
+<input type="hidden" name="meta" value="YTo5OntzOjY6InN0YXR1cyI7czowOiIiO3M6NzoiY2hhbm5lbCI7czoxOToiYmxvZ3xwYWdlc3xmYXF8d2lraSI7czo4OiJjYXRlZ29yeSI7czowOiIiO3M6OToic2VhcmNoX2luIjtzOjEwOiJldmVyeXdoZXJlIjtzOjU6IndoZXJlIjtzOjM6ImFsbCI7czoxMjoic2hvd19leHBpcmVkIjtzOjA6IiI7czoxOToic2hvd19mdXR1cmVfZW50cmllcyI7YjowO3M6MTE6InJlc3VsdF9wYWdlIjtzOjE0OiJzZWFyY2gvcmVzdWx0cyI7czoxNToibm9fcmVzdWx0c19wYWdlIjtzOjE3OiJzZWFyY2gvbm9fcmVzdWx0cyI7fTNkZmE5MTM0YzRkODdjNWE2MDc5Y2YxZjA5OGYxOTRh" />
+<input type="hidden" name="site_id" value="1" />
+</div>
+
+
+            <input type="text" name="keywords" id="keywords" maxlength="100" value="M50o93H7pQ09L8X1t49cHY01Z5j4TT91fGfr" class="textbox">
+            <input type="submit" value="Search" class="button">
+          </form>
+          -->
+        </div>
+      </header>
+
+      <div id="content" class="hide-sidebar" role="main">
+        <div class="container">
+
+    
+      <div id="sidebar">
+              <section>
+              <header>Features</header>
+            <div class="sidebar-section-content prettify">
+        <p>
+	<a href="https://isocpp.org/std/status">Current ISO C++ status</a></p>
+<p>
+	&nbsp;</p>
+<p>
+	<a href="https://isocpp.org/std/standing-documents">ISO C++ standing documents</a></p>
+<p>
+	&nbsp;</p>
+<p>
+	<a href="https://isocpp.org/std/meetings-and-participation/upcoming-meetings">Upcoming ISO C++ meetings</a></p>
+<p>
+	&nbsp;</p>
+<p>
+	<a href="https://isocpp.org/wiki/faq/conferences-worldwide">Upcoming C++ conferences</a></p>
+<p>
+	&nbsp;</p>
+<p>
+	<a href="http://en.cppreference.com/w/cpp/compiler_support">Compiler conformance status</a></p>
+      </div>
+    </section>
+  
+  
+        <nav>
+          <section>
+            <header>
+              Navigation
+            </header>
+            <ul>
+              <li><a href="https://isocpp.org/wiki/faq">FAQ Home</a></li>
+              <li><a href="/themes/wiki_themes/isocpp/rss/faq-revisions-rss.php" class="icon rss">FAQ RSS Feed</a></li>
+              <li><a href="/wiki/faq/editinfo">FAQ Help</a></li>
+                          </ul>
+          </section>
+        
+        
+          <section>
+            <header>
+              Search this Wiki
+            </header>
+            <form method="post" action="https://isocpp.org/wiki/faq/Special:Search_results">
+              <input type="hidden" name="XID" value="1dca4e88e6342921ba3f84b6c003a751ce00f92c" />
+              <input type="text" class="input" name="keywords" size="20" value="" maxlength="80" /><input type="submit" class="submit" value="Go" />
+            </form>
+          </section>
+          
+          <section>
+            <header>
+              Go to Page
+            </header>
+            <form method="post" action="https://isocpp.org/wiki/faq/Special:Find_page">
+              <input type="hidden" name="XID" value="bc5bdaf2c609a9ed10d016bca8cc63b9763a62b7" />
+              <input type="text" class="input" name="title" size="20" value="" maxlength="80" /><input type="submit" class="submit" value="Go" />
+            </form>
+          </section>
+        </nav>
+          
+      <section>
+              <header>Upcoming Events</header>
+            <div class="sidebar-section-content">
+        <p>
+	<a href="https://italiancpp.github.io/cppday26/"><strong>C++ Day 2026</strong></a></p>
+<p>
+	October 17, Pavia, Italy</p>
+<p>
+	&nbsp;</p>
+<p>
+	<a href="https://isocpp.org/files/papers/N5021.html"><strong>ISO C++ meeting - B&uacute;zios</strong></a></p>
+<p>
+	November 16-21, B&uacute;zios, Rio De Janeiro, Brazil</p>
+<p>
+	&nbsp;</p>
+<p>
+	<a href="http://meetingcpp.com/2026"><strong>Meeting C++</strong></a></p>
+<p>
+	November 26-28, Berlin, Germany</p>
+<p>
+	&nbsp;</p>
+<p>
+	<strong><a href="https://cpponline.uk/call-for-speakers/">C++Online 2027</a></strong></p>
+<p>
+	March 10-12</p>
+      </div>
+    </section>
+  
+      </div>
+
+      <div id="mainbar">
+        <header>
+          <div class="breadcrumbs">
+
+            <a href="https://isocpp.org/wiki/faq">Wiki Home</a>
+            <span class="breadcrumbspacer">&nbsp;&nbsp;&gt;&nbsp;&nbsp;</span>
+
+                        index
+            
+          </div>
+          
+          <div class="wiki-page-actions">
+                    <a href="https://isocpp.org/wiki/faq">View</a>
+                              </div>
+          
+          <h2>
+                    
+          
+                    
+                    FAQ
+                    </h2>
+
+          
+          
+        </header>
+
+        <article>
+
+          <!-- Begin Main Content of Page -->
+
+          
+          
+
+          <div id="wiki-content">
+
+          
+
+          
+            <div class="prettify">
+
+
+<h2 id="index">C++ FAQ</h2>
+
+<h3>Welcome to the C++ Super-FAQ!</h3>
+
+<p>What&#8217;s &#8220;Super&#8221; about this FAQ? In part it&#8217;s because this is a merger of two great FAQs: Marshall Cline&#8217;s C++ FAQs, and Bjarne Stroustrup&#8217;s C++ FAQ. And in part it&#8217;s because this is a wiki being continuously updated for modern C++. There are some FAQ topics not yet updated; if you spot one, suggest an improvement using the link on the bar for that FAQ.</p>
+
+<p>We would like to gratefully acknowledge Pearson Education (Addison-Wesley), Marshall Cline, Bjarne Stroustrup, Herb Sutter, and Andrei Alexandrescu for launching this FAQ by freely contributing the contents of Marshall Cline&#8217;s online <em>C++ FAQ Lite</em>, Bjarne Stroustrup&#8217;s online <em>C++ and C++11 FAQs</em>, and in the near future material from their books <em>C++ FAQs Second Edition</em> by Marshall Cline, Greg Lomow, and Mike Girou, and <em>C++ Coding Standards</em> by Herb Sutter and Andrei Alexandrescu.</p>
+
+<hr>
+
+<h3>C++ FAQ Sections</h3>
+
+<h4>Overview Topics</h4>
+
+<ul>
+<li><a href="/wiki/faq/big-picture" title="Section: Big Picture Issues">Big Picture Issues</a></li>
+<li><a href="/wiki/faq/newbie" title="Section: Newbie Questions &amp; Answers">Newbie Questions &amp; Answers</a></li>
+<li><a href="/wiki/faq/how-to-learn-cpp" title="Section: Learning C++">Learning OO/C++</a></li>
+<li><a href="/wiki/faq/coding-standards" title="Section: Coding Standards">Coding Standards</a></li>
+<li><a href="/wiki/faq/user-groups-worldwide" title="Section: User Groups Worldwide">User Groups Worldwide</a></li>
+<li><a href="https://isocpp.org/wiki/faq/conferences-worldwide/">Conferences Worldwide</a></li>
+<li><a href="https://bit.ly/CppCommunityCalendar">Community Events Calendar</a></li>
+</ul>
+
+<h4>Starting From Another Language</h4>
+
+<ul>
+<li><a href="/wiki/faq/objective-c" title="Section: Learning C++ if you already know Objective-C">Learning C++ if you already know Objective-C</a></li>
+<li><a href="/wiki/faq/csharp-java" title="Section: Learning C++ if you already know C# or Java">Learning C++ if you already know C# or Java</a></li>
+<li><a href="/wiki/faq/c" title="Section: Learning C++ if you already know C">Learning C++ if you already know C</a></li>
+<li><a href="/wiki/faq/mixing-c-and-cpp" title="Section: How to mix C and C++">How to mix C and C++</a></li>
+</ul>
+
+<h4>General Topics</h4>
+
+<ul>
+<li><a href="/wiki/faq/intrinsic-types" title="Section: Built-in / Intrinsic / Primitive Data Types">Built-in / Intrinsic / Primitive Data Types</a></li>
+<li><a href="/wiki/faq/input-output" title="Section: Input/output via &lt;iostream> and &lt;cstdio>">Input/output via <code>&lt;iostream&gt;</code> and <code>&lt;cstdio&gt;</code></a></li>
+<li><a href="/wiki/faq/const-correctness" title="Section: Const Correctness">Const Correctness</a></li>
+<li><a href="/wiki/faq/references" title="Section: References">References</a></li>
+<li><a href="/wiki/faq/freestore-mgmt" title="Section: Memory Management">Memory Management</a></li>
+</ul>
+
+<h4>Classes and Inheritance</h4>
+
+<ul>
+<li><a href="/wiki/faq/classes-and-objects" title="Section: Classes and Objects">Classes and Objects</a></li>
+<li><a href="/wiki/faq/ctors" title="Section: Constructors">Constructors</a></li>
+<li><a href="/wiki/faq/dtors" title="Section: Destructors">Destructors</a></li>
+<li><a href="/wiki/faq/assignment-operators" title="Section: Assignment Operators">Assignment Operators</a></li>
+<li><a href="/wiki/faq/operator-overloading" title="Section: Operator Overloading">Operator Overloading</a></li>
+<li><a href="/wiki/faq/friends" title="Section: Friends">Friends</a></li>
+<li><a href="/wiki/faq/basics-of-inheritance" title="Section: Inheritance — Basics">Inheritance &#8212; Basics</a></li>
+<li><a href="/wiki/faq/virtual-functions" title="Section: Inheritance — virtual functions">Inheritance &#8212; <code>virtual</code> functions</a></li>
+<li><a href="/wiki/faq/proper-inheritance" title="Section: Inheritance — Proper Inheritance and Substitutability">Inheritance &#8212; Proper Inheritance and Substitutability</a></li>
+<li><a href="/wiki/faq/abcs" title="Section: Inheritance — Abstract Base Classes (ABCs)">Inheritance &#8212; Abstract Base Classes (ABCs)</a></li>
+<li><a href="/wiki/faq/strange-inheritance" title="Section: Inheritance — What your mother never told you">Inheritance &#8212; What your mother never told you</a></li>
+<li><a href="/wiki/faq/private-inheritance" title="Section: Inheritance — private and protected inheritance">Inheritance &#8212; <code>private</code> and <code>protected</code> inheritance</a></li>
+<li><a href="/wiki/faq/multiple-inheritance" title="Section: Inheritance — Multiple and Virtual Inheritance">Inheritance &#8212; Multiple and Virtual Inheritance</a></li>
+</ul>
+
+<h4>Beyond Classes</h4>
+
+<ul>
+<li><a href="/wiki/faq/templates" title="Section: Templates">Templates</a></li>
+<li><a href="/wiki/faq/containers" title="Section: Container Classes">Container Classes</a></li>
+<li><a href="/wiki/faq/class-libraries" title="Section: Class Libraries">Class Libraries</a></li>
+<li><a href="/wiki/faq/exceptions" title="Section: Exceptions and Error Handling">Exceptions and Error Handling</a></li>
+<li><a href="/wiki/faq/value-vs-ref-semantics" title="Section: Reference and Value Semantics">Reference and Value Semantics</a></li>
+<li><a href="/wiki/faq/inline-functions" title="Section: Inline Functions">Inline Functions</a></li>
+<li><a href="/wiki/faq/pointers-to-members" title="Section: Pointers to Member Functions">Pointers to Member Functions</a></li>
+<li><a href="/wiki/faq/serialization" title="Section: Serialization and Unserialization">Serialization and Unserialization</a></li>
+</ul>
+
+<h4>C++11</h4>
+
+<ul>
+<li><a href="/wiki/faq/cpp11" title="Section: C++11 Overview">C++11 Overview</a></li>
+<li><a href="/wiki/faq/cpp11-language" title="Section: C++11 Language Extensions --- General Features">C++11 Language Extensions &#8212; General Features</a></li>
+<li><a href="/wiki/faq/cpp11-language-classes" title="Section: C++11 Language Extensions -- Classes">C++11 Language Extensions &#8212; Classes</a></li>
+<li><a href="/wiki/faq/cpp11-language-types" title="Section: C++11 Language Extensions --- Other Types">C++11 Language Extensions &#8212; Other Types</a></li>
+<li><a href="/wiki/faq/cpp11-language-templates" title="Section: C++11 Language Extensions -- Templates">C++11 Language Extensions &#8212; Templates</a></li>
+<li><a href="/wiki/faq/cpp11-language-concurrency" title="Section: C++11 Language Extensions --- Concurrency">C++11 Language Extensions &#8212; Concurrency</a></li>
+<li><a href="/wiki/faq/cpp11-language-misc" title="Section: C++11 Language Extensions --- Miscellaneous Language Features">C++11 Language Extensions &#8212; Miscellaneous Language Features</a></li>
+<li><a href="/wiki/faq/cpp11-library" title="Section: C++11 Library Extensions --- General Libraries">C++11 Library Extensions &#8212; General Libraries</a></li>
+<li><a href="/wiki/faq/cpp11-library-stl" title="Section: C++11 Standard Library Extensions --- Containers and Algorithms">C++11 Library Extensions &#8212; Containers and Algorithms</a></li>
+<li><a href="/wiki/faq/cpp11-library-concurrency" title="Section: C++11 Standard Library Extensions --- Concurrency">C++11 Library Extensions &#8212; Concurrency</a></li>
+</ul>
+
+<h4>C++14</h4>
+
+<ul>
+<li><a href="/wiki/faq/cpp14" title="Section: C++14 Overview">C++14 Overview</a></li>
+<li><a href="/wiki/faq/cpp14-language" title="Section: C++14 Language Extensions">C++14 Language Extensions</a></li>
+<li><a href="/wiki/faq/cpp14-library" title="Section: C++14 Library Extensions">C++14 Library Extensions</a></li>
+</ul>
+
+<h4>Miscellaneous Q&amp;A</h4>
+
+<ul>
+<li><a href="/wiki/faq/compiler-dependencies" title="Section: Compiler Dependencies">Compiler Dependencies</a></li>
+<li><a href="/wiki/faq/misc-technical-issues" title="Section: Miscellaneous Technical Issues">Miscellaneous Technical Issues</a></li>
+<li><a href="/wiki/faq/misc-environmental-issues" title="Section: Miscellaneous Environmental Issues">Miscellaneous Environmental Issues</a></li>
+<li><a href="/wiki/faq/style-and-techniques" title="Section: Miscellaneous Style Issues">Miscellaneous Style Issues</a></li>
+<li><a href="/wiki/faq/cpp0x-concepts-history" title="Section: C++0x Concepts --- Historical FAQs">C++0x Concepts &#8212; Historical FAQs</a></li>
+<li><a href="/wiki/faq/myths" title="Section: Myths and urban legends about C++">Myths and Urban Legends About C++</a></li>
+<li><a href="/wiki/faq/wg21" title="Section: WG21 Members">Partial List of ISO C++ Committee Members</a></li>
+</ul>
+
+<!--
+File: id-defns
+
+Defines IDs for each FAQ and section.
+
+Rule:
+  FAQ editors should always use these IDs for every internal cross-reference within the FAQ.
+  Always use indirect links ('[description][id-of-target]')  when linking to the FAQ from within the FAQ.
+  Never  use  direct  links ('[description](url-of-target)') when linking to the FAQ from within the FAQ.
+
+Reason:
+  The FAQ is a living document -- we will split/join sections and move FAQs between sections.
+  Those changes result in changes to the URL of the moved FAQs, which breaks all direct links -- many changes.
+  However using indirect links means we need only change one thing in one place: this id-defns file.
+
+Caveat:
+  This rule applies only to internal cross-reference links, not to links to resources outside the FAQ.
+  E.g., if you are making a link from FAQ 'x' to FAQ 'y', then you should always use FAQ 'y's link-ID.
+  However if you are making a link from FAQ 'x' to some resource outside the FAQ, you have two choices:
+  You can use a direct link to the external resource's URL ('[description](url-of-external-resource)'),
+  or you can add the external resource to this file then link indirectly ('[description][id-of-external-resource]').
+  Typically you would do the latter only when the FAQ contains more than one link to that external resource.
+-->
+
+<p><!-- special resources -->
+<!-- /wiki/faq/index = 'C++ FAQ' -->
+<!-- /wiki/faq/big-picture = 'Big Picture Issues' -->
+<!-- /wiki/faq/classes-and-objects = 'Classes and Objects' -->
+<!-- /wiki/faq/references = 'References' -->
+<!-- /wiki/faq/inline-functions = 'Inline Functions' -->
+<!-- /wiki/faq/ctors = 'Constructors' -->
+<!-- /wiki/faq/dtors = 'Destructors' -->
+<!-- /wiki/faq/assignment-operators = 'Assignment Operators' -->
+<!-- /wiki/faq/operator-overloading = 'Operator Overloading' -->
+<!-- /wiki/faq/friends = 'Friends' -->
+<!-- /wiki/faq/input-output = 'Input/output via <iostream> and <cstdio>' -->
+<!-- /wiki/faq/freestore-mgmt = 'Memory Management' -->
+<!-- /wiki/faq/exceptions = 'Exceptions and Error Handling' -->
+<!-- /wiki/faq/const-correctness = 'Const Correctness' -->
+<!-- /wiki/faq/big3 = 'The Big Three' -->
+<!-- /wiki/faq/basics-of-inheritance = 'Inheritance — Basics' -->
+<!-- /wiki/faq/virtual-functions = 'Inheritance — virtual functions' -->
+<!-- /wiki/faq/proper-inheritance = 'Inheritance — Proper Inheritance and Substitutability' -->
+<!-- /wiki/faq/abcs = 'Inheritance — Abstract Base Classes (ABCs)' -->
+<!-- /wiki/faq/strange-inheritance = 'Inheritance — What your mother never told you' -->
+<!-- /wiki/faq/private-inheritance = 'Inheritance — private and protected inheritance' -->
+<!-- /wiki/faq/multiple-inheritance = 'Inheritance — Multiple and Virtual Inheritance' -->
+<!-- /wiki/faq/intrinsic-types = 'Built-in / Intrinsic / Primitive Data Types' -->
+<!-- /wiki/faq/coding-standards = 'Coding Standards' -->
+<!-- /wiki/faq/how-to-learn-cpp = 'Learning C++' -->
+<!-- /wiki/faq/newbie = 'Newbie Questions & Answers' -->
+<!-- /wiki/faq/objective-c = 'Learning C++ if you already know Objective-C' -->
+<!-- /wiki/faq/c = 'Learning C++ if you already know C' -->
+<!-- /wiki/faq/csharp-java = 'Learning C++ if you already know C# or Java' -->
+<!-- /wiki/faq/myths = 'Myths and Urban Legends About C++' -->
+<!-- /wiki/faq/value-vs-ref-semantics = 'Reference and Value Semantics' -->
+<!-- /wiki/faq/mixing-c-and-cpp = 'How to mix C and C++' -->
+<!-- /wiki/faq/pointers-to-members = 'Pointers to Member Functions' -->
+<!-- /wiki/faq/containers = 'Container Classes' -->
+<!-- /wiki/faq/templates = 'Templates' -->
+<!-- /wiki/faq/serialization = 'Serialization and Unserialization' -->
+<!-- /wiki/faq/class-libraries = 'Class Libraries' -->
+<!-- /wiki/faq/compiler-dependencies = 'Compiler Dependencies' -->
+<!-- /wiki/faq/misc-technical-issues = 'Miscellaneous Technical Issues' -->
+<!-- /wiki/faq/misc-environmental-issues = 'Miscellaneous Environmental Issues' -->
+<!-- /wiki/faq/style-and-techniques = 'Miscellaneous Style Issues' -->
+<!-- /wiki/faq/user-groups-worldwide = 'User Groups Worldwide' -->
+<!-- /wiki/faq/cpp11 = 'C++11 Overview' -->
+<!-- /wiki/faq/cpp11-language = 'C++11 Language Extensions --- General Features' -->
+<!-- /wiki/faq/cpp11-language-classes = 'C++11 Language Extensions -- Classes' -->
+<!-- /wiki/faq/cpp11-language-concurrency = 'C++11 Language Extensions --- Concurrency' -->
+<!-- /wiki/faq/cpp11-language-misc = 'C++11 Language Extensions --- Miscellaneous Language Features' -->
+<!-- /wiki/faq/cpp11-language-templates = 'C++11 Language Extensions -- Templates' -->
+<!-- /wiki/faq/cpp11-language-types = 'C++11 Language Extensions --- Other Types' -->
+<!-- /wiki/faq/cpp11-library = 'C++11 Library Extensions --- General Libraries' -->
+<!-- /wiki/faq/cpp11-library-concurrency = 'C++11 Standard Library Extensions --- Concurrency' -->
+<!-- /wiki/faq/cpp11-library-stl = 'C++11 Standard Library Extensions --- Containers and Algorithms' -->
+<!-- /wiki/faq/cpp0x-concepts-history = 'C++0x Concepts --- Historical FAQs' -->
+<!-- /wiki/faq/cpp14 = 'C++14 Overview' -->
+<!-- /wiki/faq/cpp14-language = 'C++14 Language Extensions' -->
+<!-- /wiki/faq/cpp14-library = 'C++14 Library Extensions' -->
+<!-- /wiki/faq/wg21 = 'WG21 Members' -->
+<!-- /wiki/faq/subject-index = 'Subject Index' --></p>
+
+<!-- BEGIN 'Category' Namespace Stuff -->
+
+
+<!-- END 'Category' Namespace Stuff -->
+
+
+<!-- BEGIN Categories for Page -->
+
+
+<!-- END Categories for Page -->
+
+
+</div>
+          
+
+
+          </div>
+
+        </article>
+
+      </div>
+      
+<div id="popup-suggest" class="wiki-popup">
+  <p>Please <a href="/member/login">Login</a> to submit a recommendation.</p>
+  <p>If you don&rsquo;t have an account, you can <a href="/member/register">register for free.</a></p>
+</div>
+
+        </div>
+        
+        <div id="root-footer"></div>
+      </div>
+    </div>
+
+    <footer id="bottom" role="contentinfo">
+      <div class="container">
+        &copy; <a href="/home/terms-of-use">Copyright</a> 2026 Standard C++ Foundation. 
+        All rights reserved.
+        <ul id="nav-sub">
+<li class="first"><a href="https://isocpp.org/home/terms-of-use">Terms of Use</a></li>
+<li class="last"><a href="https://isocpp.org/home/privacy-policy">Privacy Policy</a></li>
+</ul>
+        <br>Hosted by <a href="https://m.do.co/c/32f291566cf7" target="_blank">DigitalOcean</a>
+        
+      </div>
+    </footer>
+
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+    <script>window.jQuery || document.write('<script src="https://isocpp.org/javascript/jquery.min"><\/script>')</script>
+    <script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.10.1/jquery-ui.min.js"></script>
+    <script>window.jQuery.ui || document.write('<script src="https://isocpp.org/javascript/jquery-ui.min"><\/script>')</script>
+    
+    <script type="text/javascript" charset="utf-8" src="https://isocpp.org/?ACT=comment_editor"></script>
+    M20o93H7pQ09L8X1t49cHY01Z5j4TT91fGfr
+    
+    <script type="text/javascript" src="/js/isocpp.lib.min.js"></script>
+    <script type="text/javascript" src="/js/global.js"></script>
+
+    
+    <script type="text/javascript" src="/js/magnific.min.js"></script>
+    <script type="text/javascript" src="/js/qtip.min.js"></script>
+    <script type="text/javascript" src="/themes/wiki_themes/isocpp/javascript/wiki.js?v=20140115"></script>
+    
+    
+    <script type="text/javascript">
+      $("#top nav a").each(function() {
+        var aSeg1 = $(this).attr("href").replace("http://", "").replace("https://", "").split("/")[1];
+        if (aSeg1 == "faq") {$(this).parent().addClass("here");}
+      });
+    </script>
+
+  <script type="module" src="https://static.cloudflareinsights.com/beacon.min.js/vce701823e78c4301a35b7e07294d87301792088814092" integrity="sha512-UKNk8GbxkABxKcXYuLkO16EleLGUkcvJWtpSNmExE0Too3ZaFAxTscNWEc1OdAv5/BikHawapSCaiD2XCmp+Bw==" data-cf-beacon='{"version":"2024.11.0","token":"f4cc48aef47249ed8b0b0af3e64f93f3","r":1,"spa":2}' crossorigin="anonymous"></script>
+</body>
+</html>

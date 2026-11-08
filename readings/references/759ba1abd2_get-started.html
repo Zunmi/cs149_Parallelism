@@ -1,0 +1,1565 @@
+<!DOCTYPE html>
+<html lang='en' class='h-100'>
+<head>
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="csrf-param" content="authenticity_token" />
+<meta name="csrf-token" content="1fq3JFwgipmOISw3jCEbhvvy3OUzPtM1gaDLM-3DxBzdDlFKBpitbNdRW6g-QSQ58cCnxA0in55DbpunL6d5Cw" />
+  <meta name="csp-nonce" />
+  <title>Getting Started with Nsight Compute | NVIDIA Developer</title>
+<link rel="canonical" href="https://developer.nvidia.com/tools-overview/nsight-compute/get-started">
+<link rel="alternate" href="https://developer.nvidia.com/tools-overview/nsight-compute/get-started" hreflang="x-default">
+<link rel="alternate" href="https://developer.nvidia.com/tools-overview/nsight-compute/get-started" hreflang="en-us">
+<meta property="og:site_name" content="NVIDIA Developer">
+<meta property="og:title" content="Getting Started with Nsight Compute">
+<meta property="og:type" content="website">
+<meta property="og:image" content="https://developer.download.nvidia.com/images/og-default.jpg">
+<meta property="og:url" content="https://developer.nvidia.com/tools-overview/nsight-compute/get-started">
+<meta name="twitter:title" content="Getting Started with Nsight Compute">
+<meta name="twitter:image" content="https://developer.download.nvidia.com/images/og-default.jpg">
+<meta name="twitter:site" content="@NVIDIA">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:creator" content="@NVIDIA">
+<meta name="nv-cre-date" content="2023-09-18T17:03:20.161Z">
+<meta name="nv-pub-date" content="2026-09-16T22:34:02.889Z">
+<meta property="industry" content="HPC / Scientific Computing">
+
+  <link rel="stylesheet" href="https://developer.nvidia.com/assets/application-b1311f8e3775d0111068ffb570bc2dbc9f97b4e9b142bf9583af462cd93ca62f.css" media="all" />
+  <link rel="stylesheet" href="https://developer.nvidia.com/assets/devzone3/shared/modal-b27162ea9a12461a0b0076440408cdd94ddf4273a6a89539e4b81f4641416436.css" media="all" />
+  
+  <link rel="stylesheet" href="https://developer.nvidia.com/assets/one-trust-bea625cf16a072ce5fdb0707a19f2645daf63c05eb1a016db72773eba008fc07.css" />
+  <script src="https://cdn.cookielaw.org/scripttemplates/otSDKStub.js" charset="UTF-8" data-document-language="true" data-domain-script="3e2b62ff-7ae7-4ac5-87c8-d5949ecafff5"></script>
+
+<script src="https://images.nvidia.com/aem-dam/Solutions/ot-js/ot-custom.js"></script>
+
+<script>
+  function OptanonWrapper() {
+    let event = new Event('bannerLoaded');
+    window.dispatchEvent(event);
+
+      if (window.OnetrustActiveGroups && window.OnetrustActiveGroups.includes("C0002")) {
+        window.DD_RUM && window.DD_RUM.init({
+          clientToken: 'pub0430c74fae5d2b467bcb8d48b13e5b32',
+          applicationId: '9fc963c7-14e6-403d-bdec-ee671550bb7f',
+          site: 'datadoghq.com',
+          service: 'devzone',
+          env: 'prod',
+          version: 'v2.60.0',
+          sessionSampleRate: 10,
+          sessionReplaySampleRate: 5,
+          trackUserInteractions: true,
+          trackResources: true,
+          trackLongTasks: true,
+          defaultPrivacyLevel: 'mask-user-input',
+        });
+      }
+  }
+</script>
+
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "name": "NVIDIA Developer",
+    "url": "https://developer.nvidia.com",
+    "logo": "https://www.nvidia.com/en-us/about-nvidia/legal-info/logo-brand-usage/_jcr_content/root/responsivegrid/nv_container_392921705/nv_container_412055486/nv_image.coreimg.100.630.png/1703060329095/nvidia-logo-horz.png",
+    "sameAs": [
+      "https://github.com/nvidia",
+      "https://www.linkedin.com/company/nvidia/",
+      "https://x.com/nvidiadeveloper"
+    ]
+  }
+</script>
+
+  
+  <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" as="style" type="text/css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
+  <link rel="stylesheet" href="https://developer.nvidia.com/assets/devzone3/vars-cd3a0769a3c2f2d9ea6b83ac53ce86bceef4c719e4dbd22ed41d48d01f200901.css" media="all" />
+  <link rel="stylesheet" href="https://developer.nvidia.com/assets/devzone3/new/application-9f23f8b7c393ec4cf46b5284d149f84c5301d9373ceca59acb23e4318443bbfa.css" media="all" />
+  <link rel="stylesheet" href="https://developer.nvidia.com/assets/feed-aggregator/feed-aggregator-9ace7521871242143cb35fa86d5be702c4dacb409600041fa6a5b14fa2a71dde.css" media="all" />
+  <link rel="stylesheet" href="https://developer.nvidia.com/assets/twentytwenty/css/twentytwenty-4ef2ccd719d09a97572e93c499c1fb11cc971d2a3519cfe105dcff2be92f65b9.css" media="all" />
+
+  <script src="https://developer.nvidia.com/assets/horizontal-chart/d3.v4.min-41cfecdf7c41476e805de7afacf4aacdd1a4be6947fbecf95217e947ebc2faf5.js"></script>
+  <script src="https://developer.nvidia.com/assets/horizontal-chart/visualize-d-16cf14d4b63d6031e6c18983e91ac6d2b1b1f8140d15e351a9c847f8610b7e5b.js"></script>
+  <link rel="stylesheet" href="https://developer.nvidia.com/assets/sf-validation/sf-validation-805362e079494cd052f713be5f91a44eb602f545c342f794abbd4a8050c0acb3.css" />
+
+  <script src="https://assets.adobedtm.com/5d4962a43b79/c1061d2c5e7b/launch-191c2462b890.min.js" data-ot-ignore="true"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.3/jquery.min.js" integrity="sha512-STof4xm1wgkfm7heWqFJVn58Hm3EtS31XFaagaa8VMReCXAkQnJZ+jEy8PCC/iT18dFy95WcExNHFTqLyp72eQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+    <script src="https://api-prod.nvidia.com/search/nvidia-gallery-widget.js"></script>
+
+<script src="https://developer.nvidia.com/assets/devzone3/modules/nvidia_editor/nod_widgets-8c38a7d04ed3c3acd9117aa126bf76d7902d3c57c72b76dbf3c281c96ed09975.js"></script>
+
+
+  <link rel="icon" type="image/x-icon" href="https://developer.nvidia.com/assets/favicon-81bff16cada05fcff11e5711f7e6212bdc2e0a32ee57cd640a8cf66c87a6cbe6.ico" />
+</head>
+
+<body class='d-flex flex-column h-100' data-theme='devzone3_new'>
+
+<div id='header'></div>
+
+
+
+
+
+
+
+
+  
+
+<main class="main-content dz3-main-section dz-new-theme page-tools-overview-nsight-compute-get-started page-tools-overview-nsight-compute-get-started" data-id="2159">
+  <style>
+    .nav-tabs .nav-link.active, .nav-tabs .nav-item.show .nav-link{
+        background-color: #91c733;
+    }
+    </style>
+    <section class="cntnr--cw">
+        
+        <div class="container">
+        <div class="sct--s docs-lndg-sct">
+            <div class="row" id="docs-docs-05-04-2021">
+
+                <div class="col-lg-3 col-md-3 col-sm-4 col-xs-12">
+                    <div id="sidebar-navbar" class="sdbr-cntnr">
+                    <div class="sdbr-accrdn mobile-sticky-menu">
+                        <div class="mobile-sticky-arrow"></div>
+                    </div>
+                    <div class="sticky-menu">
+                        
+                        <p class="h--smaller">Getting Started <br> with Nsight <br> Compute</p>
+                        <br>
+                        <ul class="sdbr-ul-page" style="height: calc(100vh - 130px);">
+                        <li>Download</li>
+                        <li><a href="#latest">Latest Version</a></li>
+                        <li><a href="#requirements">System Requirements</a></li>
+                        
+                        <li><a href="#release-notes" class="">Release Notes</a></li>
+                        <li><a href="#archives" class="">Archives</a></li>
+                        
+                        <br>
+                        <li>Resources</li>
+                        <li><a href="#documentation" class="">Documentation</a></li>
+                        <li><a href="#sessions" class="">Tutorial Sessions</a></li>
+                        <li><a href="#support" class="">Support</a></li>
+                        
+                        
+
+                        
+                    </ul>
+                    
+                    </div>
+                    </div>
+
+            </div>
+
+    <div class="col-lg-9 col-md-9 col-sm-9 col-xs-12">
+
+        <div id="latest"></div>
+        <section>
+
+            <h1 class="h--medium">Download NVIDIA Nsight Compute</h1>
+            <h2 class="h--small">Nsight Compute 2026.3 with Nsight Copilot Available Now</h2>
+            
+            <p>Nsight Compute allows profiling on x86_64 Windows, Linux, and Arm Server Based System Architecture platforms locally or from Windows, Linux, or MacOS hosts. See <a href="/tools-overview/nsight-compute/get-started#requirements">System Requirements</a> for more information. </p>
+            <br>
+            <ul class="nav nav-tabs justify-content-center">
+                
+                <li class="nav-item active">
+                    <a class="nav-link active txt-cntr" data-toggle="tab" href="#windows">Windows</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link txt-cntr" data-toggle="tab" href="#linux">Linux</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link txt-cntr" data-toggle="tab" href="#macos">MacOS</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link txt-cntr" data-toggle="tab" href="#jetson">Jetson</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link txt-cntr" data-toggle="tab" href="#drive">DRIVE</a>
+                </li>
+            
+            </ul>
+
+            <div class="tab-content">
+
+                <div class="tab-pane active" id="windows">
+                <br>
+                    <table class="table  table-bordered">
+                        <tbody>
+                            <tr>
+                                <td style="background-color:#eeeeee;" class="font-weight-bold">Download <br> Latest <br> Release</td>
+                                <td class="txt-cntr" colspan="6">
+                                    <a href="/downloads/assets/tools/secure/nsight-compute/2026_3_1/nsight_compute-windows-x86_64-2026.3.1.2.msi">Nsight Compute 2026.3 (Windows-x86_64)</a>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="tab-pane" id="linux">
+                <br>
+                    <table class="table  table-bordered">
+                        <tbody>
+                            <tr>
+                                <td style="background-color:#eeeeee;" class="font-weight-bold">Download <br> Latest <br> Release</td>
+                                <td class="txt-cntr" colspan="6">
+                                    <a href="/downloads/assets/tools/secure/nsight-compute/2026_3_1/nsight_compute-linux-x86_64-2026.3.1.2.run">Nsight Compute 2026.3 (Linux-x86_64)</a>
+                                </td>
+                                <td class="txt-cntr" colspan="6">
+                                    <a href="/downloads/assets/tools/secure/nsight-compute/2026_3_1/nsight_compute-linux-sbsa-2026.3.1.2.run">Nsight Compute 2026.3 (Linux-arm64)</a>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="tab-pane" id="macos">
+                <br>
+                    <table class="table  table-bordered">
+                        <tbody>
+                            <tr>
+                                <td style="background-color:#eeeeee;" class="font-weight-bold">Download <br> Latest <br> Release</td>
+                                <td class="txt-cntr" colspan="6">
+                                    <a href="/downloads/assets/tools/secure/nsight-compute/2026_3_1/nsight_compute-mac-x86_64-2026.3.1.2.dmg">Nsight Compute 2026.3 (MacOS-x86_64)</a>
+                                </td>
+                                <td class="txt-cntr" colspan="6">
+                                    <a href="/downloads/assets/tools/secure/nsight-compute/2026_3_1/nsight_compute-mac-arm64-2026.3.1.2.dmg">Nsight Compute 2026.3 (MacOS-arm64)</a>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>  
+
+                <div class="tab-pane" id="jetson">
+                    <br>
+                    <table class="table  table-bordered">
+                        <tbody>
+                            <tr>
+                                <td style="background-color:#eeeeee;" class="font-weight-bold">Download <br> Latest <br> Release</td>
+                                <td class="txt-cntr" colspan="6">
+                                    Nsight Compute is available in the CUDA Toolkit bundled in the <a href="/embedded/jetpack">JetPack SDK</a>.
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div> 
+
+                <div class="tab-pane" id="drive">
+                    <br>
+                    <table class="table  table-bordered">
+                        <tbody>
+                            <tr>
+                                <td style="background-color:#eeeeee;" class="font-weight-bold">Download <br> Latest <br> Release</td>
+                                <td class="txt-cntr" colspan="6">
+                                    Nsight Compute is available as part of <a href="/drive/driveos"> DRIVE OS</a> for development and deployment on DRIVE AGX-based autonomous vehicles.
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <p><b>Download NVIDIA Nsight Tools JupyterLab Extension:</b></p>
+                <p>The Nsight Tools JupyterLab Extension integrates Nsight Compute's CUDA kernel profiling functionality in JupyterLab.</p>
+                <a target="_blank" href="https://pypi.org/project/jupyterlab-nvidia-nsight/">Download Nsight Tools JupyterLab Extension (PyPI)</a>
+
+                <br>
+
+                <p><b>Nsight Compute is also available as part of the <a href="/cuda-toolkit">CUDA Toolkit</a> </b>
+
+                <br>
+
+                Read <a target="_blank" href="https://archive.docs.nvidia.com/nsight-compute/2026.3/">Nsight Compute 2026.3 documentation</a> </p>  
+
+                <br>
+            </div>
+        </section>
+
+        <div id="requirements"></div>
+            <section>
+
+                <a id="streamline-requirements"></a>
+                <h2 class="h--small">System Requirements</h2>
+
+
+                <!-- Table section -->  
+
+                <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th></th>
+                            <th class="txt-cntr" style="background-color:#666666; color:white;">Windows</th> 
+                            <th class="txt-cntr" style="background-color:#666666; color:white;">Linux</th>
+                            <th class="txt-cntr" style="background-color:#666666; color:white;">Mac</th>
+                            <th class="txt-cntr" style="background-color:#666666; color:white;">DRIVE OS</th> 
+                    
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="font-weight-bold">Host</td>
+                            <td class="txt-cntr">Windows x86_64<sup><span class="p--small">[1]</span></sup>
+                            </td>
+                        
+                            <td class="txt-cntr">Linux x86_64<sup><span class="p--small">[1]</span></sup>
+                                <br>
+                            Linux aarch64 sbsa<sup><span class="p--small">[1]</span></sup> <br>
+                            Linux aarch64 (L4T)<sup><span class="p--small">[2]</span></sup>
+                            </td>
+                            <td>MacOS<sup><span class="p--small">[1]</span></sup>
+                            </td>
+                            <td class="txt-cntr"> - </td>
+                        </tr>
+                        
+                    
+                        <tr style="background-color:#eeeeee;">
+                            <td class="font-weight-bold">Target</td>
+                            <td class="txt-cntr"> Windows x86_64<sup><span class="p--small">[1]</span></sup>
+                            </td>
+                            <td class="txt-cntr"> Linux x86_64<sup><span class="p--small">[1]</span></sup> <br>
+                                Linux aarch64 sbsa<sup><span class="p--small">[1]</span></sup> <br>
+                                Linux aarch64 (L4T)<sup><span class="p--small">[2]</span></sup>
+                            </td>
+                            <td class="txt-cntr"> - </td>
+                            <td class="txt-cntr">DRIVE OS QNX aarch64<sup><span class="p--small">[2][3]</span></sup> <br>
+                                DRIVE OS Linux aarch64<sup><span class="p--small">[2][3]</span></sup>
+                            </td>
+
+
+                        </tr>
+
+                    </tbody>
+
+                </table>
+
+
+
+                <!-- End of Table section -->
+
+                <p>Host platforms support the Nsight Compute UI for viewing reports, interactive profiling and remote connections. Applications are profiled on target platforms, which also support the Nsight Compute command line interface.</p>
+
+
+                <br>
+
+
+                <h3 class="h--smaller">Supported NVIDIA GPU architectures</h3>
+                <div class="row">
+                    <div class="col-md-6">
+                        <ul class="fa-ul">
+                            <li><span class="fa-li"></span>Turing: TU1xx</li> 
+                            <li><span class="fa-li"></span>Ampere: A100 with Multi-Instance GPU, GA10x</li> 
+                            <li><span class="fa-li"></span>Ada: AD10x</li>
+                        </ul>
+
+                    </div>
+                    <div class="col-md-6">
+                        <ul class="fa-ul">          
+                            <li><span class="fa-li"></span>Hopper: H100 with Multi-Instance GPU</li> 
+                            <li><span class="fa-li"></span>Blackwell: B100 with Multi-Instance GPU, GB10x, GB11x, GB20x</li> 
+                        </ul>
+                    </div>
+
+                </div>
+
+                <p>[1] available in this <a target="_blank" href="https://developer.nvidia.com/gameworksdownload#?dn=nsight-compute-2026-3-1">download</a> and the <a target="_blank" href="https://developer.nvidia.com/cuda-toolkit">CUDA Desktop Toolkit</a></p>
+                <p>[2] available in the <a target="_blank" href="https://developer.nvidia.com/embedded/develop/tools">Embedded</a> or <a target="_blank" href="https://developer.nvidia.com/drive/drive-sdk">Drive</a> toolkits only</p>
+                <p>[3] Only the command line interface (CLI) is provided for these platforms. There is no Nsight Compute GUI application for these platforms</p>
+                <br>
+
+                <h3 class="h--smaller">Recommended Drivers</h3>
+
+                <ul class="fa-ul">
+                    <li><span class="fa-li"></span>NVIDIA Windows display driver - 616.92 or <a target="_blank" href="https://www.nvidia.com/Download/index.aspx?lang=en-us">newer</a>
+                        <ul>For CUDA ToolKit 13.0 and later, Windows drivers are available at the <a href="https://www.nvidia.com/Download/index.aspx">NVIDIA Driver Download page</a>.
+                            Older driver versions are also supported.</ul>
+                    </li>
+                    <li><span class="fa-li"></span>NVIDIA Linux display driver Linux - 615.71 or <a target="_blank" href="https://www.nvidia.com/Download/index.aspx?lang=en-us">newer</a>
+                        <ul>We recommend using the Linux drivers provided with the most recent  <a target="_blank" href="https://developer.nvidia.com/cuda-toolkit">CUDA Toolkit</a> production release or a newer version. 
+                            Older driver versions are also supported.</ul>
+                    </li>
+                </ul>
+               
+            </section>
+            <br>
+            <hr>
+            <br>
+            <!-- <div id="latest-version"></div>
+
+            <section >
+                <h2 class="h--medium">Latest Version - Nsight Compute 2026.3</h2>
+                <p><a target="_blank" href="https://developer.nvidia.com/nsight-compute-2026_3-new-features">Read the Nsight Compute 2026.3 release notes.</a></p>
+
+                <a class="cta cta--prim " href="https://developer.nvidia.com/gameworksdownload#?dn=nsight-compute-2026-3-1"> Download 2026.3.1/a> &nbsp; &nbsp; 
+
+                <a class="cta cta--prim " href="https://developer.nvidia.com/gameworksdownload#?dn=nsight-compute-2026-3-0"> Download 2026.3.0</a> &nbsp; &nbsp; 
+                <a class="cta cta--prim " href="https://docs.nvidia.com/nsight-compute/index.html">Documentation</a>
+
+
+
+            </section>
+
+
+            <br> 
+            <hr>
+            <br> -->
+
+            <div id="release-notes"></div>   
+            <section>
+                <h2 class="h--medium">Release Notes</h2>
+                <p class="p--large"><a target="_blank" href="https://developer.nvidia.com/gameworksdownload#?dn=nsight-compute-2026-3-1">2026.3 Update 1</a> - 2026/09/16</p>
+                    <ul class="fa-ul">
+                        <li><span class="fa-li"></span> Support for the CUDA Toolkit 13.4 Update 1.</li>
+                        <li><span class="fa-li"></span> Added limited support for C2C metrics for GB20B and GB20C.</li>
+                        <li><span class="fa-li"></span> Additionally there are a few Bug fixes with this update.</li>
+
+                        <li>
+                            <span class="fa-li"></span>
+                            <a target="_blank" href="https://developer.nvidia.com/nsight-compute-2026_3-new-features"> View full release notes</a>
+                        </li> 
+                    </ul>
+
+                    <p class="p--large"><a target="_blank" href="https://developer.nvidia.com/gameworksdownload#?dn=nsight-compute-2026-3-0">2026.3</a> - 2026/09/09</p>
+                    <ul class="fa-ul">
+                        <li><span class="fa-li"></span> Support for the CUDA Toolkit 13.4.</li>
+                        <li><span class="fa-li"></span> Added support for the Rubin GPU architecture.</li>
+                        <li><span class="fa-li"></span> Added the Compute Triage Guide. It provides a top-down workflow for understanding compute workload performance bottlenecks and optimizations.</li>
+                        <li><span class="fa-li"></span> Added access to workload-aligned PM sampling timeline data from the Python Report Interface and the NvRules API.</li>
+
+                        <li>
+                            <span class="fa-li"></span>
+                            <a target="_blank" href="https://developer.nvidia.com/nsight-compute-2026_3-new-features"> View full release notes</a>
+                        </li> 
+                    </ul>
+
+
+                <p class="p--large"><a target="_blank" href="https://developer.nvidia.com/gameworksdownload#?dn=nsight-compute-2026-2-1">2026.2 Update 1</a> - 2026/06/29</p>
+                    <ul class="fa-ul">
+                        <li><span class="fa-li"></span> Support for the CUDA Toolkit 13.3 Update 1.</li>
+                        <li><span class="fa-li"></span> Added support for in-process profiling workflows that dynamically load the CUDA injection library. Added --process-id, --list-injection-path-64, --list-injection-path-32 command line options.</li>
+                        <li><span class="fa-li"></span> Additionally there are number of Bug fixes.</li>
+
+                        <li>
+                            <span class="fa-li"></span>
+                            <a target="_blank" href="https://developer.nvidia.com/nsight-compute-2026_2-new-features"> View full release notes</a>
+                        </li> 
+                    </ul>
+
+            <p class="p--large"><a target="_blank" href="https://developer.nvidia.com/gameworksdownload#?dn=nsight-compute-2026-2-0">2026.2</a> - 2026/05/26</p>
+                    <ul class="fa-ul">
+                        <li><span class="fa-li"></span> Added metrics for the size of SASS instructions.</li>
+                        <li><span class="fa-li"></span> Added profiling support for previously unsupported SKUs, with reduced metric support, including GPUs such as RTX 6000D BSE (GB202-891), RTX 5090DD (GB202-240), and RTX 5090D (GB202-250). For more details, refer to ERR_NVGPU.</li>
+
+                        <li>
+                            <span class="fa-li"></span>
+                            <a target="_blank" href="https://developer.nvidia.com/nsight-compute-2026_2-new-features"> View full release notes</a>
+                        </li> 
+                    </ul>
+
+            <p class="p--large"><a target="_blank" href="https://developer.nvidia.com/gameworksdownload#?dn=nsight-compute-2026-1-1">2026.1 Update 1</a> - 2026/04/13</p>
+                    <ul class="fa-ul">
+                        <li><span class="fa-li"></span> Support for the CUDA Toolkit 13.2 Update 1.</li>
+                        <li><span class="fa-li"></span> Fixed an incorrect calculation in Roofline Analysis rule that prevented triggering in all cases</li>
+                        <li><span class="fa-li"></span> Additionally there are number of Bug fixes.</li>
+
+                        <li>
+                            <span class="fa-li"></span>
+                            <a target="_blank" href="https://developer.nvidia.com/nsight-compute-2026_1-new-features"> View full release notes</a>
+                        </li> 
+                    </ul>
+
+            <p class="p--large"><a target="_blank" href="https://developer.nvidia.com/gameworksdownload#?dn=nsight-compute-2026-1-0">2026.1</a> - 2026/03/09</p>
+                    <ul class="fa-ul">
+                        <li><span class="fa-li"></span> Support for the CUDA Toolkit 13.2.</li>
+                        <li><span class="fa-li"></span> The minimum supported version of macOS is now 13.0.</li>
+                        <li><span class="fa-li"></span> The Python Report Interface can now be installed as a standalone package from PyPI using pip install ncu-report.</li>
+
+                        <li>
+                            <span class="fa-li"></span>
+                            <a target="_blank" href="https://developer.nvidia.com/nsight-compute-2026_1-new-features"> View full release notes</a>
+                        </li> 
+                    </ul>
+
+            <p class="p--large"><a target="_blank" href="https://developer.nvidia.com/gameworksdownload#?dn=nsight-compute-2025-4-1">2025.4 Update 1</a> - 2026/01/12</p>
+                    <ul class="fa-ul">
+                        <li><span class="fa-li"></span> Support for the CUDA Toolkit 13.1 Update 1.</li>
+                        <li><span class="fa-li"></span> Added profiling support for OptiX workloads.</li>
+                        <li><span class="fa-li"></span> Additionally there are number of Bug fixes.</li>
+
+                        <li>
+                            <span class="fa-li"></span>
+                            <a target="_blank" href="https://developer.nvidia.com/nsight-compute-2025_4-new-features"> View full release notes</a>
+                        </li> 
+                    </ul>
+
+            <p class="p--large"><a target="_blank" href="https://developer.nvidia.com/gameworksdownload#?dn=nsight-compute-2025-3-0">2025.3</a> - 2025/08/04</p>
+            <ul class="fa-ul">
+                <li><span class="fa-li"></span> Support for the CUDA Toolkit 13.0.</li>
+                <li><span class="fa-li"></span> Improved Green Context Support.</li>
+                <li><span class="fa-li"></span> Improved CUDA Graph node profiling support.</li>
+                <li><span class="fa-li"></span> Leaner reports: Now allow not importing of SASS cubins.</li>
+                <li><span class="fa-li"></span> Source Page shows instruction category</li>
+                <li><span class="fa-li"></span> Throughput metrics now detailed in Metrics window</li>
+                <li><span class="fa-li"></span> Improved support for Blackwell chips.</li>
+                <li><span class="fa-li"></span> Support for Volta GPUs (GV100, GV10b) has been dropped.</li>
+                <li>
+                    <span class="fa-li"></span>
+                    <a target="_blank" href="https://developer.nvidia.com/nsight-compute-2025_3-new-features"> View full release notes</a>
+                </li> 
+            </ul>
+
+            <p class="p--large"><a target="_blank" href="https://developer.nvidia.com/gameworksdownload#?dn=nsight-compute-2025-2-1">2025.2 Update 1</a> - 2025/06/05</p>
+            <ul class="fa-ul">
+              <li><span class="fa-li"></span> Support for the CUDA Toolkit 12.9 Update 1.</li>
+              <li><span class="fa-li"></span> OpenSSL 3.0.16.</li>
+              <li><span class="fa-li"></span> Bug fixes.</li>
+              <li>
+                <span class="fa-li"></span>
+                <a target="_blank" href="https://developer.nvidia.com/nsight-compute-2025_2-new-features"> View full release notes</a>
+              </li> 
+            </ul>
+
+            <p class="p--large"><a target="_blank" href="https://developer.nvidia.com/gameworksdownload#?dn=nsight-compute-2025-2-0">2025.2</a> - 2025/05/01</p>
+            <ul class="fa-ul">
+              <li><span class="fa-li"></span> Support for the CUDA Toolkit 12.9.</li>
+              <li><span class="fa-li"></span> Now collecting C2C link information on Blackwell GPUs.</li>
+              <li><span class="fa-li"></span> Now collecting request counts and hit rates for Constant Caches on Turing and newer GPU architectures.</li>
+              <li><span class="fa-li"></span> Added additional Python support.</li>
+              <li><span class="fa-li"></span> Added product-wide search functionality via a new search bar and tool window.</li>
+              <li><span class="fa-li"></span> The Source page now shows scoreboard dependencies in SASS</li>
+              <li><span class="fa-li"></span> Interactive tooltips can now be pinned and dragged.</li>
+              <li><span class="fa-li"></span> Added source correlation navigation controls.</li>
+              <li><span class="fa-li"></span> Added support for profiling MPS applications.</li>
+              <li>
+                <span class="fa-li">
+                </span>
+                <a target="_blank" href="https://developer.nvidia.com/nsight-compute-2025_2-new-features"> View full release notes</a>
+              </li>
+            </ul>
+
+                <p class="p--large"><a target="_blank" href="https://developer.nvidia.com/gameworksdownload#?dn=nsight-compute-2025-1-1">2025.1 Update 1</a> - 2025/03/04</p>
+                    <ul class="fa-ul">
+                        <li><span class="fa-li"></span> Support for the CUDA Toolkit 12.8 Update 1.</li>
+                        <li><span class="fa-li"></span> OptiX 9.0 support.</li>
+                        <li><span class="fa-li"></span> Bug fixes.</li>
+
+                        <li>
+                            <span class="fa-li"></span>
+                            <a target="_blank" href="https://developer.nvidia.com/nsight-compute-2025_1-new-features2"> View full release notes</a>
+                        </li> 
+                    </ul>
+
+                <p class="p--large"><a target="_blank" href="https://developer.nvidia.com/gameworksdownload#?dn=nsight-compute-2025-1-0">2025.1</a> - 2025/01/23</p>
+                    <ul class="fa-ul">
+                        <li><span class="fa-li"></span> Support for the CUDA Toolkit 12.8.</li>
+                        <li><span class="fa-li"></span> All roofline sections are now included in the full section set.</li>
+                        <li><span class="fa-li"></span> Rules are now supported for range replays.</li>
+                        <li><span class="fa-li"></span> Added a new launch__stack_size metric in the Launch Statistics section</li>
+                        <li><span class="fa-li"></span> Added a new sass__inst_executed_register_spilling metric.</li>
+                        <li><span class="fa-li"></span> Nsight Compute host GUI now natively supports macOS arm64.</li>
+                        <li><span class="fa-li"></span> Added "Diff By" drop down menu for Opcode vs. Full Instruction diffs.</li>
+                        <li><span class="fa-li"></span> New Chart mode allows CUDA Graph visualization of the graph structure.</li>
+                        <li><span class="fa-li"></span> Memory Chart now supports zoom and pan.</li>
+                        <li>
+                            <span class="fa-li"></span>
+                            <a target="_blank" href="https://developer.nvidia.com/nsight-compute-2025_1-new-features2"> View full release notes</a>
+                        </li> 
+                    </ul>
+
+
+                    <p class="p--large"><a target="_blank" href="https://developer.nvidia.com/gameworksdownload#?dn=nsight-compute-2024-4-0">2024.4</a> - 2024/09/30 (OEM/ISV release)</p>
+                    <ul class="fa-ul">
+                        <li><span class="fa-li"></span> Added support for the Blackwell architecture.</li>
+                        <li><span class="fa-li"></span> The occupancy calculator now considers the impact of block barriers.</li>
+                        <li><span class="fa-li"></span> Added support for several launch__* metrics for CUDA graphs.</li>
+                        <li><span class="fa-li"></span> Register spilling compiler annotations reported on the Source page.</li>
+                        <li><span class="fa-li"></span> Added hyperlinks for the line numbers and inline function addresses in the Inline Table</li>
+                        <li><span class="fa-li"></span> new --nvtx-push-pop-scope command line option</li>
+                        <li>
+                            <span class="fa-li"></span>
+                            <a target="_blank" href="https://developer.nvidia.com/nsight-compute-2024_4-new-features"> View full release notes</a>
+                        </li> 
+                    </ul>
+
+                <p class="p--large"><a target="_blank" href="https://developer.nvidia.com/gameworksdownload#?dn=nsight-compute-2024-3-1">2024.3 Update 1</a> - 2024/08/29</p>
+                    <ul class="fa-ul">
+                        <li><span class="fa-li"></span> Support for the CUDA Toolkit 12.6 Update 1.</li>
+                        <li><span class="fa-li"></span> UI enhancements.</li>
+                        <li><span class="fa-li"></span> Bug fixes.</li>
+                        <li>
+                            <span class="fa-li"></span>
+                            <a target="_blank" href="https://developer.nvidia.com/nsight-compute-2024_3-new-features"> View full release notes</a>
+                        </li> 
+                    </ul>
+
+                <p class="p--large"><a target="_blank" href="https://developer.nvidia.com/gameworksdownload#?dn=nsight-compute-2024-3-0">2024.3</a> - 2024/08/01</p>
+                    <ul class="fa-ul">
+                        <li><span class="fa-li"></span> Support for the CUDA Toolkit 12.6.</li>
+                        <li><span class="fa-li"></span> Added syntax highlighting support for section and rule files when open these as a new document.</li>
+                        <li><span class="fa-li"></span> Section and rule files now support edit, save, text search, zoom in/out functionalities.</li>
+                        <li><span class="fa-li"></span> Added hyperlinks for section and rule files in the Metric Selection tool window.</li>
+                        <li><span class="fa-li"></span> Source Comparison documents support synchronized horizontal scrolling support across both sides for frozen columns.</li>
+                        <li><span class="fa-li"></span> Improved Inline Table source syntax highlighting.</li>
+                        <li>
+                            <span class="fa-li"></span>
+                            <a target="_blank" href="https://developer.nvidia.com/nsight-compute-2024_3-new-features"> View full release notes</a>
+                        </li> 
+                    </ul>
+
+                <p class="p--large"><a target="_blank" href="https://developer.nvidia.com/gameworksdownload#?dn=nsight-compute-2024-2-1">2024.2 Update 1</a> - 2024/07/01</p>
+                    <ul class="fa-ul">
+                        <li><span class="fa-li"></span> Support for the CUDA Toolkit 12.5 Update 1.</li>
+                        <li><span class="fa-li"></span> Performance improvements.</li>
+                        <li><span class="fa-li"></span> UI enhancements.</li>
+                        <li><span class="fa-li"></span> Bug fixes.</li>
+                        <li>
+                            <span class="fa-li"></span>
+                            <a target="_blank" href="https://developer.nvidia.com/nsight-compute-2024_2-new-features"> View full release notes</a>
+                        </li> 
+                    </ul>
+
+                <p class="p--large"><a target="_blank" href="https://developer.nvidia.com/gameworksdownload#?dn=nsight-compute-2024-2-0">2024.2</a> - 2024/05/21</p>
+                    <ul class="fa-ul">
+                        <li><span class="fa-li"></span> Support for the CUDA Toolkit 12.5.</li>
+                        <li><span class="fa-li"></span> GPU workload activities now shown on Sampling Timeline.</li>
+                        <li><span class="fa-li"></span> Added support for collecting Python Call Stacks.</li>
+                        <li><span class="fa-li"></span> Added automatic and manual renaming of demangled kernel names.</li>
+                        <li><span class="fa-li"></span> Acceleration Structure Viewer improvements.</li>
+                        <li><span class="fa-li"></span> Expands syntax highlighting.</li>
+                        <li><span class="fa-li"></span> New Statistics Table aggregates metrics across custom line selection.</li>
+                        <li><span class="fa-li"></span> Removed support for ppc64le.</li>
+                        <li><span class="fa-li"></span><a target="_blank" href="https://developer.nvidia.com/nsight-compute-2024_2-new-features"> View full release notes</a></li> 
+                    </ul>
+
+                <p class="p--large"><a target="_blank" href="https://developer.nvidia.com/gameworksdownload#?dn=nsight-compute-2024-1-1">2024.1 Update 1</a> - 2024/4/03</p>
+                    <ul class="fa-ul">
+                        <li><span class="fa-li"></span> Support for the CUDA Toolkit 12.4 Update 1.</li>
+                        <li><span class="fa-li"></span> Library loading enhancements.</li>
+                        <li><span class="fa-li"></span> Bug fixes.</li>
+                        <li><span class="fa-li"></span><a target="_blank" href="https://developer.nvidia.com/nsight-compute-2024_1-new-features"> View full release notes</a></li> 
+                    </ul>
+
+                <p class="p--large"><a target="_blank" href="https://developer.nvidia.com/gameworksdownload#?dn=nsight-compute-2024-1-0">2024.1</a> - 2024/03/05</p>
+                    <ul class="fa-ul">
+                        <li><span class="fa-li"></span> Support for the CUDA Toolkit 12.4.</li>
+                        <li><span class="fa-li"></span> Added support for CUDA Green Contexts.</li>
+                        <li><span class="fa-li"></span> Added SASS view and Source Markers support in Source Comparison.</li>
+                        <li><span class="fa-li"></span> Improved Source Comparison diff visualization.</li>
+                        <li><span class="fa-li"></span> Added a Launch Details tool window.</li>
+                        <li><span class="fa-li"></span> Added a new optional PmSampling_WarpStates section.</li>
+                        <li><span class="fa-li"></span> Added a new rule for detecting load imbalances.</li>
+                        <li><span class="fa-li"></span> Various performance improvements and bug fixes.</li>
+                        <li><span class="fa-li"></span><a target="_blank" href="https://developer.nvidia.com/nsight-compute-2024_1-new-features"> View full release notes</a></li> 
+                    </ul>
+
+                <p class="p--large"><a target="_blank" href="https://developer.nvidia.com/gameworksdownload#?dn=nsight-compute-2023-3-1">2023.3 Update 1</a> - 2023/11/15</p>
+                    <ul class="fa-ul">
+                        <li><span class="fa-li"></span> Support for the CUDA toolkit 12.3 Update 1.</li>
+                        <li><span class="fa-li"></span> Switched to using OpenSSL version 1.1.1w.</li>
+                        <li><span class="fa-li"></span> Improved the speedup estimates for rule IssueSlotUtilization as well as its child rules.</li>
+                        <li><span class="fa-li"></span> Updated report files and documentation for the samples in this release.</li>
+                        <li><span class="fa-li"></span><a target="_blank" href="https://developer.nvidia.com/nsight-compute-2023_3-new-features"> View full release notes</a></li> 
+                    </ul>
+
+                <p class="p--large"><a target="_blank" href="https://developer.nvidia.com/gameworksdownload#?dn=nsight-compute-2023-3-0">2023.3 </a> - 2023/10/19</p>
+                    <ul class="fa-ul">
+                        <li><span class="fa-li"></span> Support for the CUDA Toolkit 12.3.</li>
+                        <li><span class="fa-li"></span> Adds periodic metric sampling.</li>
+                        <li><span class="fa-li"></span> Adds side-by-side profiled source comparison.</li>
+                        <li><span class="fa-li"></span> Improved accuracy of estimated speedups.</li>
+                        <li><span class="fa-li"></span> Expanded OS support for WSL2 profiling.</li>
+                        <li><span class="fa-li"></span> Various bug fixes.</li>
+                        <li><span class="fa-li"></span><a target="_blank" href="https://developer.nvidia.com/nsight-compute-2023_3-new-features"> View full release notes</a></li> 
+                    </ul>
+
+                <p class="p--large"><a target="_blank" href="https://developer.nvidia.com/gameworksdownload#?dn=nsight-compute-2023-2-1">2023.2 Update 2</a> - 8/29/2023</p>
+                    <ul class="fa-ul">
+                        <li><span class="fa-li"></span>Support for the CUDA Toolkit 12.2 Update 2.</li>
+                        <li><span class="fa-li"></span>Various bug fixes.</li>
+                        <!--
+                        -->
+                        <li>
+                            <span class="fa-li"></span><a target="_blank" href="https://developer.nvidia.com/nsight-compute-2023_2-new-features">View full release notes</a>
+                        </li> 
+                    </ul>
+
+                <p class="p--large"><a target="_blank" href="https://developer.nvidia.com/gameworksdownload#?dn=nsight-compute-2023-2-1">2023.2 Update 1</a> - 7/25/2023</p>
+                    <ul class="fa-ul">
+                        <li>
+                            <span class="fa-li"></span>Support for the CUDA Toolkit 12.2 Update 1.</li>
+                        <li>
+                            <span class="fa-li"></span>Various bug fixes.</li>
+                        <!--
+                        -->
+                        <li>
+                            <span class="fa-li"></span><a target="_blank" href="https://developer.nvidia.com/nsight-compute-2023_2-new-features">View full release notes</a>
+                        </li> 
+                    </ul>
+
+                <p class="p--large"><a target="_blank" href="https://developer.nvidia.com/gameworksdownload#?dn=nsight-compute-2023-2-0">2023.2</a> - 6/26/2023</p>
+                    <ul class="fa-ul">
+                        <li>
+                            <span class="fa-li"></span>Support for the CUDA Toolkit 12.2.</li>
+                        <li>
+                            <span class="fa-li"></span>Adds rules to show potential performance improvement estimates for prioritization.</li>
+                        <li>
+                            <span class="fa-li"></span>Workflow improvements and bug fixes.</li>
+                        <!--
+                        -->
+                        <li>
+                            <span class="fa-li"></span><a target="_blank" href="https://developer.nvidia.com/nsight-compute-2023_2-new-features">View full release notes</a>
+                        </li> 
+                    </ul>
+
+                <p class="p--large"><a target="_blank" href="https://developer.nvidia.com/gameworksdownload#?dn=nsight-compute-2023-1-1">2023.1 Update 1</a> - 4/18/2023</p>
+                    <ul class="fa-ul">
+                        <li>
+                            <span class="fa-li"></span>Support for the CUDA Toolkit 12.1 Update 1.</li>
+                        <li>
+                            <span class="fa-li"></span>New configuration options to set the default view mode and precision for the Source page.</li>
+                        <li>
+                            <span class="fa-li"></span>Workflow improvements and bug fixes.</li>
+                        <!--
+                        -->
+                        <li>
+                            <span class="fa-li"></span><a target="_blank" href="https://developer.nvidia.com/nsight-compute-2023_1-new-features">View full release notes</a>
+                        </li> 
+                    </ul>
+
+                <p class="p--large"><a target="_blank" href="https://developer.nvidia.com/gameworksdownload#?dn=nsight-compute-2023-1-0">2023.1</a> - 2/28/2023</p>
+                    <ul class="fa-ul">
+                        <li>
+                            <span class="fa-li"></span>Support for the CUDA Toolkit 12.1 and OptiX 7.7.</li>
+                        <li>
+                            <span class="fa-li"></span>New application range replay mode<./li>
+                        <li>
+                            <span class="fa-li"></span>Added sharedBankConflicts sample CUDA application.</li>
+                        <li>
+                            <span class="fa-li"></span>CPU and GPU NUMA topology metrics and NUMA Affinity sections.</li>
+                        <li>
+                            <span class="fa-li"></span>Performance improvements and source file re-resolve on the source page.</li>
+                        <!--
+                        -->
+                        <li>
+                            <span class="fa-li"></span><a target="_blank" href="https://developer.nvidia.com/nsight-compute-2023_1-new-features">View full release notes</a>
+                        </li> 
+                    </ul>
+
+                <p class="p--large"><a target="_blank" href="https://developer.nvidia.com/gameworksdownload#?dn=nsight-compute-2022-4-1">2022.4 Update 1</a> - 1/30/2023</p>
+                    <ul class="fa-ul">
+                        <li>
+                            <span class="fa-li"></span>Support for the CUDA Toolkit 12.0 Update 1. </li>
+                        <li>
+                            <span class="fa-li"></span>Support for the latest ADA GPUs, including AD104, AD106, and AD107.</li> 
+                        <li>
+                            <span class="fa-li"></span><a target="_blank" href="https://developer.nvidia.com/nsight-compute-2022_4-new-features">View full release notes</a>
+                        </li> 
+                    </ul>
+
+                <p class="p--large"><a target="_blank" href="https://developer.nvidia.com/gameworksdownload#?dn=nsight-compute-2022-4-0">2022.4</a> - 12/8/2022</p>
+                    <ul class="fa-ul">
+                        <li>
+                            <span class="fa-li"></span>Support for the CUDA Toolkit 12.0.  </li>
+                        <li>
+                            <span class="fa-li"></span>Profiling of complete CUDA graphs and device-sided graph launches.</li> 
+                        <li>
+                            <span class="fa-li"></span>OptiX resource tracking, export and Acceleration Structure viewer enhancements.</li> 
+                        <li>
+                            <span class="fa-li"></span><a target="_blank" href="https://developer.nvidia.com/nsight-compute-2022_4-new-features">View full release notes</a>
+                        </li> 
+                    </ul>
+
+                    <p class="p--large"><a target="_blank" href="https://developer.nvidia.com/gameworksdownload#?dn=nsight-compute-2022-3-0">2022.3</a> - 08/03/2022</p>
+                        <ul class="fa-ul">
+                            <li>
+                                <span class="fa-li"></span>NVIDIA Ada Lovelace GPU architecture support </li>
+                            <li>
+                                <span class="fa-li"></span>NVIDIA Hopper GPU architecture support</li> 
+                            <li>
+                                <span class="fa-li"></span>Acceleration Structure viewer supports multiple traversable handles and uses OptiX naming for displayed elements.</li> 
+                            <li>
+                                <span class="fa-li"></span><a target="_blank" href="https://developer.nvidia.com/nsight-compute-2022_3-new-features">View full release notes</a>
+                            </li> 
+
+                        </ul>
+
+                    <p class="p--large"><a target="_blank" href="https://developer.nvidia.com/gameworksdownload#?dn=nsight-compute-2022-2-1">2022.2</a> - 05/11/2022</p>
+                        <ul class="fa-ul">
+                            <li>
+                                <span class="fa-li"></span>Improved performance for profiling and metric query </li>
+                            <li>
+                                <span class="fa-li"></span>Expanded <a target="_blank" href="https://docs.nvidia.com/nsight-compute/NsightCompute/index.html#tool-window-resources">Resources</a> tool window</li> 
+                            <li>
+                                <span class="fa-li"></span>Acceleration Structure viewer for debugging and optimizing Optix API ray tracing.</li> 
+                            <li>
+                                <span class="fa-li"></span><a target="_blank" href="https://developer.nvidia.com/nsight-compute-2022_2-new-features">View full release notes</a>
+                            </li> 
+
+                        </ul>
+
+            </section>
+
+            <br>
+            <hr>
+            <br>
+
+            <div id="archives"></div>
+
+            <section>
+
+                <p class="h--medium">Archives</p>
+                <p>View the full <a target="_blank" href="https://developer.nvidia.com/nsight-compute-history">Nsight Compute Release History.</a></p>
+
+            </section>
+            <br>
+            <hr>
+            <br>
+
+            <div id="documentation"></div>
+
+            <section>
+
+                <h2 class="h--medium">Resources</h2>
+                <h3 class="h--small">Nsight Compute Documentation</h3>
+                <br>
+                <a target="_blank" href="https://docs.nvidia.com/nsight-compute/ReleaseNotes/index.html">Release Notes</a>
+                <p>Release notes, including new features and important bug fixes. Supported platforms and GPUs. List of known issues for the current release.</p>
+                <br>
+                <a target="_blank" href="/tools-tutorials">Nsight Tools Tutorials</a>
+                <p>Access the latest resources to get started with Nsight Compute. </p>
+                <br>
+                <a target="_blank" href="https://docs.nvidia.com/nsight-compute/ProfilingGuide/index.html">Kernel Profiling Guide</a>
+                <p>Kernel Profiling Guide with metric types and meaning, data collection modes and FAQ for common problems.</p>
+                <br>
+                <a target="_blank" href="https://docs.nvidia.com/nsight-compute/NsightCompute/index.html">Nsight Compute</a>
+                <p>NVIDIA Nsight Compute User Interface (UI) manual. Information on all views, controls and workflows within the tool UI. Transitions guide for Visual Profiler.</p>
+                <br>
+                <a target="_blank" href="https://docs.nvidia.com/nsight-compute/NsightComputeCli/index.html">Nsight Compute CLI</a>
+                <p>NVIDIA Nsight Compute Command Line Interface (CLI) manual. Information on workflows and options for the command line, including multi-process profiling and NVTX filtering. Transitions guide for Nvprof.</p>
+
+                <a class="btn btn-success col-md-2 col-sm-2 col-xs-2" style=" min-width:150px;" href="https://docs.nvidia.com/nsight-compute/index.html"> Documentation</a>
+            </section>
+            <br>
+            <hr>
+            <br>
+
+
+            <div id="sessions"></div>
+
+            <style>
+                .cta-padding{
+                    padding-top: 15px !important;
+                }
+            </style>
+
+            <section>
+                <h2 class="h--medium">Tutorial Sessions</h2>
+                <p>Check out a catalog of <a target="_blank" href="https://developer.nvidia.com/nsight-compute-videos">Nsight Compute training videos.</a></p>
+
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="card" onclick="location.href='https://www.nvidia.com/en-us/on-demand/session/gtcspring23-s51882/';">
+                            <img src="https://d29g4g2dyqv443.cloudfront.net/sites/default/files/akamai/960.jpg" alt="">
+                            <div class="card-cntnt-cntnr">
+                                <div>
+                                    <h3 class="h--smaller">Become Faster in Writing Performant CUDA Kernels using the Source Page in Nsight Compute</h3>
+                                    <p>Learn how to make the most of the Source Page in Nsight Compute to quickly pinpoint and resolve bottlenecks in your CUDA kernels.</p>
+                                </div>
+                                <a class="cta--tert mt-auto cta-padding" target="_blank" href="https://www.nvidia.com/en-us/on-demand/session/gtcspring23-s51882/">Watch <span class="fas fa-angle-right fa-fw"></span></a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6">
+                        <div class="card" onclick="location.href='https://www.youtube.com/watch?v=sz42MI4jJmY';">
+                            <img src="https://d29g4g2dyqv443.cloudfront.net/sites/default/files/akamai/CUDAScale.PNG" alt="">
+                            <div class="card-cntnt-cntnr">
+                                <div>
+                                    <h3 class="h--smaller">From the Macro to the Micro: CUDA Developer Tools Find and Fix Problems at Any Scale</h3>
+                                    <p>Understand how your multi-node CUDA workload is scaling across machines and how a GPU assembly instruction is moving through the pipeline</p>
+                                </div>
+                                <a class="cta--tert mt-auto cta-padding" href="https://www.youtube.com/watch?v=sz42MI4jJmY">Watch <span class="fas fa-angle-right fa-fw"></span></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="card" onclick="location.href='https://www.youtube.com/watch?v=sz42MI4jJmY';">
+                            <img src="https://d29g4g2dyqv443.cloudfront.net/sites/default/files/akamai/nsight/sz42MI4jJmY-HD.png" alt="">
+                            <div class="card-cntnt-cntnr">
+                                <div>
+                                    <h3 class="h--smaller">What's New in CUDA Developer Tools: Profiling NVIDIA Hopper and workflow enhancements</h3>
+                                    <p>The latest updates to CUDA developer tools include workflow enhancements, new supported environments, and profiling features for the latest NVIDIA Hopper-based platforms.</p>
+                                </div>
+                                <a class="cta--tert mt-auto cta-padding" target="_blank" href="https://www.youtube.com/watch?v=sz42MI4jJmY">Watch <span class="fas fa-angle-right fa-fw"></span></a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6">
+                        <div class="card" onclick="location.href='https://courses.nvidia.com/courses/course-v1:DLI+S-AC-03+V1/';">
+                            <img src="https://d29g4g2dyqv443.cloudfront.net/sites/default/files/akamai/nsight/NCU_DLI_THUMB.PNG" alt="">
+                            <div class="card-cntnt-cntnr">
+                                <div>
+                                    <h3 class="h--smaller">Optimizing CUDA Machine Learning Codes with Nsight Profiling Tools</h3>
+                                    <p>This lab teaches how to use NVIDIA's Nsight tools for analyzing and optimizing CUDA applications. </p>
+                                </div>
+                                <a class="cta--tert mt-auto cta-padding" href="https://courses.nvidia.com/courses/course-v1:DLI+S-AC-03+V1/">Enroll <span class="fas fa-angle-right fa-fw"></span></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="card" onclick="location.href='https://www.youtube.com/watch?v=04dJ-aePYpE';">
+                            <img src="https://d29g4g2dyqv443.cloudfront.net/sites/default/files/akamai/nsight/Ncu_Thumb.PNG" alt="">
+                            <div class="card-cntnt-cntnr">
+                                <div>
+                                    <h3 class="h--smaller">Guided Analysis with Nsight Compute</h3>
+                                    <p>Guided analysis is the set of features in NVIDIA Nsight Compute that provides expert analysis of collected profile data, including insights into performance issues and options to fix them. </p>
+                                </div>
+                                <a class="cta--tert mt-auto cta-padding" target="_blank" href="https://www.youtube.com/watch?v=04dJ-aePYpE">Watch <span class="fas fa-angle-right fa-fw"></span></a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6">
+                        <div class="card" onclick="location.href='https://www.youtube.com/watch?v=z5bbTi__GTk';">
+                            <img src="https://d29g4g2dyqv443.cloudfront.net/sites/default/files/akamai/nsight/maxresdefault.png" alt="">
+                            <div class="card-cntnt-cntnr">
+                                <div>
+                                    <h3 class="h--smaller">Tools and Techniques for Making Efficient Use of GPUs</h3>
+                                    <p>We look at programming GPUs and some of the technologies available to minimize bottlenecks both within and across nodes. In addition, some tools for scientific visualization of data will be presented.</p>
+                                </div>
+                                <a class="cta--tert mt-auto cta-padding" target="_blank" href="https://www.youtube.com/watch?v=z5bbTi__GTk">Watch <span class="fas fa-angle-right fa-fw"></span></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+            </section>
+            <br>
+            <hr>
+            <br>
+
+            <div id="support"></div>
+                <section>
+                    <p class="h--medium">Support</p>
+                    <p><a target="_blank" href="https://forums.developer.nvidia.com/c/developer-tools/nsight-compute/114">Nsight Compute forum</a></p>
+                    <p>To provide feedback, request additional features, or report Nsight Compute issues, please use the Developer forums.</p>
+                    <br>
+
+                    <p><a target="_blank" href="https://docs.nvidia.com/nsight-compute/Training/index.html">Training</a></p>
+                    <p>NVIDIA Nsight Compute blogs, videos, samples and tutorials.</p>
+                </section>
+            </div>
+
+        </div>
+    </div>
+</div></section>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const allLinks = document.querySelectorAll('.dz3-main-section.dz-new-theme a');
+      allLinks.forEach((link) => {
+        let hasIcon = link.querySelector('span.fas');
+        if(hasIcon) {
+          link.classList.add('has-cta-icon');
+        }
+      });
+    });
+  </script>
+</main>
+
+
+
+
+<div id='footer' class='mt-auto'></div>
+
+  <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script>
+  jQuery.event.props = [];
+</script>
+<script src="https://developer.nvidia.com/assets/devzone3/new/popper.min-a9eb3f3101919a18965114cfdcd0138652ec03b2b58cfb26806f9a256564c858.js"></script>
+
+
+  <script src="https://developer.nvidia.com/assets/feed-aggregator/feed-aggregator-7f147443abc2d1300a239c29e4ba3ca0d0d2eb0dc66b608765e2b3be50e18e10.js"></script>
+
+    <script src="https://developer.nvidia.com/assets/devzone3/new/dist/dz3-new-bundle-5e5224f77427893f6e6e8928b699298c96fb16292431055f18e740803e7ddea8.js"></script>
+
+  <script src="https://developer.nvidia.com/assets/twentytwenty/js/jquery.event.move-16041d2e384b513c1b202af51fc404a0643b8c38ff823bb4326520ad5a82b761.js"></script>
+  <script src="https://developer.nvidia.com/assets/twentytwenty/js/jquery.twentytwenty-835622257095d5bd0719a5484d68213ccc8708a321dd3deded777d1e6623b499.js"></script>
+
+  <script>
+  const template = document.createElement('template');
+  template.innerHTML = `
+<style>
+@import "https://developer.nvidia.com/assets/feed-aggregator/feed-aggregator-9ace7521871242143cb35fa86d5be702c4dacb409600041fa6a5b14fa2a71dde.css";
+.feed-aggregator-component .card {
+  box-shadow: 0 4px 5px 0 rgba(0,0,0,0.14), 0 1px 10px 0 rgba(0,0,0,0.12), 0 2px 4px -1px rgba(0,0,0,0.3) !important;
+}
+.feed-aggregator-component .card:hover {
+  box-shadow: 0 0 8px 0 rgba(0,0,0,0.13), 0 14px 32px 5px rgba(0,0,0,0.13) !important;
+}
+</style>
+<div class="feed-aggregator-component"></div>
+`;
+  const hosts = {
+    'en': 'https://developer.nvidia.com/blog',
+    'cn': 'https://developer.nvidia.com/zh-cn/blog',
+  }
+
+  class FeedAggregatorElement extends HTMLElement {
+    constructor() {
+      super();
+      this._shadowRoot = this.attachShadow({ 'mode': 'open' });
+      this._shadowRoot.appendChild(template.content.cloneNode(true));
+    }
+
+    connectedCallback() {
+      const categories = this.getAttribute('categories');
+      const tags = this.getAttribute('tags');
+      const perPage = this.getAttribute('per-page');
+      const excludedTags = this.getAttribute('excluded-tags');
+
+      let locale = this.getAttribute('locale');
+      if (!locale) {
+        locale = 'en';
+      }
+      let targetElement = this._shadowRoot.querySelector(".feed-aggregator-component");
+      let feed = {
+        id: 'blog',
+        host: hosts[locale],
+        type: 'json',
+        minCount: 2,
+      };
+      if (categories && categories !== 'all') {
+        feed['category_ids'] = categories.split(',');
+      }
+      if (tags && tags !== 'all') {
+        feed['tag_ids'] = tags.split(',');
+      }
+      if(excludedTags && excludedTags !== 'null'){
+        feed['excluded_tag_ids'] = excludedTags.split(',');
+      }
+      document.addEventListener("DOMContentLoaded", function () {
+        new FeedAggregator({
+          target: targetElement,
+          props: {
+            count: perPage,
+            openInNewTab: true,
+            showExcerpts: true,
+            feeds: [feed]
+          }
+        });
+      })
+    }
+  }
+
+  window.customElements.define('feed-aggregator', FeedAggregatorElement);
+</script>
+
+
+<template id='application-button-template'>
+  <style>
+      @import "https://developer.nvidia.com/assets/application-button/application-button-68ca7e1e3aa49ec79169d49226e34ee0c341d27a15a38b28ce975cb2467e123e.css";
+  </style>
+  <a href='' class='nvidia-application-button'>Join now</a>
+</template>
+
+<script>
+  async function fetchMembershipState () {
+    const userInfo = await fetch('/api/user');
+    const {status} = userInfo;
+    if (status === 401) {
+      let error = new Error('Unauthorized');
+      error.statusCode = status;
+      throw error;
+    }
+
+    // TODO: Figure out how to get DZ4 program
+
+    // Fetch page info.
+    const {pathname} = location;
+    const pageInfo = await fetch(`${pathname}.json`);
+    const pageData = await pageInfo.json();
+
+    // Fetch membership info
+    return pageData;
+  }
+
+  const initApplicationButton = (element) => {
+    const linkElement = element.querySelector('a');
+    fetchMembershipState()
+      .then(data => {
+        console.log(data);
+      })
+      .catch(error => {
+        switch (error.statusCode) {
+          default:
+            linkElement.innerHTML = 'Login';
+            linkElement.href = '/login';
+        }
+      });
+  };
+
+  class NvidiaApplicationButton extends HTMLElement {
+    constructor() {
+      const template = document.getElementById('application-button-template');
+      super();
+      this._shadowRoot = this.attachShadow({ 'mode': 'open' });
+      this._shadowRoot.appendChild(template.content.cloneNode(true));
+    }
+    connectedCallback() {
+      const element = this._shadowRoot;
+      document.addEventListener('DOMContentLoaded', () => {
+        initApplicationButton(element);
+      });
+    }
+  }
+  window.customElements.define('nv-application-button', NvidiaApplicationButton);
+</script>
+
+<template id='application-text-template'>
+  <p></p>
+</template>
+
+<script>
+  class NvidiaApplicationText extends HTMLElement {
+    constructor() {
+      const template = document.getElementById('application-text-template');
+      super();
+      this._shadowRoot = this.attachShadow({ 'mode': 'open' });
+      this._shadowRoot.appendChild(template.content.cloneNode(true));
+    }
+    connectedCallback() {
+
+    }
+  }
+  window.customElements.define('nv-application-text', NvidiaApplicationText);
+</script>
+
+
+
+
+<template id='nv-sf-form-validator-template'>
+  <script src="https://developer.nvidia.com/assets/sf-validation/moment-620a5949fff0ad37198f07464b91d7b7c110ecdb6f94ca90ca7d2e1b471f1da8.js"></script>
+  <script src="https://developer.nvidia.com/assets/sf-validation/validate.min-2160a65c1b5d4a5966544ad25af8fe99f11c636a99c516fee6c7afd3b1f21409.js"></script>
+  <p></p>
+</template>
+
+<script>
+  class NvidiaSalesforceValidator extends HTMLElement {
+    constructor() {
+      const template = document.getElementById('nv-sf-form-validator-template');
+      super();
+      this._shadowRoot = this.attachShadow({'mode': 'open'});
+      this._shadowRoot.appendChild(template.content.cloneNode(true));
+    }
+
+    initComponent() {
+      if (!window.sfv) {
+        return;
+      }
+      validate.extend(validate.validators.datetime, {
+        parse: function (value, options) {
+          if (moment(value, options.format, true).isValid()) {
+            return +moment.utc(value);
+          }
+        },
+        format: function (value, options) {
+          var format = options.dateOnly ? "MM/DD/YYYY" : "MM/DD/YYYY hh:mm";
+          return moment.utc(value).format(format);
+        }
+      });
+
+      function showErrors(errors) {
+        $.each(errors, function (index, element) {
+          $('input[name="' + errors[index]['attribute'] + '"]').each(function (i, e) {
+            var errorMessage = errors[index]['options']['message'];
+            $('<div class="js-validation-errors">' + errorMessage + '</div>').insertAfter(e);
+          }).focus();
+        });
+      }
+
+      function isValidForm(form, constraints) {
+        var errors = validate(form, constraints, {format: "detailed"});
+        if (errors) {
+          showErrors(errors);
+          return false;
+        }
+        return true;
+      }
+
+      $.each(window.sfv, function (index, element) {
+        $(element.target).on('click', function (event) {
+          $('.js-validation-errors').remove();
+          if (!isValidForm(element.form, element.constraints)) {
+            event.preventDefault();
+          }
+        });
+      });
+    }
+
+    connectedCallback() {
+      document.addEventListener('DOMContentLoaded', () => {
+        this.initComponent();
+      });
+    }
+  }
+
+  window.customElements.define('nv-sf-form-validator', NvidiaSalesforceValidator);
+</script>
+
+
+<script src="https://developer.nvidia.com/assets/horizontal-chart/d3.v4.min-41cfecdf7c41476e805de7afacf4aacdd1a4be6947fbecf95217e947ebc2faf5.js"></script>
+<script src="https://developer.nvidia.com/assets/horizontal-chart/visualize-d-16cf14d4b63d6031e6c18983e91ac6d2b1b1f8140d15e351a9c847f8610b7e5b.js"></script>
+
+<template id="chart-template">
+  <style>
+      @import "https://developer.nvidia.com/assets/devzone3/modules/nvidia_tokens/nvidia-charts-6cd359a7ee3970fbfc15904a87ff96d214c208297870d8db7f6a5fa2c449bea7.css";
+  </style>
+  <div class="horizontal-chart-component">
+    <div class="chart-container">
+      <h4 class="chart-title"></h4>
+      <p class="chart-subtitle"></p>
+      <div class="legend"></div>
+      <svg data-nvidia-chart="true" data-chart-legend=""></svg>
+      <p class="chart-footnote"></p>
+    </div>
+  </div>
+</template>
+
+<script>
+  function chartInit(element) {
+    const chart = element.querySelector('svg[data-nvidia-chart]');
+    const isRendered = chart.getAttribute("data-rendered");
+    if (isRendered) {
+      return;
+    }
+
+    const svgChart = d3.select(chart);
+    const bars = JSON.parse(chart.dataset['chartBars']);
+    const ticks = JSON.parse(chart.dataset['chartTicks']);
+    const xAxisLabel = chart.dataset['xAxisLabel'];
+    const yAxisLabel = chart.dataset['yAxisLabel'];
+    const barPadding = chart.dataset['barPadding'];
+    const milestone = null;
+
+    const isGrouped = chart.dataset['isGrouped'] === 'true';
+    if (isGrouped) {
+      const legend = JSON.parse(chart.dataset['chartLegend']);
+      createGroupedHorizontalBarChart(svgChart, bars, barPadding, legend, ticks, milestone, xAxisLabel, yAxisLabel, false);
+    } else {
+      createHorizontalBarChart(svgChart, bars, barPadding, ticks, xAxisLabel, yAxisLabel, "", false);
+    }
+
+    chart.dataset['rendered'] = 'true';
+  }
+
+  $('a[data-toggle="tab"]').on("click", function (event) {
+    setTimeout(() => {
+      // Triggering 'resize' event to redraw charts.
+      window.dispatchEvent(new Event('resize'));
+
+      const target = jQuery(event.target).parents('.nav.nav-tabs').siblings('.tab-content').find('.tab-pane.active');
+      if (target.length > 0) {
+        const svg = jQuery(target).find('horizontal-chart');
+        if (svg.length) {
+          svg.each((idx, el) => {
+            setTimeout(function () {
+              const chartContainer = el._shadowRoot.querySelector('.chart-container');
+              chartInit(chartContainer);
+            }, 300);
+          });
+        }
+      }
+    }, 50);
+  });
+
+  async function loadFileSource(url) {
+    try{
+      const response = await fetch(url);
+      return response.json();
+    }catch (e) {
+      console.warn(`Failed to load chart data. URL: ${url}`);
+    }
+    return {};
+  }
+
+  class HorizontalChartElement extends HTMLElement {
+    constructor() {
+      const horizontalCharTemplate = document.getElementById('chart-template');
+      super();
+      this._shadowRoot = this.attachShadow({ 'mode': 'open' });
+      this._shadowRoot.appendChild(horizontalCharTemplate.content.cloneNode(true));
+    }
+    connectedCallback() {
+      const url = this.getAttribute('source');
+      const element = this._shadowRoot;
+      document.addEventListener("DOMContentLoaded", function () {
+        loadFileSource(url).then(data => {
+          const {
+            chartTitle: title,
+            chartSubtitle: subTitle,
+            chartFootnote: footNote,
+            chartId: id,
+            isGrouped: isGrouped,
+            legendData,
+            barPadding,
+            xAxisLabel,
+            yAxisLabel,
+            bars,
+            ticks
+          } = data;
+          element.querySelector('.chart-title').innerHTML = title;
+
+          // Subtitle
+          if (subTitle) {
+            element.querySelector('.chart-subtitle').innerHTML = subTitle;
+          } else {
+            element.querySelector('.chart-subtitle').remove();
+          }
+
+          // Chart
+          const svgElement = element.querySelector('.chart-container svg');
+          svgElement.id = id;
+
+          const dataAttributes = [
+            ['isGrouped', isGrouped ? 'true' : 'false', ''],
+            ['chartLegend', JSON.stringify(legendData), ''],
+            ['xAxisLabel', xAxisLabel, ''],
+            ['yAxisLabel', yAxisLabel, ''],
+            ['barPadding', barPadding, 5],
+            ['chartBars', bars, ''],
+            ['chartTicks', ticks, ''],
+          ];
+          dataAttributes.forEach(dataAttribute => {
+            if (dataAttribute[0] === 'chartBars' && dataAttribute[1]) {
+              dataAttribute[1] = JSON.stringify(dataAttribute[1]);
+            }
+            if (dataAttribute[0] === 'chartTicks' && dataAttribute[1]) {
+              dataAttribute[1] = JSON.stringify(dataAttribute[1]);
+            }
+
+            svgElement.dataset[dataAttribute[0]] = dataAttribute[1] ? dataAttribute[1] : dataAttribute[2];
+          });
+
+          // Caption
+          if (footNote) {
+            element.querySelector('.chart-footnote').innerHTML = footNote;
+          } else {
+            element.querySelector('.chart-footnote').remove();
+          }
+
+          // Init chart
+          const chartContainer = element.querySelector('.chart-container');
+          setTimeout(function () {
+            if (jQuery(chartContainer).is(':visible')) {
+              chartInit(chartContainer);
+            }
+          }, 300);
+        });
+      })
+    }
+  }
+
+  window.customElements.define('horizontal-chart', HorizontalChartElement);
+</script>
+
+
+
+<script src="https://developer.nvidia.com/assets/nv-developer-menu-8ae864e49d5d53c328146a66e7ad6d73242af7511f642a7d1aa1ffedd496f826.js"></script>
+  <div id='footer' class='mt-auto'></div>
+  <script src="https://www.nvidia.com/content/dam/en-zz/Solutions/librarian/bundle-search-prod-pub-v3.1.js"></script>
+  <div id="librarian-overlay"></div>
+  <script defer>
+    setTimeout(() => {
+      LIBRARIAN.Home.mount({
+        elementId: 'librarian-overlay',
+        searchPage: false,
+        placeholder: '',
+        site: 'https://developer.nvidia.com',
+        retainFilters: true,
+        overlay: true,
+        pillsOpen: true,
+        suggestedSearchPills: ["CUDA Toolkit","cuDNN Installation Guide","Computer Vision for Self-Driving Cars","DGX SuperPOD","NVIDIA Container Toolkit","Documentation for Triton Inference Server","NeMo Framework Fundamentals","TensorRT","Download SDK Manager","NVIDIA API Guides","Omniverse Renderer Microservice","CUDA Programming Guide","vGPU","Networking Solutions","Building a RAG Powered AI Chatbot"]
+      })
+    }, 1000)
+  </script>
+<script>
+  // The menu CDN publishes en-US and zh-CN only. Any other available locale
+  // (ja-JP reaches here via the login page and the /ja-jp/ path prefix) would
+  // 404 the header and footer fetches and report a menu error, so fall back
+  // rather than lose the nav.
+  const MENU_LOCALES = ['en-US', 'zh-CN'];
+
+  let menuLocale = 'en';
+
+  if (menuLocale == 'en') {
+    menuLocale = 'en-US';
+  }
+
+  if (!MENU_LOCALES.includes(menuLocale)) {
+    menuLocale = 'en-US';
+  }
+
+  function mountHeader(data = false) {
+    const headerTarget = document.getElementById('header');
+    if (!headerTarget) {
+      return;
+    }
+    let options = {
+      baseURL: window.location.origin,
+      signedIn: false,
+      locale: menuLocale
+    };
+
+    if (data) {
+      options.secondaryMenu = data;
+    }
+
+
+    options.showMembershipCardLink = true;
+
+    new NVDeveloperHeader({
+      target: headerTarget,
+      props: options
+    });
+  }
+
+  function mountFooter(data = false) {
+    const footerTarget = document.getElementById('footer');
+    if (!footerTarget) {
+      return;
+    }
+    let options = {
+      menu: data,
+      locale: menuLocale
+    };
+
+    new NVDeveloperFooter({
+      target: document.getElementById('footer'),
+      props: options
+    });
+  }
+
+  let url = 'd29g4g2dyqv443.cloudfront.net';
+  let headerMenuURL = "https://d29g4g2dyqv443.cloudfront.net/menu/en-US/header-secondary.json";
+
+  if (headerMenuURL) {
+    fetch(headerMenuURL)
+      .then(response => response.json())
+      .then(data => {
+        mountHeader(data);
+      })
+      .catch((error) => {
+        mountHeader();
+        window.nv.tracing.addError('menu', error);
+      });
+  } else {
+    mountHeader();
+  }
+
+  fetch(`https://${url}/menu/${menuLocale}/footer.json`)
+    .then(response => response.json())
+    .then(data => {
+      mountFooter(data);
+    })
+    .catch((error) => {
+      mountFooter();
+      window.nv.tracing.addError('menu', error);
+    });
+</script>
+
+  <script src="https://www.datadoghq-browser-agent.com/us1/v5/datadog-rum.js"></script>
+
+
+
+<script>
+  let silentAuthHost = 'www.nvidia.com';
+  let crossOriginPageUrl = `https://${silentAuthHost}/auth/hints/`;
+
+  function readHint() {
+    return new Promise((resolve) => {
+      const { origin: targetOrigin } = new URL(crossOriginPageUrl);
+
+      const iframe = document.createElement('iframe');
+      iframe.hidden = true;
+      iframe.src = crossOriginPageUrl;
+
+      function responseHandler(event) {
+        if (event.origin === targetOrigin) {
+          iframe.parentNode.removeChild(iframe);
+          return resolve(event.data);
+        }
+      }
+
+      window.addEventListener('message', responseHandler, { once: true });
+
+      iframe.onload = () => {
+        iframe.contentWindow.postMessage({ type: 'read' }, targetOrigin);
+      }
+
+      document.body.appendChild(iframe);
+    });
+  }
+
+  function writeHint(login_hint, idp_id, timestamp, sub) {
+    const { origin: targetOrigin } = new URL(crossOriginPageUrl);
+
+    const iframe = document.createElement('iframe');
+    iframe.hidden = true;
+    iframe.src = crossOriginPageUrl;
+
+    iframe.onload = () => {
+      const message = { type: 'write', login_hint, idp_id, timestamp, sub };
+      iframe.contentWindow.postMessage(message, targetOrigin);
+    }
+
+    document.body.appendChild(iframe);
+  }
+
+  function deleteHint() {
+    const { origin: targetOrigin } = new URL(crossOriginPageUrl);
+
+    const iframe = document.createElement('iframe');
+    iframe.hidden = true;
+    iframe.src = crossOriginPageUrl;
+
+    iframe.onload = () => {
+      iframe.contentWindow.postMessage({ type: 'delete' }, targetOrigin);
+    }
+
+    document.body.appendChild(iframe);
+  }
+
+
+</script>
+
+<script>_satellite.pageBottom();</script>
+<script src="https://developer.nvidia.com/assets/nv-alert/nv-alert-2fcf4faf418bd05dbbfc6d06c67713fd512ff67b25b6059be61edd35a7bcc0ed.js"></script>
+<script src="https://developer.nvidia.com/packs/js/runtime-f904b50470fcb0ec9bf4.js" defer="defer"></script>
+<script src="https://developer.nvidia.com/packs/js/4692-e2ed051c68e93113bb58.js" defer="defer"></script>
+<script src="https://developer.nvidia.com/packs/js/2681-6ac336ff34441936c0fb.js" defer="defer"></script>
+<script src="https://developer.nvidia.com/packs/js/2778-e8f3c5f27fbb1956fdb2.js" defer="defer"></script>
+<script src="https://developer.nvidia.com/packs/js/9878-baa65d618824b708a55b.js" defer="defer"></script>
+<script src="https://developer.nvidia.com/packs/js/8465-f321c9c28242e4383fa8.js" defer="defer"></script>
+<script src="https://developer.nvidia.com/packs/js/4622-1cd0dbd2a0f0b5243900.js" defer="defer"></script>
+<script src="https://developer.nvidia.com/packs/js/3566-4da32dac193512480c1b.js" defer="defer"></script>
+<script src="https://developer.nvidia.com/packs/js/486-1ddc749b634c231b0122.js" defer="defer"></script>
+<script src="https://developer.nvidia.com/packs/js/8311-71b2da0387dad11f356f.js" defer="defer"></script>
+<script src="https://developer.nvidia.com/packs/js/1252-6d8bb3f37b33aca41843.js" defer="defer"></script>
+<script src="https://developer.nvidia.com/packs/js/8823-bac8f579788282b3f2cd.js" defer="defer"></script>
+<script src="https://developer.nvidia.com/packs/js/775-f1e30132fa79d9ff8c3f.js" defer="defer"></script>
+<script src="https://developer.nvidia.com/packs/js/6900-b1b00a8ef19d3868862c.js" defer="defer"></script>
+<script src="https://developer.nvidia.com/packs/js/application-0583f79dc71e088940e6.js" defer="defer"></script>
+<script src="https://developer.nvidia.com/packs/js/ls_track-d4505a41101e752062c8.js" defer="defer"></script>
+</body>
+</html>
