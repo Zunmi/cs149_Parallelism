@@ -1,0 +1,75 @@
+{
+  "dataset_sha256": "633b9395f15de5616929f9c84dd05ebed3ef0af51e55127b658b9673f5dbc1a8",
+  "M": 1000000,
+  "N": 100,
+  "K": 3,
+  "epsilon": 0.1,
+  "allowed_cpus": "0-3,56-59",
+  "physical_cores": 4,
+  "logical_cpus": 8,
+  "independent_runs_per_configuration": 1,
+  "parallelized_function": "computeAssignments",
+  "optimized_execution_threads": 8,
+  "new_threads_per_call": 7,
+  "main_thread_helps": true,
+  "versions": [
+    {
+      "version": "baseline",
+      "iterations": 24,
+      "time_ms": {
+        "assignments": 11863.496,
+        "centroids": 2396.644,
+        "cost": 3647.71,
+        "total": 17907.873
+      },
+      "fractions_of_total": {
+        "assignments": 0.6624737622385416,
+        "centroids": 0.13383186266733071,
+        "cost": 0.2036930907428258
+      },
+      "run_sha256": "cc697d240a28f4dc364ade4f3d142614c1e9d3fe30c11aba753bf313432054db",
+      "source_sha256": "36a82c5358e8b7a6d313135d103744c5c14bbc9b314e36321b162c4764da6660",
+      "binary_sha256": "f0dbe92412f53c93f0f972d3210b5706250924d4e311bf60cb5fb3d26e5f48b1"
+    },
+    {
+      "version": "threaded8",
+      "iterations": 24,
+      "time_ms": {
+        "assignments": 1958.408,
+        "centroids": 2264.148,
+        "cost": 3398.645,
+        "total": 7621.219
+      },
+      "fractions_of_total": {
+        "assignments": 0.25696781577855193,
+        "centroids": 0.29708475770083503,
+        "cost": 0.4459450646937189
+      },
+      "run_sha256": "50421d86a5d392bb7061269b963a8cdaa7452476a17903992385ddd1082f09a8",
+      "source_sha256": "28e4462718abd26ee3ebd9b44be59eda23f36f4ca2eb357a1b009c83b92afda4",
+      "binary_sha256": "eff7e18dccce3f2cf90df0dc37f58af824a8ed2d9e8859cfe595965f8b483566"
+    }
+  ],
+  "measured_speedups": {
+    "assignments": 6.057724437400174,
+    "centroids": 1.0585191427415521,
+    "cost": 1.073283617441657,
+    "total": 2.3497386704147982
+  },
+  "logged_output_comparison": {
+    "start": {
+      "byte_identical": true,
+      "bytes": 9198391,
+      "sha256": "676adbd797201fdd0096fae23346e4cb2c0958c40f2c551fff44f732b61feb34"
+    },
+    "end": {
+      "byte_identical": true,
+      "bytes": 9186162,
+      "sha256": "b40efdc98363f7d611426e190dffe70266cce0f518a69b2a4ebd62673e30f7e0"
+    }
+  },
+  "validation_scope": "640 assignment states and 3 full small fixtures compare all result bytes; full-size runs compare sampled point logs and centroid text, not every full-size array element",
+  "cpp_flags": "-m64 -march=native -O3 -Wall",
+  "target_total_speedup": 2.1,
+  "target_met_in_this_measurement": true
+}

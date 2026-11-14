@@ -1,0 +1,7 @@
+Proposed implementation tested in temporary copies. Original main.cpp and VECTOR_WIDTH unchanged.
+Exactly representable signed inputs; empty input, one group, multiple groups, and N=10000.
+PASS: proposed arraySumVector, VECTOR_WIDTH=1, 18 exact-sum cases, ASan/UBSan
+PASS: proposed arraySumVector, VECTOR_WIDTH=2, 18 exact-sum cases, ASan/UBSan
+PASS: proposed arraySumVector, VECTOR_WIDTH=4, 18 exact-sum cases, ASan/UBSan
+PASS: proposed arraySumVector, VECTOR_WIDTH=8, 18 exact-sum cases, ASan/UBSan
+PASS: proposed arraySumVector, VECTOR_WIDTH=16, 18 exact-sum cases, ASan/UBSan

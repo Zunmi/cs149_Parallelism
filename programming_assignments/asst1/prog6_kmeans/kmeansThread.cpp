@@ -61,31 +61,39 @@ double dist(double *x, double *y, int nDim) {
   return sqrt(accum);
 }
 
+static void computeAssignmentsWorker(WorkerArgs *const args, int startPoint,
+                                     int endPoint) {
+  for (int m = startPoint; m < endPoint; m++) {
+    double minDist = 1e30;
+    int bestAssignment = -1;
+    for (int k = args->start; k < args->end; k++) {
+      double d = dist(&args->data[m * args->N],
+                      &args->clusterCentroids[k * args->N], args->N);
+      if (d < minDist) {
+        minDist = d;
+        bestAssignment = k;
+      }
+    }
+    args->clusterAssignments[m] = bestAssignment;
+  }
+}
+
 /**
  * Assigns each data point to its "closest" cluster centroid.
  */
 void computeAssignments(WorkerArgs *const args) {
-  double *minDist = new double[args->M];
-  
-  // Initialize arrays
-  for (int m =0; m < args->M; m++) {
-    minDist[m] = 1e30;
-    args->clusterAssignments[m] = -1;
+  const int numThreads = 8;
+  thread workers[numThreads - 1];
+  for (int t = 1; t < numThreads; t++) {
+    int startPoint = 1LL * args->M * t / numThreads;
+    int endPoint = 1LL * args->M * (t + 1) / numThreads;
+    workers[t - 1] = thread(computeAssignmentsWorker, args, startPoint, endPoint);
   }
 
-  // Assign datapoints to closest centroids
-  for (int k = args->start; k < args->end; k++) {
-    for (int m = 0; m < args->M; m++) {
-      double d = dist(&args->data[m * args->N],
-                      &args->clusterCentroids[k * args->N], args->N);
-      if (d < minDist[m]) {
-        minDist[m] = d;
-        args->clusterAssignments[m] = k;
-      }
-    }
+  computeAssignmentsWorker(args, 0, args->M / numThreads);
+  for (int t = 1; t < numThreads; t++) {
+    workers[t - 1].join();
   }
-
-  delete[] minDist;
 }
 
 /**
@@ -195,6 +203,10 @@ void kMeansThread(double *data, double *clusterCentroids, int *clusterAssignment
     currCost[k] = 0.0;
   }
 
+  double assignmentSeconds = 0.0;
+  double centroidSeconds = 0.0;
+  double costSeconds = 0.0;
+
   /* Main K-Means Algorithm Loop */
   int iter = 0;
   while (!stoppingConditionMet(prevCost, currCost, epsilon, K)) {
@@ -207,13 +219,26 @@ void kMeansThread(double *data, double *clusterCentroids, int *clusterAssignment
     args.start = 0;
     args.end = K;
 
+    double t0 = CycleTimer::currentSeconds();
     computeAssignments(&args);
+    double t1 = CycleTimer::currentSeconds();
     computeCentroids(&args);
+    double t2 = CycleTimer::currentSeconds();
     computeCost(&args);
+    double t3 = CycleTimer::currentSeconds();
+
+    assignmentSeconds += t1 - t0;
+    centroidSeconds += t2 - t1;
+    costSeconds += t3 - t2;
 
     iter++;
   }
 
   delete[] currCost;
   delete[] prevCost;
+
+  printf("[Iterations]: %d\n", iter);
+  printf("[Assignments Time]: %.3f ms\n", assignmentSeconds * 1000);
+  printf("[Centroids Time]: %.3f ms\n", centroidSeconds * 1000);
+  printf("[Cost Time]: %.3f ms\n", costSeconds * 1000);
 }

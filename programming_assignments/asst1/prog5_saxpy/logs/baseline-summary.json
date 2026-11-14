@@ -1,0 +1,46 @@
+{
+  "date": "2026-11-14",
+  "N": 20000000,
+  "scale": 2.0,
+  "initialization": "X[i] = Y[i] = float(i)",
+  "cpu": "Intel Xeon Gold 6330",
+  "allowed_cpus": "0-3,56-59",
+  "physical_cores": 4,
+  "logical_cpus": 8,
+  "worker_threads": 7,
+  "main_thread_helps": true,
+  "tasks": 64,
+  "simd_width": 8,
+  "cpp_flags": "-m64 -O2 -Wall",
+  "ispc_flags": "-O3 --target=avx2-i32x8 --arch=x86-64 --pic",
+  "independent_invocations": 1,
+  "internal_trials_per_version": 3,
+  "reported_statistic": "minimum",
+  "modeled_bytes_per_call": 320000000,
+  "flops_per_call": 40000000,
+  "modeled_arithmetic_intensity_flop_per_byte": 0.125,
+  "printed_bandwidth_label": "GB/s",
+  "actual_conversion_unit": "GiB/s",
+  "bandwidth_from_hardware_counters": false,
+  "serial_time_reported": false,
+  "result_error_reported": false,
+  "baseline_log": "baseline.log",
+  "baseline_sha256": "03453c172cbfd67369d102798f5e53f6f2de56efced6f9bc8e415d444c398866",
+  "build_log": "build.log",
+  "build_sha256": "36dae0b6b7feb87ff710c6bb266bb1dc998f30ca8daabaa50c727ef6ab574156",
+  "results": [
+    {
+      "implementation": "ispc",
+      "time_ms": 21.485,
+      "estimated_bandwidth_gib_per_s": 13.871,
+      "gflops": 1.862
+    },
+    {
+      "implementation": "task ispc",
+      "time_ms": 7.105,
+      "estimated_bandwidth_gib_per_s": 41.946,
+      "gflops": 5.63
+    }
+  ],
+  "task_speedup": 3.023926812104152
+}

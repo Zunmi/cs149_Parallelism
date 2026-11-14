@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <algorithm>
 #include <getopt.h>
-
+#include <cstring>
 #include "CycleTimer.h"
 
 extern void mandelbrotSerial(
@@ -123,7 +123,7 @@ int main(int argc, char** argv) {
     int* output_thread = new int[width*height];
     
     //
-    // Run the serial implementation.  Run the code three times and
+    // Run the serial implementation.  Run the code five times and
     // take the minimum to get a good estimate.
     //
 

@@ -1,0 +1,3 @@
+/bin/mkdir -p objs/
+g++ -m64 ../common/tasksys.cpp -I../common -Iobjs/ -O3 -Wall -fPIC -ffp-contract=off -c -o objs/tasksys.o
+g++ -m64 -I../common -Iobjs/ -O3 -Wall -fPIC -ffp-contract=off -o mandelbrot_ispc objs/main.o objs/mandelbrotSerial.o objs/mandelbrot_ispc.o objs/ppm.o objs/tasksys.o -lm -lpthread

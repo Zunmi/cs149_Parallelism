@@ -1,0 +1,6 @@
+PASS: dataset SHA-256 matches generation metadata
+PASS: both full-size runs completed 24 iterations
+PASS: start.log byte-identical; SHA-256 676adbd797201fdd0096fae23346e4cb2c0958c40f2c551fff44f732b61feb34
+PASS: end.log byte-identical; SHA-256 b40efdc98363f7d611426e190dffe70266cce0f518a69b2a4ebd62673e30f7e0
+PASS: protected compute functions, stopping condition, and outer iteration unchanged
+Full-size logs contain about 1% of points and centroid text at logged precision; this does not compare all full-size output elements.

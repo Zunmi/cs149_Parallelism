@@ -1,0 +1,7 @@
+Build: g++ -std=c++11 -O2 -pthread common/tests/tasksys_affinity.cpp
+Affinity: 0
+PASS: 1 allowed CPUs, 1 OS threads, 257 tasks executed exactly once per round
+Affinity: 0-1
+PASS: 2 allowed CPUs, 2 OS threads, 257 tasks executed exactly once per round
+Affinity: 0-3,56-59
+PASS: 8 allowed CPUs, 8 OS threads, 257 tasks executed exactly once per round

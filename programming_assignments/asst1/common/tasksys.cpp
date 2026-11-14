@@ -92,6 +92,9 @@ using namespace Concurrency;
 #include <errno.h>
 #include <fcntl.h>
 #include <pthread.h>
+#ifdef __linux__
+#include <sched.h>
+#endif
 #include <semaphore.h>
 #include <sys/param.h>
 #include <sys/stat.h>
@@ -636,6 +639,15 @@ static void InitTaskSystem() {
                     // since the main thread here will also grab jobs from
                     // the task queue itself.
                     nThreads = sysconf(_SC_NPROCESSORS_ONLN) - 1;
+#ifdef __linux__
+                    // Honor CPU affinity so restricted runs do not oversubscribe the pool.
+                    cpu_set_t allowedCPUs;
+                    if (sched_getaffinity(0, sizeof(allowedCPUs), &allowedCPUs) != 0) {
+                        fprintf(stderr, "Error reading CPU affinity: %s\n", strerror(errno));
+                        exit(1);
+                    }
+                    nThreads = CPU_COUNT(&allowedCPUs) - 1;
+#endif
 
                     int err;
                     if ((err = pthread_mutex_init(&taskSysMutex, nullptr)) != 0) {
@@ -663,7 +675,8 @@ static void InitTaskSystem() {
                         exit(1);
                     }
 
-                    threads = (pthread_t *)malloc(nThreads * sizeof(pthread_t));
+                    // Keep the initialization marker allocated even with no worker threads.
+                    threads = (pthread_t *)malloc(std::max(nThreads, 1) * sizeof(pthread_t));
                     if (threads == nullptr) {
                         fprintf(stderr, "Error creating pthreads: %s\n", strerror(err));
                         exit(1);

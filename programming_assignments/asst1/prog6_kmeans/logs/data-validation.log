@@ -1,0 +1,4 @@
+PASS: header M=1000000, N=100, K=3, epsilon=0.1
+PASS: file size 804,002,420 bytes and SHA-256 633b9395f15de5616929f9c84dd05ebed3ef0af51e55127b658b9673f5dbc1a8
+PASS: finite coordinates and nearest-centroid labels for 7 sampled points
+PASS: starter source hashes unchanged; generator refuses to overwrite existing data

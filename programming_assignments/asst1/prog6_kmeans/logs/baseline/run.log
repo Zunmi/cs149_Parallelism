@@ -1,0 +1,7 @@
+Reading data.dat...
+Running K-means with: M=1000000, N=100, K=3, epsilon=0.100000
+[Iterations]: 24
+[Assignments Time]: 11863.496 ms
+[Centroids Time]: 2396.644 ms
+[Cost Time]: 3647.710 ms
+[Total Time]: 17907.873 ms

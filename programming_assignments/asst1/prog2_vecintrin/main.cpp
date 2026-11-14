@@ -241,15 +241,40 @@ void clampedExpSerial(float* values, int* exponents, float* output, int N) {
 }
 
 void clampedExpVector(float* values, int* exponents, float* output, int N) {
+  __cs149_vec_int zero = _cs149_vset_int(0);
+  __cs149_vec_int one = _cs149_vset_int(1);
+  __cs149_vec_float limit = _cs149_vset_float(9.999999f);
+  __cs149_vec_float x = _cs149_vset_float(0.f);
+  __cs149_vec_int count = _cs149_vset_int(0);
+  __cs149_vec_float result = _cs149_vset_float(0.f);
 
-  //
-  // CS149 STUDENTS TODO: Implement your vectorized version of
-  // clampedExpSerial() here.
-  //
-  // Your solution should work for any value of
-  // N and VECTOR_WIDTH, not just when VECTOR_WIDTH divides N
-  //
-  
+  for (int i=0; i<N; i+=VECTOR_WIDTH) {
+    int activeCount = std::min(VECTOR_WIDTH, N-i);
+    __cs149_mask maskValid = _cs149_init_ones(activeCount);
+
+    _cs149_vload_float(x, values+i, maskValid);
+    _cs149_vload_int(count, exponents+i, maskValid);
+    _cs149_vmove_float(result, x, maskValid);
+
+    __cs149_mask maskZero = _cs149_init_ones(0);
+    _cs149_veq_int(maskZero, count, zero, maskValid);
+    _cs149_vset_float(result, 1.f, maskZero);
+
+    _cs149_vsub_int(count, count, one, maskValid);
+    __cs149_mask maskActive = _cs149_init_ones(0);
+    _cs149_vgt_int(maskActive, count, zero, maskValid);
+
+    while (_cs149_cntbits(maskActive) > 0) {
+      _cs149_vmult_float(result, result, x, maskActive);
+      _cs149_vsub_int(count, count, one, maskActive);
+      _cs149_vgt_int(maskActive, count, zero, maskValid);
+    }
+
+    __cs149_mask maskClamp = _cs149_init_ones(0);
+    _cs149_vgt_float(maskClamp, result, limit, maskValid);
+    _cs149_vmove_float(result, limit, maskClamp);
+    _cs149_vstore_float(output+i, result, maskValid);
+  }
 }
 
 // returns the sum of all elements in values
@@ -270,11 +295,22 @@ float arraySumVector(float* values, int N) {
   //
   // CS149 STUDENTS TODO: Implement your vectorized version of arraySumSerial here
   //
-  
-  for (int i=0; i<N; i+=VECTOR_WIDTH) {
 
-  }
+    __cs149_mask maskAll = _cs149_init_ones();
+    __cs149_vec_float sum = _cs149_vset_float(0.f);
+    __cs149_vec_float x;
+    __cs149_vec_float temp;
 
-  return 0.0;
+    for (int i = 0; i < N; i += VECTOR_WIDTH) {
+        _cs149_vload_float(x, values + i, maskAll);
+        _cs149_vadd_float(sum, sum, x, maskAll);
+    }
+
+    for (int parts = VECTOR_WIDTH; parts > 1; parts /= 2) {
+        _cs149_hadd_float(temp, sum);
+        _cs149_interleave_float(sum, temp);
+    }
+
+    return sum.value[0];
 }
 

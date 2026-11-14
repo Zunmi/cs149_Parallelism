@@ -1,0 +1,3 @@
+/bin/mkdir -p objs/
+g++ -m64 -march=native kmeansThread.cpp -I../common -Iobjs/ -O3 -Wall -c -o objs/kmeansThread.o
+g++ -m64 -march=native -I../common -Iobjs/ -O3 -Wall -o kmeans objs/main.o objs/kmeansThread.o objs/utils.o objs/ppm.o objs/tasksys.o -lm -lpthread

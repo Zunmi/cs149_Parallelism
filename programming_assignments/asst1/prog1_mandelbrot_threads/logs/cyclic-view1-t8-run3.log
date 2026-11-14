@@ -1,0 +1,5 @@
+[mandelbrot serial]:		[586.967] ms
+Wrote image file mandelbrot-serial.ppm
+[mandelbrot thread]:		[80.531] ms
+Wrote image file mandelbrot-thread.ppm
+				(7.29x speedup from 8 threads)

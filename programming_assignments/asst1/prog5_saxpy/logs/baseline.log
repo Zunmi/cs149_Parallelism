@@ -1,0 +1,3 @@
+[saxpy ispc]:		[21.485] ms	[13.871] GB/s	[1.862] GFLOPS
+[saxpy task ispc]:	[7.105] ms	[41.946] GB/s	[5.630] GFLOPS
+				(3.02x speedup from use of tasks)

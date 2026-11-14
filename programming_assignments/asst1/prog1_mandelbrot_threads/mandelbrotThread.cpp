@@ -1,6 +1,6 @@
 #include <stdio.h>
 #include <thread>
-
+#include <cstdlib>
 #include "CycleTimer.h"
 
 typedef struct {
@@ -27,15 +27,29 @@ extern void mandelbrotSerial(
 // workerThreadStart --
 //
 // Thread entrypoint.
-void workerThreadStart(WorkerArgs * const args) {
 
+    
+
+
+
+void workerThreadStart(WorkerArgs * const args) {
     // TODO FOR CS149 STUDENTS: Implement the body of the worker
     // thread here. Each thread should make a call to mandelbrotSerial()
     // to compute a part of the output image.  For example, in a
     // program that uses two threads, thread 0 could compute the top
     // half of the image and thread 1 could compute the bottom half.
+    
+    for (unsigned int row = args->threadId;
+         row < args->height;
+         row += args->numThreads) {
 
-    printf("Hello world from thread %d\n", args->threadId);
+        mandelbrotSerial(
+            args->x0, args->y0, args->x1, args->y1,
+            args->width, args->height,
+            row, 1,
+            args->maxIterations,
+            args->output);
+    }
 }
 
 //
@@ -62,7 +76,6 @@ void mandelbrotThread(
     WorkerArgs args[MAX_THREADS];
 
     for (int i=0; i<numThreads; i++) {
-      
         // TODO FOR CS149 STUDENTS: You may or may not wish to modify
         // the per-thread arguments here.  The code below copies the
         // same arguments for each thread
@@ -75,7 +88,6 @@ void mandelbrotThread(
         args[i].maxIterations = maxIterations;
         args[i].numThreads = numThreads;
         args[i].output = output;
-      
         args[i].threadId = i;
     }
 

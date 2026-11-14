@@ -1,0 +1,61 @@
+{
+  "iterations": 24,
+  "total_ms": 17907.873,
+  "phases": [
+    {
+      "function": "computeAssignments",
+      "time_ms": 11863.496,
+      "fraction_of_total": 0.6624737622385416,
+      "mean_ms_per_iteration": 494.3123333333333
+    },
+    {
+      "function": "computeCentroids",
+      "time_ms": 2396.644,
+      "fraction_of_total": 0.13383186266733071,
+      "mean_ms_per_iteration": 99.86016666666666
+    },
+    {
+      "function": "computeCost",
+      "time_ms": 3647.71,
+      "fraction_of_total": 0.2036930907428258,
+      "mean_ms_per_iteration": 151.98791666666668
+    }
+  ],
+  "unaccounted_ms": 0.023000000001047738,
+  "algorithm_threads": 1,
+  "allowed_cpus": "0-3,56-59",
+  "independent_invocations": 1,
+  "M": 1000000,
+  "N": 100,
+  "K": 3,
+  "epsilon": 0.1,
+  "dataset_sha256": "633b9395f15de5616929f9c84dd05ebed3ef0af51e55127b658b9673f5dbc1a8",
+  "run_log_sha256": "cc697d240a28f4dc364ade4f3d142614c1e9d3fe30c11aba753bf313432054db",
+  "source_sha256": "36a82c5358e8b7a6d313135d103744c5c14bbc9b314e36321b162c4764da6660",
+  "binary_sha256": "f0dbe92412f53c93f0f972d3210b5706250924d4e311bf60cb5fb3d26e5f48b1",
+  "logged_states": {
+    "start": {
+      "sampled_points": 9929,
+      "sampled_cluster_counts": [
+        4470,
+        3089,
+        2370
+      ]
+    },
+    "end": {
+      "sampled_points": 9915,
+      "sampled_cluster_counts": [
+        4900,
+        2002,
+        3013
+      ]
+    }
+  },
+  "assignment_only_model": {
+    "other_phases_fixed_ms": 6044.377,
+    "unlimited_assignment_speedup_total": 2.9627326356380483,
+    "assignment_4x_total_speedup": 1.9874999042756964,
+    "assignment_8x_total_speedup": 2.379052209061559,
+    "assignment_speedup_required_for_total_2_1x": 4.777538677195863
+  }
+}

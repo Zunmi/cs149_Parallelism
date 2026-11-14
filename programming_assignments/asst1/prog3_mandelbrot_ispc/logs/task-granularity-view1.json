@@ -1,0 +1,77 @@
+{
+  "affinity": "0-3,56-59",
+  "worker_threads": 7,
+  "caller_participates": true,
+  "view": 1,
+  "internal_trials": 3,
+  "rows": [
+    {
+      "tasks": 2,
+      "rows_per_task": 400,
+      "independent_runs": 3,
+      "statistic": "median",
+      "serial_ms": 325.297,
+      "ispc_ms": 64.858,
+      "tasks_ms": 36.728,
+      "serial_speedup": 8.857002831627096,
+      "ispc_speedup": 1.7680788499237639
+    },
+    {
+      "tasks": 8,
+      "rows_per_task": 100,
+      "independent_runs": 1,
+      "statistic": "single run",
+      "serial_ms": 302.747,
+      "ispc_ms": 60.889,
+      "tasks_ms": 19.013,
+      "serial_speedup": 15.92315783937306,
+      "ispc_speedup": 3.202493031083995
+    },
+    {
+      "tasks": 32,
+      "rows_per_task": 25,
+      "independent_runs": 1,
+      "statistic": "single run",
+      "serial_ms": 339.109,
+      "ispc_ms": 67.19,
+      "tasks_ms": 15.941,
+      "serial_speedup": 21.272755786964428,
+      "ispc_speedup": 4.2149175083119
+    },
+    {
+      "tasks": 80,
+      "rows_per_task": 10,
+      "independent_runs": 1,
+      "statistic": "single run",
+      "serial_ms": 457.146,
+      "ispc_ms": 91.259,
+      "tasks_ms": 15.52,
+      "serial_speedup": 29.45528350515464,
+      "ispc_speedup": 5.880090206185567
+    },
+    {
+      "tasks": 200,
+      "rows_per_task": 4,
+      "independent_runs": 1,
+      "statistic": "single run",
+      "serial_ms": 454.043,
+      "ispc_ms": 90.538,
+      "tasks_ms": 16.516,
+      "serial_speedup": 27.491099539840157,
+      "ispc_speedup": 5.481835795592153
+    },
+    {
+      "tasks": 800,
+      "rows_per_task": 1,
+      "independent_runs": 1,
+      "statistic": "single run",
+      "serial_ms": 306.905,
+      "ispc_ms": 90.597,
+      "tasks_ms": 14.903,
+      "serial_speedup": 20.59350466349057,
+      "ispc_speedup": 6.079111588270817
+    }
+  ],
+  "fastest_observed_tasks": 800,
+  "reference_32x_met": false
+}

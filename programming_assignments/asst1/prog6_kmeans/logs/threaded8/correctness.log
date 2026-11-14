@@ -1,0 +1,9 @@
+PASS: 640 assignment states match the original implementation byte for byte
+Coverage: zero/few points, uneven eight-way partitions, dimensions 1/2/8/100, K=1/3/5, ties, center subsets, empty center ranges, repeated calls
+PASS: 3 complete K-Means fixtures have identical final assignments and centroid bytes
+Convergence iterations in both versions: [2, 1, 3]
+PASS: input points and assignment-stage centroids remain unchanged
+PASS: AddressSanitizer and UndefinedBehaviorSanitizer
+PASS: dist, computeCentroids, computeCost, stoppingConditionMet, and kMeansThread unchanged from the measured baseline
+Compared output SHA-256: 90eb9cb7bcbb5aac9f16bdda0d43d98fa94030a2249b4d7bf19fdb6ca99482a8
+PASS: production -O3 -march=native results also match byte for byte; convergence iterations ['2', '1', '3']

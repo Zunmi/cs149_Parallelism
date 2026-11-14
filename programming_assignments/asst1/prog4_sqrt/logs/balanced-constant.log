@@ -1,0 +1,5 @@
+[sqrt serial]:		[2532.998] ms
+[sqrt ispc]:		[398.969] ms
+[sqrt task ispc]:	[82.615] ms
+				(6.35x speedup from ISPC)
+				(30.66x speedup from task ISPC)

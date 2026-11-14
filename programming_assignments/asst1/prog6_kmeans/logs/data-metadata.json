@@ -1,0 +1,28 @@
+{
+  "created": "2026-11-14T16:29:20.787130+08:00",
+  "origin": "local synthetic data using the starter main.cpp generation block",
+  "M": 1000000,
+  "N": 100,
+  "K": 3,
+  "epsilon": 0.1,
+  "c_rand_seed": 7,
+  "normal_engine_initialization": "default construction",
+  "generation_centers": 10,
+  "normal_mean": 0.0,
+  "normal_stddev": 0.5,
+  "file_bytes": 804002420,
+  "sha256": "633b9395f15de5616929f9c84dd05ebed3ef0af51e55127b658b9673f5dbc1a8",
+  "compiler": "g++ (Ubuntu 13.3.0-6ubuntu2~24.04.1) 13.3.0",
+  "compiler_flags": [
+    "-m64",
+    "-march=native",
+    "-O3",
+    "-Wall",
+    "-pthread"
+  ],
+  "source_sha256": {
+    "main.cpp": "4de09a90053270d5d52405004dd122f99667b490ab2661601d22893b923ffc53",
+    "utils.cpp": "9c153908e880f9f1eb0d5dbd77144dc65b41cc098e9f18c77f95640f81c3ee15",
+    "kmeansThread.cpp": "067de5d59f26f54a184e8f2f5a098f6aee4d0b9afd64797de70b1d5511a2e991"
+  }
+}
