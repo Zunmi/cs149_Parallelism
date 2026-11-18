@@ -1,0 +1,26 @@
+{
+  "latex-workshop.latex.recipes": [
+    {
+      "name": "latexmk (XeLaTeX)",
+      "tools": ["xelatexmk"]
+    }
+  ],
+  "latex-workshop.latex.tools": [
+    {
+      "name": "xelatexmk",
+      "command": "/usr/bin/latexmk",
+      "args": [
+        "-synctex=1",
+        "-interaction=nonstopmode",
+        "-file-line-error",
+        "-xelatex",
+        "-outdir=%OUTDIR%",
+        "%DOC%"
+      ],
+      "env": {
+        "PATH": "/usr/bin:/bin"
+      }
+    }
+  ],
+  "latex-workshop.latex.outDir": "%DIR%/build"
+}
